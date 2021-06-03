@@ -61,8 +61,7 @@ if (location.search.includes("code=", 1)) {
     log("Response code was found in query!");
     log("Trying to exchange code for token...");
     let mgr = new Oidc.UserManager(settings);
-    log(mgr);
-    log(settings);
+    
     mgr.signinCallback(settings).then(function(user) {
         log("signed in", user);
         log("Decoded access_token:", jwt_decode(user.access_token))
