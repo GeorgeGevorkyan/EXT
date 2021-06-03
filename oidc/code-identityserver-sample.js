@@ -23,30 +23,19 @@ var settings = {
     login_hint: localStorage.getItem('cfg-login'),
     extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
 };
-var mgr = new Oidc.UserManager(settings);
+let mgr;
 access_token = null;
 
 function getAccessToken(scope){
-    settings = scope;
+    settings.scope = scope;
+    mgr = new Oidc.UserManager(settings);
 
-    if (location.search.includes("code=", 1)) {
-        log("Response code was found in query!");
-        log("Trying to exchange code for token...");
-        mgr.signinCallback(settings).then(function(user) {
-            log("signed in", user);
-            log("Decoded access_token:", jwt_decode(user.access_token))
-            return user.access_token;
-        }).catch(function(err) {
-            log(err);
-    });
-} else {
     log("Going to sign in using following configuration", settings);
     mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
         log("Redirecting to AdSTS...");
     }).catch(function(err) {
         log(err);
     });
-}
 }
 
 ///////////////////////////////
@@ -55,7 +44,6 @@ function getAccessToken(scope){
 
 function GetVoiceMails()
 {
-    
     access_token = getAccessToken("api.user.voice.voicemails");
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
@@ -68,5 +56,16 @@ function GetVoiceMails()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+ 
 
-
+if (location.search.includes("code=", 1)) {
+    log("Response code was found in query!");
+    log("Trying to exchange code for token...");
+    mgr.signinCallback(settings).then(function(user) {
+        log("signed in", user);
+        log("Decoded access_token:", jwt_decode(user.access_token))
+        access_token = user.access_token;
+    }).catch(function(err) {
+        log(err);
+});
+}
