@@ -144,8 +144,8 @@ function httpGetAsync(access_token)
             log(xmlHttp.responseText);
     }
     log("alo");
-    xmlHttp.setRequestHeader('Authorization', 'Bearer {access_token}'); 
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader('Authorization', 'Bearer {access_token}'); 
     log(xmlHttp.send(null));
 }
 
