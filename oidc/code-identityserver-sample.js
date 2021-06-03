@@ -135,30 +135,34 @@ function startSigninMainWindow() {
     });
 }
 
-function httpGetAsync(access_token)
+
+function GetVoiceMails(access_token)
 {
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            log(xmlHttp.responseText);
+            console.log(xmlHttp.responseText);
     }
-    xmlHttp.open("GET", theUrl, false); // true for asynchronous
-    xmlHttp.setRequestHeader('Authorization', 'Bearer {access_token}'); 
-    xmlHttp.send(null);
-    log(xmlHttp.responseText);
+  
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    log(xmlHttp.send());
+    
 }
+
 
 function endSigninMainWindow() {
     log("Trying to exchange code for token...");
     mgr.signinCallback(settings).then(function(user) {
         log("signed in", user);
         log("Decoded access_token:", jwt_decode(user.access_token))
-        httpGetAsync(user.access_token);
+        GetVoiceMails(user.access_token);
     }).catch(function(err) {
         log(err);
     });
 }
+
 
 function startSigninMainWindowDiffCallbackPage() {
     mgr.signinRedirect({state:'some data', redirect_uri: url + '/code-identityserver-sample-callback.html'}).then(function() {
