@@ -26,17 +26,18 @@ var settings = {
 var mgr = new Oidc.UserManager(settings);
 access_token = null;
 
-function getAccessToken(){
+function getAccessToken(scope){
+    settings = scope;
 
-if (location.search.includes("code=", 1)) {
-    log("Response code was found in query!");
-    log("Trying to exchange code for token...");
-    mgr.signinCallback(settings).then(function(user) {
-        log("signed in", user);
-        log("Decoded access_token:", jwt_decode(user.access_token))
-        return user.access_token;
-    }).catch(function(err) {
-        log(err);
+    if (location.search.includes("code=", 1)) {
+        log("Response code was found in query!");
+        log("Trying to exchange code for token...");
+        mgr.signinCallback(settings).then(function(user) {
+            log("signed in", user);
+            log("Decoded access_token:", jwt_decode(user.access_token))
+            return user.access_token;
+        }).catch(function(err) {
+            log(err);
     });
 } else {
     log("Going to sign in using following configuration", settings);
@@ -54,7 +55,8 @@ if (location.search.includes("code=", 1)) {
 
 function GetVoiceMails()
 {
-    access_token = getAccessToken();
+    
+    access_token = getAccessToken("api.user.voice.voicemails");
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
