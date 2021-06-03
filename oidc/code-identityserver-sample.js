@@ -23,12 +23,11 @@ var settings = {
     login_hint: localStorage.getItem('cfg-login'),
     extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
 };
-let mgr;
 access_token = null;
 
 function getAccessToken(scope){
     settings.scope = scope;
-    mgr = new Oidc.UserManager(settings);
+    let mgr = new Oidc.UserManager(settings);
 
     log("Going to sign in using following configuration", settings);
     mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
@@ -61,6 +60,7 @@ function GetVoiceMails()
 if (location.search.includes("code=", 1)) {
     log("Response code was found in query!");
     log("Trying to exchange code for token...");
+    let mgr = new Oidc.UserManager(settings);
     log(mgr);
     log(settings);
     mgr.signinCallback(settings).then(function(user) {
