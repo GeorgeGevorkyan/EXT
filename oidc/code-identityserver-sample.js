@@ -143,10 +143,10 @@ function httpGetAsync(access_token)
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             log(xmlHttp.responseText);
     }
-    log("alo");
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.open("GET", theUrl, false); // true for asynchronous
     xmlHttp.setRequestHeader('Authorization', 'Bearer {access_token}'); 
-    log(xmlHttp.send(null));
+    xmlHttp.send(null);
+    log(xmlHttp.responseText);
 }
 
 function endSigninMainWindow() {
