@@ -135,11 +135,26 @@ function startSigninMainWindow() {
     });
 }
 
+function httpGetAsync(access_token)
+{
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            log(xmlHttp.responseText);
+    }
+    log("alo");
+    xmlHttp.setRequestHeader('Authorization', 'Bearer {access_token}'); 
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    log(xmlHttp.send(null));
+}
+
 function endSigninMainWindow() {
     log("Trying to exchange code for token...");
     mgr.signinCallback(settings).then(function(user) {
         log("signed in", user);
         log("Decoded access_token:", jwt_decode(user.access_token))
+        httpGetAsync(user.access_token);
     }).catch(function(err) {
         log(err);
     });
