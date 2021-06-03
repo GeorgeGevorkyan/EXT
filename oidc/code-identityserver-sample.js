@@ -17,73 +17,44 @@ var settings = {
     client_id: localStorage.getItem('cfg-clientId'),
     redirect_uri: location.href.split('?')[0],
     response_type: 'code',
-    scope: localStorage.getItem('cfg-scopes'),
-    automaticSilentRenew:false,
-    validateSubOnSilentRenew: false,
-    monitorAnonymousSession : false,
-    filterProtocolClaims: false,
-    monitorSession: false,
-    loadUserInfo: false,
-    revokeAccessTokenOnSignout : true,
+    //scope: localStorage.getItem('cfg-scopes'),
+    scope: null,
     acr_values : localStorage.getItem('cfg-acr'),
     login_hint: localStorage.getItem('cfg-login'),
     extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
 };
 var mgr = new Oidc.UserManager(settings);
 access_token = null;
-///////////////////////////////
-// events
-///////////////////////////////
-// mgr.events.addAccessTokenExpiring(function () {
-//     console.log("token expiring");
-//     log("token expiring");
 
-//     // maybe do this code manually if automaticSilentRenew doesn't work for you
-//     mgr.signinSilent().then(function(user) {
-//         log("silent renew success", user);
-//     }).catch(function(e) {
-//         log("silent renew error", e.message);
-//     })
-// });
+function getAccessToken(){
 
-// mgr.events.addAccessTokenExpired(function () {
-//     console.log("token expired");
-//     log("token expired");
-// });
-
-// mgr.events.addSilentRenewError(function (e) {
-//     console.log("silent renew error", e.message);
-//     log("silent renew error", e.message);
-// });
-
-// mgr.events.addUserLoaded(function (user) {
-//     console.log("user loaded", user);
-//     mgr.getUser().then(function(){
-//        console.log("getUser loaded user after userLoaded event fired"); 
-//     });
-// });
-
-// mgr.events.addUserUnloaded(function (e) {
-//     console.log("user unloaded");
-// });
-
-// mgr.events.addUserSignedIn(function (e) {
-//     log("user logged in to the token server");
-// });
-// mgr.events.addUserSignedOut(function (e) {
-//     log("user logged out of the token server");
-// });
-
-function startSigninMainWindow() {
+if (location.search.includes("code=", 1)) {
+    log("Response code was found in query!");
+    log("Trying to exchange code for token...");
+    mgr.signinCallback(settings).then(function(user) {
+        log("signed in", user);
+        log("Decoded access_token:", jwt_decode(user.access_token))
+        return user.access_token;
+    }).catch(function(err) {
+        log(err);
+    });
+} else {
+    log("Going to sign in using following configuration", settings);
     mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
         log("Redirecting to AdSTS...");
     }).catch(function(err) {
         log(err);
     });
 }
+}
+
+///////////////////////////////
+// functions for VoiceMails
+///////////////////////////////
 
 function GetVoiceMails()
 {
+    access_token = getAccessToken();
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
@@ -96,22 +67,4 @@ function GetVoiceMails()
     xmlHttp.send();
 }
 
-function endSigninMainWindow() {
-    log("Trying to exchange code for token...");
-    mgr.signinCallback(settings).then(function(user) {
-        log("signed in", user);
-        access_token = user.access_token;
-        log("Decoded access_token:", jwt_decode(user.access_token))
-    }).catch(function(err) {
-        log(err);
-    });
-}
-
-if (location.search.includes("code=", 1)) {
-    log("Response code was found in query!");
-    endSigninMainWindow();
-} else {
-    log("Going to sign in using following configuration", settings);
-    startSigninMainWindow();
-}
 
