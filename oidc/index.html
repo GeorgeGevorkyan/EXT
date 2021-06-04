@@ -13,7 +13,6 @@
         <ul>
             <li><label>Authority: </label><input type="text" id="authority" placeholder="https://demo.identityserver.io/"/></li>
             <li><label>ClientId: </label><input type="text" id="clientId" /></li>
-            <li><label>Scopes: </label><input type="text" id="scopes" placeholder="openid offline_access"/></li>
             <li><label>DeviceID: </label><input type="text" id="deviceId" placeholder="1824D326-43CE-4676-8168-83AEC699F677"/></li>
             <li><label>Login Hint: </label><input type="text" id="login" placeholder="user@mail.com"/></li>
         </ul>
@@ -35,19 +34,16 @@
             log("Current configuration:");
             log(`cfg-authority = ${localStorage.getItem('cfg-authority')}`);
             log(`cfg-clientId = ${localStorage.getItem('cfg-clientId')}`);
-            log(`cfg-scopes = ${localStorage.getItem('cfg-scopes')}`);
             log(`cfg-acr = ${localStorage.getItem('cfg-acr')}`);
             log(`cfg-login = ${localStorage.getItem('cfg-login')}`);
         }
         function applyConfiguration(){
             const authority = document.getElementById('authority').value;
             const clientId = document.getElementById('clientId').value;
-            const scopes = document.getElementById('scopes').value;
             const deviceId = document.getElementById('deviceId').value;
             const login = document.getElementById('login').value;
             localStorage.setItem('cfg-authority', authority);
             localStorage.setItem('cfg-clientId', clientId);
-            localStorage.setItem('cfg-scopes', scopes);
             localStorage.setItem('cfg-acr', `deviceId:${deviceId}`);
             localStorage.setItem('cfg-login', login);
             readConfig();
@@ -55,7 +51,6 @@
         function loadConfiguration(){
             document.getElementById('authority').value = localStorage.getItem('cfg-authority');
             document.getElementById('clientId').value = localStorage.getItem('cfg-clientId');
-            document.getElementById('scopes').value = localStorage.getItem('cfg-scopes');
             document.getElementById('deviceId').value = localStorage.getItem('cfg-acr').substr("deviceId:".length);
             document.getElementById('login').value = localStorage.getItem('cfg-login');
         }
