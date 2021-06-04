@@ -46,8 +46,11 @@ function GetVoiceMails()
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            log(xmlHttp.responseText);
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            xmlHttp.responseText.forEach(element => {
+                log(element);
+            });
+        }
     }
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
@@ -68,8 +71,6 @@ if (location.search.includes("code=", 1)) {
     let mgr = new Oidc.UserManager(settings);
     
     mgr.signinCallback(settings).then(function(user) {
-        log("signed in", user);
-        log("Decoded access_token:", jwt_decode(user.access_token))
         access_token = user.access_token;
     }).catch(function(err) {
         log(err);
