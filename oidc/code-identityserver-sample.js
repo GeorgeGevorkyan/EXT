@@ -45,11 +45,13 @@ function GetVoiceMails()
 {
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
+    
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            xmlHttp.responseText.forEach(element => {
-                log(element);
-            });
+            response = JSON.parse(xmlHttp.responseText);
+            for (let index = 0; index < xmlHttp.responseText.length; index++) {
+                log(this.response[i]);
+            }
         }
     }
     xmlHttp.open("GET", theUrl, true); 

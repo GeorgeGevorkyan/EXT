@@ -1,5 +1,4 @@
 function log() {
-    // document.getElementById('out').innerText = '';
 
     Array.prototype.forEach.call(arguments, function(msg) {
         if (msg instanceof Error){
