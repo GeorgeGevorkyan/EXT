@@ -2,8 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-document.getElementById('getVoiceMails').addEventListener("click",GetVoiceMails,false);
-document.getElementById('getVoiceMailsToken').addEventListener("click",getAccessToken("api.user.voice.voicemails"),false);
+document.getElementById('getVoiceMails').addEventListener("click", GetVoiceMails, false);
+document.getElementById('getVoiceMailsToken').addEventListener("click", getAccessToken("api.user.voice.voicemails"), false);
 ///////////////////////////////
 // config
 ///////////////////////////////
@@ -19,7 +19,7 @@ var settings = {
     redirect_uri: location.href.split('?')[0],
     response_type: 'code',
     //scope: localStorage.getItem('cfg-scopes'),
-    scope: null,
+    scope: '',
     acr_values : localStorage.getItem('cfg-acr'),
     login_hint: localStorage.getItem('cfg-login'),
     extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
