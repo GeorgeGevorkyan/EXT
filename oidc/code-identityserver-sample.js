@@ -1,13 +1,15 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails, false);
+document.getElementById('getVoiceMailsToken').addEventListener("click", getAccessToken("api.user.voice.voicemails"), false);
+
 ///////////////////////////////
 // config
 ///////////////////////////////
 Oidc.Log.logger = console;
 Oidc.Log.level = Oidc.Log.DEBUG;
 console.log("Using oidc-client version: ", Oidc.Version);
-access_token = null;
 let url = location.href.substring(0, location.href.lastIndexOf('/'));
 
 let settings = {
@@ -76,6 +78,3 @@ if (location.search.includes("code=", 1)) {
 });
 }
 
-
-document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails, false);
-document.getElementById('getVoiceMailsToken').addEventListener("click", getAccessToken("api.user.voice.voicemails"), false);
