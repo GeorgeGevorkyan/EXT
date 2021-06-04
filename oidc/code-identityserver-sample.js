@@ -3,6 +3,7 @@
 
 
 document.getElementById('getVoiceMails').addEventListener("click",GetVoiceMails,false);
+document.getElementById('getVoiceMailsToken').addEventListener("click",GetVoiceMailsToken,false);
 ///////////////////////////////
 // config
 ///////////////////////////////
@@ -28,7 +29,6 @@ access_token = null;
 function getAccessToken(scope){
     settings.scope = scope;
     let mgr = new Oidc.UserManager(settings);
-
     log("Going to sign in using following configuration", settings);
     mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
         log("Redirecting to AdSTS...");
@@ -43,19 +43,20 @@ function getAccessToken(scope){
 
 function GetVoiceMails()
 {
-    access_token = getAccessToken("api.user.voice.voicemails");
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             log(xmlHttp.responseText);
     }
-  
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
  
+function GetVoiceMailsToken(){
+    access_token = getAccessToken("api.user.voice.voicemails");
+}
 
 if (location.search.includes("code=", 1)) {
     log("Response code was found in query!");
