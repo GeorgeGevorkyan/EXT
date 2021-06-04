@@ -55,8 +55,12 @@ function GetVoiceMails()
 }
  
 function GetVoiceMailsToken(){
-    access_token = getAccessToken("api.user.voice.voicemails");
+    getAccessToken("api.user.voice.voicemails");
 }
+
+//////////////////////////////
+
+
 
 if (location.search.includes("code=", 1)) {
     log("Response code was found in query!");
