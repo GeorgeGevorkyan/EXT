@@ -3,7 +3,7 @@
 
 
 document.getElementById('getVoiceMails').addEventListener("click",GetVoiceMails,false);
-document.getElementById('getVoiceMailsToken').addEventListener("click",GetVoiceMailsToken,false);
+document.getElementById('getVoiceMailsToken').addEventListener("click",getAccessToken("api.user.voice.voicemails"),false);
 ///////////////////////////////
 // config
 ///////////////////////////////
@@ -45,24 +45,22 @@ function GetVoiceMails()
 {
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
     var xmlHttp = new XMLHttpRequest();
-    
+
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
-            for (let index = 0; index < xmlHttp.responseText.length; index++) {
-                log(this.response[i]);
+            log("All detected VoiceMails: ");
+            for (let index = 0; index < response["records"].length; index++) {
+                log(response["records"][index]);
             }
         }
     }
+
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
  
-function GetVoiceMailsToken(){
-    getAccessToken("api.user.voice.voicemails");
-}
-
 //////////////////////////////
 
 
@@ -74,6 +72,7 @@ if (location.search.includes("code=", 1)) {
     
     mgr.signinCallback(settings).then(function(user) {
         access_token = user.access_token;
+       // localStorage.setItem('VoiceMailsToken', access_token);
     }).catch(function(err) {
         log(err);
 });
