@@ -66,13 +66,10 @@ function getVoiceMails()
 
 
 if (location.search.includes("code=", 1)) {
-    log("Response code was found in query!");
-    log("Trying to exchange code for token...");
     let mgr = new Oidc.UserManager(settings);
-    
     mgr.signinCallback(settings).then(function(user) {
         access_token = user.access_token;
-       // localStorage.setItem('VoiceMailsToken', access_token);
+        //localStorage.setItem('VoiceMailsToken', access_token);
     }).catch(function(err) {
         log(err);
 });
