@@ -2,6 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails, false);
+document.getElementById('getVoiceMailsTranscription').addEventListener("click", getVoiceMailsTranscription, false);
+document.getElementById('getVoiceMailsContent').addEventListener("click", getVoiceMailsContent, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails"); }, false);
 
 ///////////////////////////////
@@ -17,7 +19,6 @@ let settings = {
     client_id: localStorage.getItem('cfg-clientId'),
     redirect_uri: location.href.split('?')[0],
     response_type: 'code',
-    //scope: localStorage.getItem('cfg-scopes'),
     scope: '',
     acr_values : localStorage.getItem('cfg-acr'),
     login_hint: localStorage.getItem('cfg-login'),
@@ -61,6 +62,42 @@ function getVoiceMails()
     xmlHttp.send();
 }
  
+function getVoiceMailsTranscription(id)
+{
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
+    let xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            response = JSON.parse(xmlHttp.responseText);
+            log("Transcript of" + id + "VoiceMails: ");
+            log(response.responseText);
+        }
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+function getVoiceMailsContent(id)
+{
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
+    let xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            response = JSON.parse(xmlHttp.responseText);
+            log("Transcript of" + id + "VoiceMails: ");
+            log(response.responseText);
+            var audio = new Audio(response.responseText);
+            audio.play();
+        }
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
 //////////////////////////////
 
 
