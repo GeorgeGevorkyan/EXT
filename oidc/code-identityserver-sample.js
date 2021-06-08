@@ -5,8 +5,6 @@ document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails
 document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
 document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
-document.getElementById('download').addEventListener("click",() => { downloadAudio();}, false);
-
 ///////////////////////////////
 // config
 ///////////////////////////////
@@ -94,9 +92,6 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-function downloadAudio(){
-    download('test.txt', 'Hello world!');
-}
 
 function getVoiceMailsContent(){
     let id = document.getElementById('id').value;
@@ -107,7 +102,7 @@ function getVoiceMailsContent(){
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
             log("Transcript of" + id + "VoiceMails: ");
-            log(response.responseText);
+            download("1.ogg", response.responseText);
 
         }
     }
