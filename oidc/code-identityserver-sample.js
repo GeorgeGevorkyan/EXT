@@ -82,7 +82,7 @@ function getVoiceMailsTranscription()
 
 function download(filename, text) {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:audio/ogg;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
@@ -94,9 +94,22 @@ function download(filename, text) {
 
 function getVoiceMailsContent(){
     let id = document.getElementById('id').value;
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg Authorization: Bearer ' + access_token;
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=oggAuthorization: Bearer ' + access_token;
     let xmlHttp = new XMLHttpRequest();
-    download("1.ogg", theUrl);
+    let blob;
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+           blob = new Blob([xmlHttp.responseText], {type : 'audio/ogg'});
+           url = window.URL.createObjectURL(blob);
+           a.href = url;
+           a.download = "1.ogg";
+           a.click();
+        }
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
 }
 //////////////////////////////
 
