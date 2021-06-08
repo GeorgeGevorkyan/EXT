@@ -5,6 +5,7 @@ document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails
 document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
 document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
+document.getElementById('download').addEventListener("click",() => { downloadAudio();}, false);
 
 ///////////////////////////////
 // config
