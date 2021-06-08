@@ -1,10 +1,11 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+let voicemail_ID = document.getElementById('id').value;
 
 document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails, false);
-document.getElementById('getVoiceMailsTranscription').addEventListener("click", getVoiceMailsTranscription, false);
-document.getElementById('getVoiceMailsContent').addEventListener("click", getVoiceMailsContent, false);
-document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails"); }, false);
+document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription(voicemail_ID);}, false);
+document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent(voicemail_ID);}, false);
+document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
 
 ///////////////////////////////
 // config
@@ -25,7 +26,8 @@ let settings = {
     extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
 };
 
-access_token = null;
+let access_token = null;
+
 
 function getAccessToken(scope){
     settings.scope = scope;
