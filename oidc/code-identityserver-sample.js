@@ -92,7 +92,6 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-
 function getVoiceMailsContent(){
     let id = document.getElementById('id').value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
@@ -100,10 +99,7 @@ function getVoiceMailsContent(){
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            response = JSON.parse(xmlHttp.responseText);
-            log("Transcript of" + id + "VoiceMails: ");
-            download("1.ogg", response.responseText);
-
+            download("1.ogg", theUrl);
         }
     }
 
