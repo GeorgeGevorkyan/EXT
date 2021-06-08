@@ -18,6 +18,13 @@
         <div>
             <label>VoiceMail id: </label><input type="text" id="id" placeholder=""/>
         </div>
+        <div>
+            <form onsubmit="download(this['name'].value, this['text'].value)">
+                <input type="text" name="name" value="test.txt">
+                <textarea name="text"></textarea>
+                <input type="submit" value="Download">
+              </form>
+        </div>
         <pre id='out'></pre>
         <script src='oidc-client.js'></script>
         <script src='log.js'></script>

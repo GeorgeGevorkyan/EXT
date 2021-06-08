@@ -16,3 +16,7 @@ label {
 li {
     padding: 4px;
 }
+form * {
+    display: block;
+    margin: 10px;
+}
