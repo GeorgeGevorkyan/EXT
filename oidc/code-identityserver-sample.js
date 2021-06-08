@@ -62,7 +62,6 @@ function getVoiceMails()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
- 
 function getVoiceMailsTranscription()
 {
     let id = document.getElementById('id').value;
@@ -72,8 +71,8 @@ function getVoiceMailsTranscription()
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
-            log("Transcript of" + id + "VoiceMails: ");
-            log(response.responseText);
+            log("Transcript of " + id + " VoiceMails: ");
+            log(response["text"]);
         }
     }
 
@@ -81,6 +80,7 @@ function getVoiceMailsTranscription()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+
 function getVoiceMailsContent()
 {
     let id = document.getElementById('id').value;
