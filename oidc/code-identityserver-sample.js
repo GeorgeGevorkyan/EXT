@@ -94,7 +94,7 @@ function download(filename, text) {
 
 function getVoiceMailsContent(){
     let id = document.getElementById('id').value;
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=oggAuthorization: Bearer ' + access_token;
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
     let xmlHttp = new XMLHttpRequest();
     let blob;
     xmlHttp.onreadystatechange = function() { 
