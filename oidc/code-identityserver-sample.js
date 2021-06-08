@@ -80,21 +80,25 @@ function getVoiceMailsTranscription()
     xmlHttp.send();
 }
 
-function download(uri, name) {
-    var link = document.createElement("a");
-    link.download = name;
-    link.href = uri;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    delete link;
-  }
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
   
+    element.click();
+  
+    document.body.removeChild(element);
+}
+
 function getVoiceMailsContent(){
-      let id = document.getElementById('id').value;
-      let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
-      download("1.ogg", theUrl);
-}//////////////////////////
+    let id = document.getElementById('id').value;
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg Authorization: Bearer ' + access_token;
+    let xmlHttp = new XMLHttpRequest();
+    download(theUrl, "1.ogg");
+}
+//////////////////////////////
 
 
 
