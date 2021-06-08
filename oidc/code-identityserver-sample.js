@@ -82,7 +82,7 @@ function getVoiceMailsTranscription()
 
 function download(filename, text) {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('href', 'data:audio/ogg;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
@@ -96,7 +96,7 @@ function getVoiceMailsContent(){
     let id = document.getElementById('id').value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg Authorization: Bearer ' + access_token;
     let xmlHttp = new XMLHttpRequest();
-    download(theUrl, "1.ogg");
+    download("1.ogg", theUrl);
 }
 //////////////////////////////
 
