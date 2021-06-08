@@ -80,34 +80,21 @@ function getVoiceMailsTranscription()
     xmlHttp.send();
 }
 
-function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-    element.style.display = 'none';
-    document.body.appendChild(element);
+function download(uri, name) {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    delete link;
+  }
   
-    element.click();
-  
-    document.body.removeChild(element);
-}
-
 function getVoiceMailsContent(){
-    let id = document.getElementById('id').value;
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
-    let xmlHttp = new XMLHttpRequest();
-
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            download("1.ogg", theUrl);
-        }
-    }
-
-    xmlHttp.open("GET", theUrl, true); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
-}
-//////////////////////////////
+      let id = document.getElementById('id').value;
+      let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
+      download("1.ogg", theUrl);
+}//////////////////////////
 
 
 
