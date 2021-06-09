@@ -60,7 +60,6 @@ function getVoiceMails()
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
-
             for (let index = 0; index < response["records"].length; index++) {
                 createNewTr(response["records"][index]);
             }
@@ -104,19 +103,31 @@ function createNewTr(tr){
 
     let element = document.createElement('tr');
     document.getElementById('table').appendChild(element);
-    td = document.createElement('td');
-    
+
+    let td = document.createElement('td');
+    element.appendChild(td);
     td.setAttribute('id', "td");
     document.getElementById('td').innerText = tr["id"];
-    element.appendChild(td);
-    document.getElementById('td').innerText = tr["sender"];
-    element.appendChild(td);
-    document.getElementById('td').innerText = tr["status"];
-    element.appendChild(td);
-    document.getElementById('td').innerText = tr["duration"];
-    element.appendChild(td);
-    document.getElementById('td').innerText = tr["whenCreated"];
-    element.appendChild(td);
+    
+    let td2 = document.createElement('td');
+    element.appendChild(td2);
+    td2.setAttribute('id', "td2");
+    document.getElementById('td2').innerText = tr["sender"];
+    
+    let td3 = document.createElement('td');
+    element.appendChild(td3);
+    td3.setAttribute('id', "td3");
+    document.getElementById('td3').innerText = tr["status"];
+
+    let td4 = document.createElement('td');
+    element.appendChild(td4);
+    td4.setAttribute('id', "td4");
+    document.getElementById('td4').innerText = tr["duration"];
+    
+    let td5 = document.createElement('td');
+    element.appendChild(td5);
+    td5.setAttribute('id', "td5");
+    document.getElementById('td5').innerText = tr["whenCreated"];
 
 }
 function download(filename, text) {
