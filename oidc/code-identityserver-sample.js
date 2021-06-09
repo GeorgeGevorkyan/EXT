@@ -47,10 +47,9 @@ function getAccessToken(scope){
 // functions for VoiceMails
 ///////////////////////////////
 
-let offset = 0;
 let count = 5;
-
-function getVoiceMails()
+let pageNumber = 0;
+function getVoiceMails(offset = 0)
 {
 
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
@@ -63,6 +62,14 @@ function getVoiceMails()
             for (let index = 0; index < response["records"].length; index++) {
                 createNewTr(response["records"][index]);
             }
+            pageNumber++;
+            let a = document.createElement("a");
+            element.appendChild(a);
+            td.setAttribute('id', "a"+ pageNumber);
+            document.getElementById('a'+ pageNumber).innerHTML = pageNumber;
+            document.getElementById('a'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
+            pageNumber++;
+            
         }
     }
 
