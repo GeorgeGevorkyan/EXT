@@ -47,17 +47,22 @@ function getAccessToken(scope){
 // functions for VoiceMails
 ///////////////////////////////
 
+let offset = 0;
+let count = 5;
+
 function getVoiceMails()
 {
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=0&count=100';
+
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
     let xmlHttp = new XMLHttpRequest();
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
+
             for (let index = 0; index < response["records"].length; index++) {
-                log(response["records"][index]);
+                createNewTr(response["records"][index]);
             }
         }
     }
@@ -84,16 +89,45 @@ function getVoiceMailsTranscription()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+/*
+<table>
+<tr>
+ <td>1</td>
+ <td>2</td>
+ <td>3</td>
+ <td>4</td>
+</tr>
+</table>
+*/
 
+function createNewTr(tr){
+
+    let element = document.createElement('tr');
+    document.getElementById('table').appendChild(element);
+    td = document.createElement('td');
+    
+    td.setAttribute('id', "td");
+    document.getElementById('td').innerText = tr["id"];
+    element.appendChild(td);
+    document.getElementById('td').innerText = tr["sender"];
+    element.appendChild(td);
+    document.getElementById('td').innerText = tr["status"];
+    element.appendChild(td);
+    document.getElementById('td').innerText = tr["duration"];
+    element.appendChild(td);
+    document.getElementById('td').innerText = tr["whenCreated"];
+    element.appendChild(td);
+
+}
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
-  
+    
     element.click();
-  
+    
     document.body.removeChild(element);
 }
 
