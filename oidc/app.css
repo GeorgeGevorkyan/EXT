@@ -12,7 +12,9 @@ label {
     display: inline-block;
     width: 80px;
 }
-
+td{
+    padding: 0 10px 0 0;
+}
 li {
     padding: 4px;
 }

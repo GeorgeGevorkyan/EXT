@@ -88,17 +88,7 @@ function getVoiceMailsTranscription()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-/*
-<table>
-<tr>
- <td>1</td>
- <td>2</td>
- <td>3</td>
- <td>4</td>
-</tr>
-</table>
-*/
-
+let idNumber = 0;
 function createNewTr(tr){
 
     let element = document.createElement('tr');
@@ -106,30 +96,35 @@ function createNewTr(tr){
 
     let td = document.createElement('td');
     element.appendChild(td);
-    td.setAttribute('id', "td");
-    document.getElementById('td').innerText = tr["id"];
+    td.setAttribute('id', "td"+ idNumber);
+    document.getElementById('td'+ idNumber).innerText = tr["id"];
+    idNumber++;
     
     let td2 = document.createElement('td');
     element.appendChild(td2);
-    td2.setAttribute('id', "td2");
-    document.getElementById('td2').innerText = tr["sender"];
-    
+    td2.setAttribute('id', "td2" + idNumber);
+    document.getElementById('td2' + idNumber).innerText = tr["sender"];
+    idNumber++;
+
     let td3 = document.createElement('td');
     element.appendChild(td3);
-    td3.setAttribute('id', "td3");
-    document.getElementById('td3').innerText = tr["status"];
+    td3.setAttribute('id', "td3" + idNumber);
+    document.getElementById('td3' + idNumber).innerText = tr["status"];
+    idNumber++;
 
     let td4 = document.createElement('td');
     element.appendChild(td4);
-    td4.setAttribute('id', "td4");
-    document.getElementById('td4').innerText = tr["duration"];
-    
+    td4.setAttribute('id', "td4" + idNumber);
+    document.getElementById('td4' + idNumber).innerText = tr["duration"];
+    idNumber++;
+
     let td5 = document.createElement('td');
     element.appendChild(td5);
-    td5.setAttribute('id', "td5");
-    document.getElementById('td5').innerText = tr["whenCreated"];
-
+    td5.setAttribute('id', "td5" + idNumber);
+    document.getElementById('td5' + idNumber).innerText = tr["whenCreated"];
+    idNumber++;
 }
+
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
