@@ -14,14 +14,19 @@ console.log("Using oidc-client version: ", Oidc.Version);
 let url = location.href.substring(0, location.href.lastIndexOf('/'));
 
 let settings = {
-    authority: localStorage.getItem('cfg-authority'),
-    client_id: localStorage.getItem('cfg-clientId'),
+    // authority: localStorage.getItem('cfg-authority'),
+    // client_id: localStorage.getItem('cfg-clientId'),
+    authority: "https://login.intermedia.net/user",
+    client_id: "BSTHred8hUOjxvZ0lMrdQ",
     redirect_uri: location.href.split('?')[0],
     response_type: 'code',
     scope: '',
-    acr_values : localStorage.getItem('cfg-acr'),
-    login_hint: localStorage.getItem('cfg-login'),
-    extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
+    // acr_values : localStorage.getItem('cfg-acr'),
+    acr_values: "deviceId:7f8b3ae9-f073-4b1e-b5af-468cb7432ad2",
+    // login_hint: localStorage.getItem('cfg-login'),
+    login_hint: "MrprodUser@test.net",
+    // extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
+    extraTokenParams: { acr_values: "deviceId:7f8b3ae9-f073-4b1e-b5af-468cb7432ad2" }
 };
 
 let access_token = null;
