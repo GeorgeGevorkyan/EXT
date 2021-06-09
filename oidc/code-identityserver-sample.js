@@ -70,9 +70,8 @@ function getVoiceMails()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-function getVoiceMailsTranscription()
+function getVoiceMailsTranscription(id)
 {
-    let id = document.getElementById('id').value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
     let xmlHttp = new XMLHttpRequest();
 
@@ -129,6 +128,30 @@ function createNewTr(tr){
     td6.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["whenCreated"];
     idNumber++;
+
+    let td7 = document.createElement('td');
+    element.appendChild(td7);
+    td7.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["hasText"];
+    idNumber++;
+
+    let td8 = document.createElement('td');
+    element.appendChild(td8);
+    td8.setAttribute('id', "td" + idNumber);
+    let button8 = document.createElement('button');
+    button8.setAttribute('id', "button" + idNumber);
+    td8.appendChild(button8);
+    document.getElementById('button' + idNumber).click = () => { getVoiceMailsTranscription(tr["id"]); };
+    idNumber++;
+
+    let td9 = document.createElement('td');
+    element.appendChild(td9);
+    td9.setAttribute('id', "td" + idNumber);
+    let button9 = document.createElement('button');
+    button9.setAttribute('id', "button" + idNumber);
+    td9.appendChild(button9);
+    document.getElementById('button' + idNumber).click = () => { getVoiceMailsContent(tr["id"]); };
+    idNumber++;
 }
 
 function download(filename, text) {
@@ -137,14 +160,11 @@ function download(filename, text) {
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
-    
     element.click();
-    
     document.body.removeChild(element);
 }
 
-function getVoiceMailsContent(){
-    let id = document.getElementById('id').value;
+function getVoiceMailsContent(id){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
     let xmlHttp = new XMLHttpRequest();
     let blob;
@@ -158,7 +178,6 @@ function getVoiceMailsContent(){
             a.click();
         }
     }
-
 
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
