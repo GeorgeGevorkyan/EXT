@@ -1,7 +1,7 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-document.getElementById('getVoiceMails').addEventListener("click", getVoiceMails, false);
+document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
 document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
@@ -49,7 +49,7 @@ function getAccessToken(scope){
 
 let count = 5;
 let pageNumber = 0;
-function getVoiceMails(offset = 0)
+function getVoiceMails(offset)
 {
 
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
