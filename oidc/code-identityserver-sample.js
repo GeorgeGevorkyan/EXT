@@ -102,26 +102,32 @@ function createNewTr(tr){
     
     let td2 = document.createElement('td');
     element.appendChild(td2);
-    td2.setAttribute('id', "td2" + idNumber);
-    document.getElementById('td2' + idNumber).innerText = tr["sender"];
+    td2.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["sender"]["phoneNumber"];
     idNumber++;
 
     let td3 = document.createElement('td');
     element.appendChild(td3);
-    td3.setAttribute('id', "td3" + idNumber);
-    document.getElementById('td3' + idNumber).innerText = tr["status"];
+    td3.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["sender"]["displayName"];
     idNumber++;
 
     let td4 = document.createElement('td');
     element.appendChild(td4);
-    td4.setAttribute('id', "td4" + idNumber);
-    document.getElementById('td4' + idNumber).innerText = tr["duration"];
+    td4.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["status"];
     idNumber++;
 
     let td5 = document.createElement('td');
     element.appendChild(td5);
-    td5.setAttribute('id', "td5" + idNumber);
-    document.getElementById('td5' + idNumber).innerText = tr["whenCreated"];
+    td5.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["duration"];
+    idNumber++;
+
+    let td6 = document.createElement('td');
+    element.appendChild(td6);
+    td6.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["whenCreated"];
     idNumber++;
 }
 
