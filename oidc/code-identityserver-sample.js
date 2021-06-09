@@ -99,13 +99,15 @@ function getVoiceMailsContent(){
     let blob;
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-           blob = new Blob([xmlHttp.responseText], {type : 'audio/ogg'});
-           url = window.URL.createObjectURL(blob);
-           a.href = url;
-           a.download = "1.ogg";
-           a.click();
+            blob = new Blob([xmlHttp.responseText], {type : 'audio/ogg'});
+            let url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "1.ogg";
+            a.click();
         }
     }
+
 
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
