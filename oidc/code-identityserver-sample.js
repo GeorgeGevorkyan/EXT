@@ -61,17 +61,17 @@ function getVoiceMails(offset)
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
             for (let index = 0; index < response["records"].length; index++) {
-                document.getElementById('table').dele
+                // document.getElementById('table').dele
                 createNewTr(response["records"][index]);
             }
             if(pageNumber != 1){
-                document.getElementById('buttonPrev').click = () => { getVoiceMails(pageNumber * count); };
+                document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(pageNumber * count)}, false);
             }
 
             document.getElementById('buttonCurr').innerHTML = pageNumber;
             
             pageNumber++;
-            document.getElementById('buttonNext').click = () => { getVoiceMails(pageNumber * count); };
+            document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(pageNumber * count)}, false);
         }
     }
 
