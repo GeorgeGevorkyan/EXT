@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 let count = 5;
-let pageNumber = 1;
+let pageNumber = 0;
 
 document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
@@ -60,20 +60,20 @@ function getVoiceMails(offset)
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
     let xmlHttp = new XMLHttpRequest();
 
+    
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
-            for (let index = 0; index < response["records"].length; index++) {
-                let myNode = document.getElementById("table");
-                log(myNode);
-                while (myNode.firstChild) {
+            let myNode = document.getElementById("table");
+            while (myNode.firstChild) {
                 myNode.removeChild(myNode.lastChild);
-                }
+             }
+            for (let index = 0; index < response["records"].length; index++) {
                 createNewTr(response["records"][index]);
              }   
          }
-        document.getElementById('buttonCurr').innerHTML = pageNumber;         
+        document.getElementById('buttonCurr').innerHTML = pageNumber + 1;         
     }
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
