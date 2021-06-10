@@ -1,10 +1,15 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+let count = 5;
+let pageNumber = 1;
+
 document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
 document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
+document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(--pageNumber * count)}, false);
 
 ///////////////////////////////
 // config
@@ -48,8 +53,7 @@ function getAccessToken(scope){
 // functions for VoiceMails
 ///////////////////////////////
 
-let count = 5;
-let pageNumber = 1;
+
 function getVoiceMails(offset)
 {
 
@@ -61,17 +65,12 @@ function getVoiceMails(offset)
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
             for (let index = 0; index < response["records"].length; index++) {
-                // document.getElementById('table').dele
+                removeChild(document.getElementById('table').children);
                 createNewTr(response["records"][index]);
             
             }
-            if(pageNumber != 1){
-                document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(--pageNumber * count)}, false);
-            }
-
             document.getElementById('buttonCurr').innerHTML = pageNumber;
             
-            document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
         }
     }
 
