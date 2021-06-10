@@ -5,6 +5,7 @@ document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoic
 document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
 document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
+
 ///////////////////////////////
 // config
 ///////////////////////////////
@@ -64,12 +65,11 @@ function getVoiceMails(offset)
             }
             pageNumber++;
             let a = document.createElement("a");
-            element.appendChild(a);
+            document.getElementById().appendChild(a);
             td.setAttribute('id', "a"+ pageNumber);
             document.getElementById('a'+ pageNumber).innerHTML = pageNumber;
             document.getElementById('a'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
             pageNumber++;
-            
         }
     }
 
