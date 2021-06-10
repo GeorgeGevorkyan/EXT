@@ -61,27 +61,17 @@ function getVoiceMails(offset)
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
             for (let index = 0; index < response["records"].length; index++) {
+                document.getElementById('table').dele
                 createNewTr(response["records"][index]);
             }
             if(pageNumber != 1){
-                let buttonPrev = document.createElement("button");
-                document.getElementById("paging").appendChild(buttonPrev);
-                buttonPrev.setAttribute('id', "butttonPrev"+ pageNumber);
-                document.getElementById('buttonPrev'+ pageNumber).innerHTML = "Prev";
-                document.getElementById('buttonPrev'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
+                document.getElementById('buttonPrev').click = () => { getVoiceMails(pageNumber * count); };
             }
 
-            let buttonCurr = document.createElement("button");
-            document.getElementById("paging").appendChild(buttonPrev);
-            buttonCurr.setAttribute('id', "butttonCurr"+ pageNumber);
-            document.getElementById('buttonCurr'+ pageNumber).innerHTML = pageNumber;
+            document.getElementById('buttonCurr').innerHTML = pageNumber;
             
             pageNumber++;
-            let buttonNext = document.createElement("button");
-            document.getElementById("paging").appendChild(buttonNext);
-            buttonNext.setAttribute('id', "buttonNext"+ pageNumber);
-            document.getElementById('buttonNext'+ pageNumber).innerHTML = "Next";
-            document.getElementById('buttonNext'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
+            document.getElementById('buttonNext').click = () => { getVoiceMails(pageNumber * count); };
         }
     }
 
