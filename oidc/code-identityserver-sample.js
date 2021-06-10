@@ -65,14 +65,14 @@ function getVoiceMails(offset)
             }
             if(pageNumber != 1){
                 let buttonPrev = document.createElement("button");
-                document.getElementById("paging").appendChild(a);
+                document.getElementById("paging").appendChild(buttonPrev);
                 buttonPrev.setAttribute('id', "butttonPrev"+ pageNumber);
                 document.getElementById('buttonPrev'+ pageNumber).innerHTML = "Prev";
                 document.getElementById('buttonPrev'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
             }
 
             let buttonCurr = document.createElement("button");
-            document.getElementById("paging").appendChild(a);
+            document.getElementById("paging").appendChild(buttonPrev);
             buttonCurr.setAttribute('id', "butttonCurr"+ pageNumber);
             document.getElementById('buttonCurr'+ pageNumber).innerHTML = pageNumber;
             
