@@ -49,7 +49,7 @@ function getAccessToken(scope){
 ///////////////////////////////
 
 let count = 5;
-let pageNumber = 0;
+let pageNumber = 1;
 function getVoiceMails(offset)
 {
 
@@ -63,13 +63,25 @@ function getVoiceMails(offset)
             for (let index = 0; index < response["records"].length; index++) {
                 createNewTr(response["records"][index]);
             }
-            pageNumber++;
-            let a = document.createElement("a");
+            if(pageNumber != 1){
+                let button = document.createElement("button");
+                document.getElementById().appendChild(a);
+                button.setAttribute('id', "butttonPrev"+ pageNumber);
+                document.getElementById('buttonPrev'+ pageNumber).innerHTML = "Prev";
+                document.getElementById('buttonPrev'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
+            }
+
+            let button = document.createElement("button");
             document.getElementById().appendChild(a);
-            td.setAttribute('id', "a"+ pageNumber);
-            document.getElementById('a'+ pageNumber).innerHTML = pageNumber;
-            document.getElementById('a'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
+            button.setAttribute('id', "butttonPrev"+ pageNumber);
+            document.getElementById('buttonPrev'+ pageNumber).innerHTML = pageNumber;
+            
             pageNumber++;
+            let button = document.createElement("button");
+            document.getElementById().appendChild(button);
+            button.setAttribute('id', "buttonNext"+ pageNumber);
+            document.getElementById('buttonNext'+ pageNumber).innerHTML = "Next";
+            document.getElementById('buttonNext'+ pageNumber).click = () => { getVoiceMails(pageNumber * count); };
         }
     }
 
