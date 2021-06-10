@@ -65,15 +65,16 @@ function getVoiceMails(offset)
             response = JSON.parse(xmlHttp.responseText);
             log("All detected VoiceMails: ");
             for (let index = 0; index < response["records"].length; index++) {
-                removeChild(document.getElementById('table').children);
+                let myNode = document.getElementById("table");
+                log(myNode);
+                while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+                }
                 createNewTr(response["records"][index]);
-            
-            }
-            document.getElementById('buttonCurr').innerHTML = pageNumber;
-            
-        }
+             }   
+         }
+        document.getElementById('buttonCurr').innerHTML = pageNumber;         
     }
-
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
