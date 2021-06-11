@@ -64,7 +64,7 @@ function getVoiceMails(offset)
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
-            if (pageNumber > 1){   
+            if (pageNumber > 0){   
                 document.getElementById('buttonPrev').hidden = false;
             }
             else{
@@ -76,7 +76,7 @@ function getVoiceMails(offset)
                 document.getElementById('buttonNext').hidden = true;
             }
            
-           
+    
             let myNode = document.getElementById("table");
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.lastChild);
@@ -84,8 +84,10 @@ function getVoiceMails(offset)
             for (let index = 0; index < response["records"].length; index++) {
                 createNewTr(response["records"][index]);
              }   
-         }
-        document.getElementById('buttonCurr').innerHTML = pageNumber + 1;         
+             document.getElementById('buttonCurr').innerHTML = pageNumber + 1;
+             document.getElementById('buttonPrev').innerHTML = pageNumber;
+             document.getElementById('buttonNext').innerHTML = pageNumber + 2;
+         }                
     }
     xmlHttp.open("GET", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
