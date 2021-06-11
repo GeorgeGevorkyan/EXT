@@ -5,8 +5,6 @@ let count = 5;
 let pageNumber = 0;
 
 document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoiceMails(0);}, false);
-document.getElementById('getVoiceMailsTranscription').addEventListener("click", () => { getVoiceMailsTranscription();}, false);
-document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count)}, false);
@@ -162,20 +160,21 @@ function createNewTr(tr){
     element.appendChild(td8);
     td8.setAttribute('id', "td" + idNumber);
     let button8 = document.createElement('button');
-    button8.setAttribute('id', "button" + idNumber);
     td8.appendChild(button8);
-    document.getElementById('button' + idNumber).click = () => { getVoiceMailsTranscription(tr["id"]); };
+    button8.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
     idNumber++;
 
     let td9 = document.createElement('td');
     element.appendChild(td9);
     td9.setAttribute('id', "td" + idNumber);
     let button9 = document.createElement('button');
-    button9.setAttribute('id', "button" + idNumber);
     td9.appendChild(button9);
-    document.getElementById('button' + idNumber).click = () => { getVoiceMailsContent(tr["id"]); };
+    button9.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); }, false);
     idNumber++;
 }
+
 
 function download(filename, text) {
     var element = document.createElement('a');
