@@ -76,7 +76,7 @@ function getVoiceMails(offset)
            
     
             let myNode = document.getElementById("table");
-            while (myNode.firstChild) {
+            while (myNode.childNodes.length > 1) {
                 myNode.removeChild(myNode.lastChild);
              }
             for (let index = 0; index < response["records"].length; index++) {
@@ -174,7 +174,6 @@ function createNewTr(tr){
     document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); }, false);
     idNumber++;
 }
-
 
 function download(filename, text) {
     var element = document.createElement('a');
