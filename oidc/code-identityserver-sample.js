@@ -194,14 +194,13 @@ function getVoiceMailsContent(id){
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             // start audio in browser
-            context = new AudioContext();
-            context.decodeAudioData(xmlHttp.response, function(buffer) {
-                source = context.createBufferSource();
-                source.buffer = buffer;
-                source.connect(context.destination);
-                // auto play
-                source.start(0); // start was previously noteOn
-              });
+            // context = new AudioContext();
+            // context.decodeAudioData(xmlHttp.response, function(buffer) {
+            //     source = context.createBufferSource();
+            //     source.buffer = buffer;
+            //     source.connect(context.destination);
+            //     source.start(0);
+            //   });
 
             // save audio file 
             blob = new Blob([xmlHttp.response], {type : 'audio/ogg'});
