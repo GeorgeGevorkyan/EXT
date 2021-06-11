@@ -12,6 +12,11 @@ label {
     display: inline-block;
     width: 80px;
 }
+#buttonCurr {
+
+    background: transparent;
+    border: none !important;
+}​
 
 td{
     padding: 0 10px 5px 0;

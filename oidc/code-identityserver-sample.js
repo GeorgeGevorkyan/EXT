@@ -64,6 +64,13 @@ function getVoiceMails(offset)
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
+            if (pageNumber != 1){   
+                document.getElementById('buttonPrev').hidden = false;
+            }
+            if (response["records"].length < count){
+                document.getElementById('buttonNext').hidden = false;
+            }
+           
             let myNode = document.getElementById("table");
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.lastChild);
