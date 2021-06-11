@@ -9,7 +9,7 @@ document.getElementById('getVoiceMailsTranscription').addEventListener("click", 
 document.getElementById('getVoiceMailsContent').addEventListener("click",() => { getVoiceMailsContent();}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(--pageNumber * count)}, false);
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count)}, false);
 
 ///////////////////////////////
 // config
@@ -64,7 +64,6 @@ function getVoiceMails(offset)
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
-            log("All detected VoiceMails: ");
             let myNode = document.getElementById("table");
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.lastChild);
