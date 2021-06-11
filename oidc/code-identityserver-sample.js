@@ -200,14 +200,15 @@ function getVoiceMailsContent(id){
                 source.connect(context.destination);
                 // auto play
                 source.start(0); // start was previously noteOn
+                let url = window.URL.createObjectURL(buffer);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = id + ".ogg";
+                a.click();
               });
             };
     
-            let url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = id + ".ogg";
-            a.click();
+
     }
 
     xmlHttp.open("GET", theUrl, true); 
