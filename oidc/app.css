@@ -12,14 +12,10 @@ label {
     display: inline-block;
     width: 80px;
 }
-button {
 
-    background: transparent;
-    border: none !important;
-}​
 
 td{
-    padding: 0 10px 5px 0;
+    padding: 0 15px 5px 0;
 }
 li {
     padding: 4px;

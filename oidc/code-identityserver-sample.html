@@ -12,13 +12,22 @@
         </div>
         <div>
             <button id='getVoiceMails'>Get VoiceMails</button>
-            <button id='getVoiceMailsTranscription'>Get VoiceMails Transcription</button>
-            <button id='getVoiceMailsContent'>Get VoiceMails Content</button>
         </div>
-        <div>
-            <label>VoiceMail id: </label><input type="text" id="id" placeholder=""/>
-        </div>
-        <table id="table"></table>
+        <table id="table">
+            <thead>
+                <tr>
+                <td> id </td>
+                <td> phoneNumber </td> 
+                <td> displayName </td>
+                <td> status </td>
+                <td> duration </td>
+                <td> whenCreated </td>
+                <td> hasText </td>
+                <td> Transcript </td>
+                <td> Content </td>
+               </tr> 
+            </thead>
+        </table>
         <div id="paging">
             <button id="buttonPrev" hidden></button>
             <button id="buttonCurr" disabled></button>
