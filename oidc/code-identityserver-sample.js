@@ -189,18 +189,29 @@ function getVoiceMailsContent(id){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
     let xmlHttp = new XMLHttpRequest();
     let blob;
+    var context;
+    var source;
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            blob = new Blob([xmlHttp.responseText], {type : 'audio/ogg'});
+            context = new AudioContext();
+            context.decodeAudioData(xmlHttp.response, function(buffer) {
+                source = context.createBufferSource();
+                source.buffer = buffer;
+                source.connect(context.destination);
+                // auto play
+                source.start(0); // start was previously noteOn
+              });
+            };
+    
             let url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = "1.ogg";
+            a.download = id + ".ogg";
             a.click();
-        }
     }
 
     xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.responseType = "arraybuffer";
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
