@@ -54,11 +54,10 @@ function getAccessToken(scope){
 
 function getVoiceMails(offset)
 {
-
+    document.getElementById('buttonCurr').hidden = false;   
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
     let xmlHttp = new XMLHttpRequest();
 
-    
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             response = JSON.parse(xmlHttp.responseText);
@@ -82,6 +81,7 @@ function getVoiceMails(offset)
             for (let index = 0; index < response["records"].length; index++) {
                 createNewTr(response["records"][index]);
              }   
+             
              document.getElementById('buttonCurr').innerHTML = pageNumber + 1;
              document.getElementById('buttonPrev').innerHTML = pageNumber;
              document.getElementById('buttonNext').innerHTML = pageNumber + 2;
