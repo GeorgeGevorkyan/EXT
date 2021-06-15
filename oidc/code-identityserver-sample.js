@@ -55,6 +55,7 @@ function getAccessToken(scope){
 function getVoiceMails(offset)
 {
     document.getElementById('buttonCurr').hidden = false;   
+    document.getElementById('thead').hidden = false;   
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
     let xmlHttp = new XMLHttpRequest();
 
