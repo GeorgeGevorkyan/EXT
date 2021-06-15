@@ -9,6 +9,10 @@ document.getElementById('getVoiceMailsToken').addEventListener("click",() => { g
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count)}, false);
 document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus();}, false);
+document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords();}, false);
+document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal();}, false);
+document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord();}, false);
+document.getElementById('deleteSelectedVoicemailRecords').addEventListener("click",() =>{ deleteSelectedVoicemailRecords();}, false);
 
 
 
@@ -169,6 +173,22 @@ function getVoiceMailRecord(id)
         }
     }                
     xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+function deleteSelectedVoicemailRecords(ids)
+{
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
+    let xmlHttp = new XMLHttpRequest();
+    let data_raw = '{  "ids": ${ids} }';
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+        }
+    }                
+    xmlHttp.open("DELETE", theUrl, true); 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
