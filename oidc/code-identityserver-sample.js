@@ -75,7 +75,7 @@ function getVoiceMails(offset)
            
     
             let myNode = document.getElementById("table");
-            while (myNode.childNodes.length > 1) {
+            while (myNode.childNodes.length > 2) {
                 myNode.removeChild(myNode.lastChild);
              }
             for (let index = 0; index < response["records"].length; index++) {
