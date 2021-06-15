@@ -8,6 +8,9 @@ document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoic
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count)}, false);
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus();}, false);
+
+
 
 ///////////////////////////////
 // config
@@ -61,7 +64,7 @@ function getVoiceMails(offset)
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            response = JSON.parse(xmlHttp.responseText);
+            let response = JSON.parse(xmlHttp.responseText);
             if (pageNumber > 0){   
                 document.getElementById('buttonPrev').hidden = false;
             }
@@ -92,6 +95,84 @@ function getVoiceMails(offset)
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+
+function deleteVoiceMailRecords(status)
+{
+
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all';
+    let xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+        }
+    }                
+    xmlHttp.open("DELETE", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+
+function updateVoiceMailRecordsStatus(status)
+{
+
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
+    let xmlHttp = new XMLHttpRequest();
+
+    let data_raw = '{  "status": "unread" }';
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+        }
+    }                
+    xmlHttp.open("POST", theUrl, true); 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send(data_raw);
+}
+
+
+/**
+ * Summary. (use period)
+ *
+ * Description. (use period)
+ * @param {status}   var           Description.
+ * @return {int} Returns current user total voicemails count.
+ */
+function getVoiceMailsTotal(status)
+{
+
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
+    let xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+        }
+    }                
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+
+function getVoiceMailRecord(id)
+{
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
+    let xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+        }
+    }                
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+
 function getVoiceMailsTranscription(id)
 {
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
@@ -174,16 +255,6 @@ function createNewTr(tr){
     button9.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); }, false);
     idNumber++;
-}
-
-function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
 }
 
 function getVoiceMailsContent(id){
