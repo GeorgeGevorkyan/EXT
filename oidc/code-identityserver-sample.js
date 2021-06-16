@@ -12,8 +12,6 @@ document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click"
 document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords();}, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal();}, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord();}, false);
-document.getElementById('deleteSelectedVoicemailRecords').addEventListener("click",() =>{ deleteSelectedVoicemailRecords();}, false);
-
 
 
 ///////////////////////////////
