@@ -101,7 +101,7 @@ function getVoiceMails(offset)
 function deleteVoiceMailRecords(status)
 {
 
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=${status}';
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=' + status;
     let xmlHttp = new XMLHttpRequest();
 
     xmlHttp.onreadystatechange = function() { 
@@ -119,7 +119,7 @@ function updateVoiceMailRecordsStatus(status)
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
     let xmlHttp = new XMLHttpRequest();
 
-    let data_raw = '{  "status": ${status} }';
+    let data_raw = '{ "status": ' + status + ' }';
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
@@ -138,7 +138,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids)
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
     let xmlHttp = new XMLHttpRequest();
 
-    let data_raw = '{  "ids": ${ids}, "status": ${status} }';
+    let data_raw = '{ "ids": ' + ids + ', "status": ' + status + ' }';
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
@@ -190,11 +190,12 @@ function getVoiceMailRecord(id)
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+
 function deleteSelectedVoicemailRecords(ids)
 {
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
     let xmlHttp = new XMLHttpRequest();
-    let data_raw = '{  "ids": ${ids} }';
+    let data_raw = '{ "ids": ' + ids + ' }';
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
@@ -318,17 +319,7 @@ function getVoiceMailsContent(id){
     var context;
     var source;
     xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            // start audio in browser
-            // context = new AudioContext();
-            // context.decodeAudioData(xmlHttp.response, function(buffer) {
-            //     source = context.createBufferSource();
-            //     source.buffer = buffer;
-            //     source.connect(context.destination);
-            //     source.start(0);
-            //   });
-
-            // save audio file 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
             blob = new Blob([xmlHttp.response], {type : 'audio/ogg'});
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
