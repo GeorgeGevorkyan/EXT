@@ -100,7 +100,7 @@ function getVoiceMails(offset)
 
 function deleteVoiceMailRecords(status)
 {
-
+    status = document.getElementById("status").value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=' + status;
     let xmlHttp = new XMLHttpRequest();
 
@@ -113,13 +113,13 @@ function deleteVoiceMailRecords(status)
     xmlHttp.send();
 }
 
-function updateVoiceMailRecordsStatus(status)
-{
-
+function updateVoiceMailRecordsStatus(status){
+    status = document.getElementById("status").value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
     let xmlHttp = new XMLHttpRequest();
 
-    let data_raw = '{ "status": ' + status + ' }';
+    let data_raw = '{ "status": "' + status + '" }';
+    log(data_raw);
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
@@ -132,13 +132,13 @@ function updateVoiceMailRecordsStatus(status)
     xmlHttp.send(data_raw);
 }
 
-function updateSelectedVoiceMailRecordsStatus(status, ids)
-{
-
+function updateSelectedVoiceMailRecordsStatus(status, ids){
+    ids = document.getElementById("id").value;
+    status = document.getElementById("status").value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
     let xmlHttp = new XMLHttpRequest();
 
-    let data_raw = '{ "ids": ' + ids + ', "status": ' + status + ' }';
+    let data_raw = '{ "ids": "' + ids + '", "status": "' + status + '" }';
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
@@ -158,9 +158,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids)
  * @param {status} var Description.
  * @return {int} Returns current user total voicemails count.
  */
-function getVoiceMailsTotal(status)
-{
-
+function getVoiceMailsTotal(status){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
     let xmlHttp = new XMLHttpRequest();
 
@@ -175,8 +173,7 @@ function getVoiceMailsTotal(status)
     xmlHttp.send();
 }
 
-function getVoiceMailRecord(id)
-{
+function getVoiceMailRecord(id){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
     let xmlHttp = new XMLHttpRequest();
 
@@ -191,8 +188,7 @@ function getVoiceMailRecord(id)
     xmlHttp.send();
 }
 
-function deleteSelectedVoicemailRecords(ids)
-{
+function deleteSelectedVoicemailRecords(ids){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = '{ "ids": ' + ids + ' }';
@@ -208,8 +204,7 @@ function deleteSelectedVoicemailRecords(ids)
     xmlHttp.send(data_raw);
 }
 
-function getVoiceMailsTranscription(id)
-{
+function getVoiceMailsTranscription(id){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
     let xmlHttp = new XMLHttpRequest();
 
@@ -227,7 +222,6 @@ function getVoiceMailsTranscription(id)
 }
 let idNumber = 0;
 function createNewTr(tr){
-
     let element = document.createElement('tr');
     document.getElementById('table').appendChild(element);
     
@@ -308,8 +302,6 @@ function createNewTr(tr){
     button11.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus("read",tr["id"]); }, false);
     idNumber++;
-
-
 }
 
 function getVoiceMailsContent(id){
