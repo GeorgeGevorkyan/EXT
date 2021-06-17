@@ -6,12 +6,12 @@ let pageNumber = 0;
 
 document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
-document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count)}, false);
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count)}, false);
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus();}, false);
-document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords();}, false);
-document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal();}, false);
-document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord();}, false);
+document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count); }, false);
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count); }, false);
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus(); }, false);
+document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords(); }, false);
+document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(); }, false);
+document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord(); }, false);
 
 
 ///////////////////////////////
@@ -155,7 +155,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
  * Summary. (use period)
  *
  * Description. (use period)
- * @param {status} var Description.
+ * @param {status} "read" or "unread".
  * @return {int} Returns current user total voicemails count.
  */
 function getVoiceMailsTotal(status){
@@ -191,11 +191,10 @@ function getVoiceMailRecord(id){
 function deleteSelectedVoicemailRecords(ids){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
     let xmlHttp = new XMLHttpRequest();
-    let data_raw = '{ "ids": ' + ids + ' }';
+    let data_raw = '{ "ids": [' + ids + '] }';
+    log(data_raw);
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            let response = JSON.parse(xmlHttp.responseText);
-            log(response);
         }
     }                
     xmlHttp.open("DELETE", theUrl, true); 
@@ -282,7 +281,7 @@ function createNewTr(tr){
     let button9 = document.createElement('button');
     td9.appendChild(button9);
     button9.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); getVoiceMails(pageNumber * count); }, false);
     idNumber++;
 
     let td10 = document.createElement('td');
@@ -291,7 +290,7 @@ function createNewTr(tr){
     let button10 = document.createElement('button');
     td10.appendChild(button10);
     button10.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]); getVoiceMails(pageNumber * count); }, false);
     idNumber++;
 
     let td11 = document.createElement('td');
@@ -300,7 +299,7 @@ function createNewTr(tr){
     let button11 = document.createElement('button');
     td11.appendChild(button11);
     button11.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus("read",tr["id"]); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(!tr["status"], tr["id"]); }, false);
     idNumber++;
 }
 
