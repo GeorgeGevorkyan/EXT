@@ -12,17 +12,25 @@
         </div>
         <div>
             <button id='getVoiceMails'>Get VoiceMails</button>
-            <button id='updateVoiceMailRecordsStatus'>Update VoiceMail Records Status</button>
-            <button id='deleteVoiceMailRecords'>Delete VoiceMail Records</button>
             <button id='getVoiceMailsTotal'>Get VoiceMails Total</button>
-            <button id='getVoiceMailRecord'>Get VoiceMail Record</button>
         </div>
          <div>
-             <input id="id" placeholder="id"></input>
-             <select id="status">
+            <button id='updateVoiceMailRecordsStatus'>Update VoiceMail Records Status</button>
+            <select id="status">
                 <option value="read">read</option>
                 <option value="unread">unread</option>
               </select>
+        </div>
+        <div>
+            <button id='deleteVoiceMailRecords'>Delete VoiceMail Records</button>
+            <select id="deleteStatus">
+                <option value="read">read</option>
+                <option value="unread">unread</option>
+            </select>
+        </div>
+        <div>
+            <button id='getVoiceMailRecord'>Get VoiceMail Record</button>
+            <input id="id" placeholder="id"></input>
         </div>
         <table id="table">
             <thead id="thead" hidden>

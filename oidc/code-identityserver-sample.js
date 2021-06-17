@@ -8,10 +8,10 @@ document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoic
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count); }, false);
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count); }, false);
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus(); }, false);
-document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords(); }, false);
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus(document.getElementById("status").value); }, false);
+document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(); }, false);
-document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord(); }, false);
+document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
 
 
 ///////////////////////////////
@@ -100,12 +100,13 @@ function getVoiceMails(offset)
 
 function deleteVoiceMailRecords(status)
 {
-    status = document.getElementById("status").value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=' + status;
     let xmlHttp = new XMLHttpRequest();
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            //UI changes
+            getVoiceMails(pageNumber * count);
         }
     }                
     xmlHttp.open("DELETE", theUrl, true); 
@@ -122,8 +123,8 @@ function updateVoiceMailRecordsStatus(status){
     log(data_raw);
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            let response = JSON.parse(xmlHttp.responseText);
-            log(response);
+            //UI changes
+            getVoiceMails(pageNumber * count);
         }
     }                
     xmlHttp.open("POST", theUrl, true); 
@@ -139,8 +140,8 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
     let data_raw = '{ "ids": [' + ids + '], "status": "' + status + '" }';
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            let response = JSON.parse(xmlHttp.responseText);
-            log(response);
+            //UI changes
+            getVoiceMails(pageNumber * count);
         }
     }                
     xmlHttp.open("POST", theUrl, true); 
@@ -193,6 +194,8 @@ function deleteSelectedVoicemailRecords(ids){
     log(data_raw);
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            //UI changes
+            getVoiceMails(pageNumber * count);
         }
     }                
     xmlHttp.open("DELETE", theUrl, true); 
@@ -288,7 +291,7 @@ function createNewTr(tr){
     let button10 = document.createElement('button');
     td10.appendChild(button10);
     button10.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]); getVoiceMails(pageNumber * count); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]);  }, false);
     idNumber++;
 
     let td11 = document.createElement('td');
