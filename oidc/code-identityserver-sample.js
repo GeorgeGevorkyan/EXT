@@ -8,7 +8,7 @@ document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoic
 document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count); }, false);
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count); }, false);
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus(document.getElementById("status").value); }, false);
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
 document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
@@ -119,7 +119,6 @@ function deleteSelectedVoicemailRecords(ids){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = '{ "ids": [' + ids + '] }';
-    log(data_raw);
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             //UI changes
@@ -133,7 +132,6 @@ function deleteSelectedVoicemailRecords(ids){
 }
 
 function updateVoiceMailRecordsStatus(status){
-    status = document.getElementById("status").value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
     let xmlHttp = new XMLHttpRequest();
 
