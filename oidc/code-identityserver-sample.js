@@ -133,12 +133,10 @@ function updateVoiceMailRecordsStatus(status){
 }
 
 function updateSelectedVoiceMailRecordsStatus(status, ids){
-    ids = document.getElementById("id").value;
-    status = document.getElementById("status").value;
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
     let xmlHttp = new XMLHttpRequest();
 
-    let data_raw = '{ "ids": "' + ids + '", "status": "' + status + '" }';
+    let data_raw = '{ "ids": [' + ids + '], "status": "' + status + '" }';
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
@@ -281,7 +279,7 @@ function createNewTr(tr){
     let button9 = document.createElement('button');
     td9.appendChild(button9);
     button9.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); getVoiceMails(pageNumber * count); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); }, false);
     idNumber++;
 
     let td10 = document.createElement('td');
@@ -299,7 +297,7 @@ function createNewTr(tr){
     let button11 = document.createElement('button');
     td11.appendChild(button11);
     button11.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(!tr["status"], tr["id"]); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumber * count); }, false);
     idNumber++;
 }
 
