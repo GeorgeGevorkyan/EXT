@@ -270,6 +270,7 @@ function createNewTr(tr){
     element.appendChild(td8);
     td8.setAttribute('id', "td" + idNumber);
     let button8 = document.createElement('button');
+    button8.innerHTML = "Transcription";
     td8.appendChild(button8);
     button8.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
@@ -286,7 +287,7 @@ function createNewTr(tr){
     idNumber++;
     
     let mp3Button = document.createElement('button');
-    oggButton.innerHTML = "mp3";
+    mp3Button.innerHTML = "mp3";
     td9.appendChild(mp3Button);
     mp3Button.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]); }, false);
@@ -298,7 +299,7 @@ function createNewTr(tr){
     element.appendChild(td10);
     td10.setAttribute('id', "td" + idNumber);
     let button10 = document.createElement('button');
-    button10.innerHTML = "delete";
+    button10.innerHTML = "Delete";
     td10.appendChild(button10);
     button10.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]);  }, false);
@@ -308,7 +309,7 @@ function createNewTr(tr){
     element.appendChild(td11);
     td11.setAttribute('id', "td" + idNumber);
     let button11 = document.createElement('button');
-    button10.innerHTML = "Change Status";
+    button11.innerHTML = "Change Status";
     td11.appendChild(button11);
     button11.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumber * count); }, false);
