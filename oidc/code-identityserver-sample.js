@@ -278,16 +278,27 @@ function createNewTr(tr){
     let td9 = document.createElement('td');
     element.appendChild(td9);
     td9.setAttribute('id', "td" + idNumber);
-    let button9 = document.createElement('button');
-    td9.appendChild(button9);
-    button9.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent(tr["id"]); }, false);
+    let oggButton = document.createElement('button');
+    oggButton.innerHTML = "ogg";
+    td9.appendChild(oggButton);
+    oggButton.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("ogg", tr["id"]); }, false);
     idNumber++;
+    
+    let mp3Button = document.createElement('button');
+    oggButton.innerHTML = "mp3";
+    td9.appendChild(mp3Button);
+    mp3Button.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]); }, false);
+    idNumber++;
+
+
 
     let td10 = document.createElement('td');
     element.appendChild(td10);
     td10.setAttribute('id', "td" + idNumber);
     let button10 = document.createElement('button');
+    button10.innerHTML = "delete";
     td10.appendChild(button10);
     button10.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]);  }, false);
@@ -297,14 +308,15 @@ function createNewTr(tr){
     element.appendChild(td11);
     td11.setAttribute('id', "td" + idNumber);
     let button11 = document.createElement('button');
+    button10.innerHTML = "Change Status";
     td11.appendChild(button11);
     button11.setAttribute('id', "button" + idNumber);
     document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumber * count); }, false);
     idNumber++;
 }
 
-function getVoiceMailsContent(id){
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=ogg';
+function getVoiceMailsContent(format, id){
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
     let xmlHttp = new XMLHttpRequest();
     let blob;
     var context;
@@ -315,7 +327,7 @@ function getVoiceMailsContent(id){
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = url;
-            a.download = id + ".ogg";
+            a.download = id + "." + format;
             a.click();
             };
     }
