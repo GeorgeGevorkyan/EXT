@@ -12,6 +12,7 @@ document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click"
 document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
+document.getElementById('getGreetingContent').addEventListener("click",() =>{ getGreetingContent(); }, false);
 
 
 ///////////////////////////////
@@ -38,24 +39,110 @@ let settings = {
     extraTokenParams: { acr_values: "deviceId:7f8b3ae9-f073-4b1e-b5af-468cb7432ad2" }
 };
 
-let access_token = null;
+///////////////////////////////
+// functions for UI elements
+///////////////////////////////
+
+let idNumber = 0;
+function createNewTr(tr){
+    let element = document.createElement('tr');
+    document.getElementById('table').appendChild(element);
+    
+    let td = document.createElement('td');
+    element.appendChild(td);
+    td.setAttribute('id', "td"+ idNumber);
+    document.getElementById('td'+ idNumber).innerText = tr["id"];
+    idNumber++;
+    
+    let td2 = document.createElement('td');
+    element.appendChild(td2);
+    td2.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["sender"]["phoneNumber"];
+    idNumber++;
+
+    let td3 = document.createElement('td');
+    element.appendChild(td3);
+    td3.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["sender"]["displayName"];
+    idNumber++;
+
+    let td4 = document.createElement('td');
+    element.appendChild(td4);
+    td4.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["status"];
+    idNumber++;
+
+    let td5 = document.createElement('td');
+    element.appendChild(td5);
+    td5.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["duration"];
+    idNumber++;
+
+    let td6 = document.createElement('td');
+    element.appendChild(td6);
+    td6.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["whenCreated"];
+    idNumber++;
+
+    let td7 = document.createElement('td');
+    element.appendChild(td7);
+    td7.setAttribute('id', "td" + idNumber);
+    document.getElementById('td' + idNumber).innerText = tr["hasText"];
+    idNumber++;
+
+    let td8 = document.createElement('td');
+    element.appendChild(td8);
+    td8.setAttribute('id', "td" + idNumber);
+    let button8 = document.createElement('button');
+    button8.innerHTML = "Transcription";
+    td8.appendChild(button8);
+    button8.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
+    idNumber++;
+
+    let td9 = document.createElement('td');
+    element.appendChild(td9);
+    td9.setAttribute('id', "td" + idNumber);
+    let oggButton = document.createElement('button');
+    oggButton.innerHTML = "ogg";
+    td9.appendChild(oggButton);
+    oggButton.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("ogg", tr["id"]); }, false);
+    idNumber++;
+    
+    let mp3Button = document.createElement('button');
+    mp3Button.innerHTML = "mp3";
+    td9.appendChild(mp3Button);
+    mp3Button.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]); }, false);
+    idNumber++;
 
 
-function getAccessToken(scope){
-    settings.scope = scope;
-    let mgr = new Oidc.UserManager(settings);
-    log("Going to sign in using following configuration", settings);
-    mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
-        log("Redirecting to AdSTS...");
-    }).catch(function(err) {
-        log(err);
-    });
+
+    let td10 = document.createElement('td');
+    element.appendChild(td10);
+    td10.setAttribute('id', "td" + idNumber);
+    let button10 = document.createElement('button');
+    button10.innerHTML = "Delete";
+    td10.appendChild(button10);
+    button10.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]);  }, false);
+    idNumber++;
+
+    let td11 = document.createElement('td');
+    element.appendChild(td11);
+    td11.setAttribute('id', "td" + idNumber);
+    let button11 = document.createElement('button');
+    button11.innerHTML = "Change Status";
+    td11.appendChild(button11);
+    button11.setAttribute('id', "button" + idNumber);
+    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumber * count); }, false);
+    idNumber++;
 }
 
 ///////////////////////////////
 // functions for VoiceMails
 ///////////////////////////////
-
 
 function getVoiceMails(offset)
 {
@@ -166,11 +253,9 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
     xmlHttp.send(data_raw);
 }
 
-/**
- * Summary. (use period)
- *
- * Description. (use period)
- * @param {status} "read" or "unread".
+/** 
+ * 
+ * @status "read" or "unread".
  * @return {int} Returns current user total voicemails count.
  */
 function getVoiceMailsTotal(status){
@@ -219,112 +304,14 @@ function getVoiceMailsTranscription(id){
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-let idNumber = 0;
-function createNewTr(tr){
-    let element = document.createElement('tr');
-    document.getElementById('table').appendChild(element);
-    
-    let td = document.createElement('td');
-    element.appendChild(td);
-    td.setAttribute('id', "td"+ idNumber);
-    document.getElementById('td'+ idNumber).innerText = tr["id"];
-    idNumber++;
-    
-    let td2 = document.createElement('td');
-    element.appendChild(td2);
-    td2.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["sender"]["phoneNumber"];
-    idNumber++;
-
-    let td3 = document.createElement('td');
-    element.appendChild(td3);
-    td3.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["sender"]["displayName"];
-    idNumber++;
-
-    let td4 = document.createElement('td');
-    element.appendChild(td4);
-    td4.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["status"];
-    idNumber++;
-
-    let td5 = document.createElement('td');
-    element.appendChild(td5);
-    td5.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["duration"];
-    idNumber++;
-
-    let td6 = document.createElement('td');
-    element.appendChild(td6);
-    td6.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["whenCreated"];
-    idNumber++;
-
-    let td7 = document.createElement('td');
-    element.appendChild(td7);
-    td7.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["hasText"];
-    idNumber++;
-
-    let td8 = document.createElement('td');
-    element.appendChild(td8);
-    td8.setAttribute('id', "td" + idNumber);
-    let button8 = document.createElement('button');
-    button8.innerHTML = "Transcription";
-    td8.appendChild(button8);
-    button8.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
-    idNumber++;
-
-    let td9 = document.createElement('td');
-    element.appendChild(td9);
-    td9.setAttribute('id', "td" + idNumber);
-    let oggButton = document.createElement('button');
-    oggButton.innerHTML = "ogg";
-    td9.appendChild(oggButton);
-    oggButton.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("ogg", tr["id"]); }, false);
-    idNumber++;
-    
-    let mp3Button = document.createElement('button');
-    mp3Button.innerHTML = "mp3";
-    td9.appendChild(mp3Button);
-    mp3Button.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]); }, false);
-    idNumber++;
-
-
-
-    let td10 = document.createElement('td');
-    element.appendChild(td10);
-    td10.setAttribute('id', "td" + idNumber);
-    let button10 = document.createElement('button');
-    button10.innerHTML = "Delete";
-    td10.appendChild(button10);
-    button10.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]);  }, false);
-    idNumber++;
-
-    let td11 = document.createElement('td');
-    element.appendChild(td11);
-    td11.setAttribute('id', "td" + idNumber);
-    let button11 = document.createElement('button');
-    button11.innerHTML = "Change Status";
-    td11.appendChild(button11);
-    button11.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumber * count); }, false);
-    idNumber++;
-}
 
 function getVoiceMailsContent(format, id){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
     let xmlHttp = new XMLHttpRequest();
     let blob;
-    var context;
-    var source;
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
-            blob = new Blob([xmlHttp.response], {type : 'audio/ogg'});
+            blob = new Blob([xmlHttp.response], {type : 'audio/' + format});
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = url;
@@ -338,9 +325,42 @@ function getVoiceMailsContent(format, id){
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+
+function getGreetingContent(format){
+    format='mp3';
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=0';
+    let xmlHttp = new XMLHttpRequest();
+    let blob;
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
+            blob = new Blob([xmlHttp.response], {type : 'audio/' + format});
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = "greeting." + format;
+            a.click();
+            };
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.responseType = "arraybuffer";
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
 //////////////////////////////
 
+let access_token = null;
 
+function getAccessToken(scope){
+    settings.scope = scope;
+    let mgr = new Oidc.UserManager(settings);
+    log("Going to sign in using following configuration", settings);
+    mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
+        log("Redirecting to AdSTS...");
+    }).catch(function(err) {
+        log(err);
+    });
+}
 
 if (location.search.includes("code=", 1)) {
     let mgr = new Oidc.UserManager(settings);
