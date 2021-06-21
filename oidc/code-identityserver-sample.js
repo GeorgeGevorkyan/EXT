@@ -13,6 +13,7 @@ document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>
 document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
 document.getElementById('getGreetingContent').addEventListener("click",() =>{ getGreetingContent(); }, false);
+document.getElementById('uploadGreetingContent').addEventListener("click",() =>{ const selectedFile = document.getElementById('greetingFile').files; uploadGreetingContent(); }, false);
 
 
 ///////////////////////////////
@@ -326,9 +327,8 @@ function getVoiceMailsContent(format, id){
     xmlHttp.send();
 }
 
-function getGreetingContent(format){
-    format='mp3';
-    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=0';
+function getGreetingContent(){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
     let blob;
     xmlHttp.onreadystatechange = function() { 
@@ -342,9 +342,23 @@ function getGreetingContent(format){
             };
     }
 
-    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.open("POST", theUrl, true); 
     xmlHttp.responseType = "arraybuffer";
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+
+function uploadGreetingContent(){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
+    let xmlHttp = new XMLHttpRequest();
+    let blob;
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.setRequestHeader('F', "greetingFile=@/path/to/file;filename=my-greeting-file"); 
     xmlHttp.send();
 }
 //////////////////////////////
