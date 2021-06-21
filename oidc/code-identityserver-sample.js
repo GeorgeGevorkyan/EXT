@@ -13,7 +13,7 @@ document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>
 document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
 document.getElementById('getGreetingContent').addEventListener("click",() =>{ getGreetingContent(); }, false);
-document.getElementById('uploadGreetingContent').addEventListener("click",() =>{ const selectedFile = document.getElementById('greetingFile').files; uploadGreetingContent(); }, false);
+document.getElementById('uploadGreetingContent').addEventListener("click",() =>{ uploadGreetingContent(); }, false);
 
 
 ///////////////////////////////
@@ -349,15 +349,21 @@ function getGreetingContent(){
 }
 
 function uploadGreetingContent(){
+
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
     let blob;
+    let formData = new FormData();
+    const selectedFile = document.getElementById('greetingFile').files;
+    formData.append("audio", selectedFile);                                
+    req.send(formData);
+
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
         }
     }
 
-    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.open("POST", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.setRequestHeader('F', "greetingFile=@/path/to/file;filename=my-greeting-file"); 
     xmlHttp.send();
