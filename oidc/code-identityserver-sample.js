@@ -4,16 +4,18 @@
 let count = 5;
 let pageNumber = 0;
 
-document.getElementById('getVoiceMails').addEventListener("click",() =>{ getVoiceMails(0);}, false);
-document.getElementById('getVoiceMailsToken').addEventListener("click",() => { getAccessToken("api.user.voice.voicemails");}, false);
+document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
+document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count); }, false);
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count); }, false);
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",() =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
-document.getElementById('deleteVoiceMailRecords').addEventListener("click",() =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
-document.getElementById('getVoiceMailsTotal').addEventListener("click",() =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
-document.getElementById('getVoiceMailRecord').addEventListener("click",() =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
-document.getElementById('getGreetingContent').addEventListener("click",() =>{ getGreetingContent(); }, false);
-document.getElementById('uploadGreetingContent').addEventListener("click",() =>{ uploadGreetingContent(); }, false);
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
+document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
+document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
+document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
+document.getElementById('getGreetingContent').addEventListener("click", () =>{ getGreetingContent(); }, false);
+document.getElementById('uploadGreetingContent').addEventListener("click", () =>{ uploadGreetingContent(); }, false);
+document.getElementById('getUserSettings').addEventListener("click", () =>{ getUserSettings(); }, false);
+document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
 
 
 ///////////////////////////////
@@ -328,7 +330,7 @@ function getVoiceMailsContent(format, id){
 }
 
 function getGreetingContent(){
-    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greetingformat=mp3&custom=0';
     let xmlHttp = new XMLHttpRequest();
     let blob;
     xmlHttp.onreadystatechange = function() { 
@@ -342,7 +344,7 @@ function getGreetingContent(){
             };
     }
 
-    xmlHttp.open("POST", theUrl, true); 
+    xmlHttp.open("GET", theUrl, true); 
     xmlHttp.responseType = "arraybuffer";
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
@@ -354,9 +356,8 @@ function uploadGreetingContent(){
     let xmlHttp = new XMLHttpRequest();
     let blob;
     let formData = new FormData();
-    const selectedFile = document.getElementById('greetingFile').files;
+    const selectedFile = document.getElementById('greetingFile').files[0];
     formData.append("audio", selectedFile);                                
-    req.send(formData);
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
@@ -366,8 +367,41 @@ function uploadGreetingContent(){
     xmlHttp.open("POST", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.setRequestHeader('F', "greetingFile=@/path/to/file;filename=my-greeting-file"); 
+    xmlHttp.send(formData);
+}
+
+function getUserSettings(){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
+    let xmlHttp = new XMLHttpRequest();
+    let blob;
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+            };
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+
+function getVoicemailUsage(){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/usage';
+    let xmlHttp = new XMLHttpRequest();
+    let blob;
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
+            let response = JSON.parse(xmlHttp.responseText);
+            log(response);
+            };
+    }
+
+    xmlHttp.open("GET", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+
 //////////////////////////////
 
 let access_token = null;
