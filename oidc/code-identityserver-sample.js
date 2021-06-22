@@ -17,6 +17,7 @@ document.getElementById('uploadGreetingContent').addEventListener("click", () =>
 document.getElementById('getUserSettings').addEventListener("click", () =>{ getUserSettings(); }, false);
 document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
 document.getElementById('updateUserSettings').addEventListener("click", () =>{ updateUserSettings(document.getElementById("pin").value, document.getElementById("hasCustomGreeting").value, document.getElementById("isTranscriptionPermitted").value, document.getElementById("enableTranscription").value, document.getElementById("receiveEmailNotifications").value, document.getElementById("emails").value, document.getElementById("includeVoiceMail").value) }, false);
+document.getElementById('resetGreetingContent').addEventListener("click", () =>{ resetGreetingContent() }, false);
 
 
 function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
@@ -370,24 +371,35 @@ function getGreetingContent(){
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-
-function uploadGreetingContent(){
-
+function resetGreetingContent()
+{
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
-    let blob;
+
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+        }
+    }                
+    xmlHttp.open("DELETE", theUrl, true); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+}
+function uploadGreetingContent(){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
+    let xmlHttp = new XMLHttpRequest();
     let formData = new FormData();
     const selectedFile = document.getElementById('greetingFile').files[0];
     formData.append("audio", selectedFile);                                
-
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
         }
     }
-
+    for(const [key, value] of formData){
+        console.log(key, value);
+    }
     xmlHttp.open("POST", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.setRequestHeader('F', "greetingFile=@/path/to/file;filename=my-greeting-file"); 
+    xmlHttp.setRequestHeader('F', "greetingFile=/" + selectedFile.name + ";filename=my-greeting-file"); 
     xmlHttp.send(formData);
 }
 
