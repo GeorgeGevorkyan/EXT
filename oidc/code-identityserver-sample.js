@@ -20,7 +20,22 @@ document.getElementById('updateUserSettings').addEventListener("click", () =>{ u
 
 
 function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
+    let xmlHttp = new XMLHttpRequest();
 
+    let data_raw = '{"pin": ' + pin + ', "hasCustomGreeting": ' + hasCustomGreeting + ', "isTranscriptionPermitted": ' + isTranscriptionPermitted + ', "enableTranscription":' + enableTranscription +
+     ', "receiveEmailNotifications": ' + receiveEmailNotifications + ', "emails": ["user1@example.org", "user2@example.com"], "includeVoiceMail": '+ includeVoiceMail + '}'
+    log(data_raw);
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            //UI changes
+            getVoiceMails(pageNumber * count);
+        }
+    }                
+    xmlHttp.open("POST", theUrl, true); 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send(data_raw);
 
 }
 
