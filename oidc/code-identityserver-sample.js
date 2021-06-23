@@ -13,7 +13,8 @@ document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click"
 document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
-document.getElementById('getGreetingContent').addEventListener("click", () =>{ getGreetingContent(); }, false);
+document.getElementById('getGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3"); }, false);
+document.getElementById('getGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg"); }, false);
 document.getElementById('uploadGreetingContent').addEventListener("click", () =>{ uploadGreetingContent(); }, false);
 document.getElementById('getUserSettings').addEventListener("click", () =>{ getUserSettings(); }, false);
 document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
@@ -331,7 +332,10 @@ function getVoiceMailsContent(format, id){
     xmlHttp.send();
 }
 
-function getGreetingContent(){
+///////////////////////////////
+// functions for VoiceMails Settings
+///////////////////////////////
+function getGreetingContent(format){
     format = 'mp3';
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=0';
     let xmlHttp = new XMLHttpRequest();
@@ -365,11 +369,6 @@ function resetGreetingContent()
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-
-///////////////////////////////
-// functions for VoiceMails Settings
-///////////////////////////////
-
 function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
     let xmlHttp = new XMLHttpRequest();
@@ -438,7 +437,6 @@ function getVoicemailUsage(){
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-
 
 ///////////////////////////////
 // functions for Access Token
