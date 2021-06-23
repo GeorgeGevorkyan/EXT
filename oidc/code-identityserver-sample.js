@@ -176,7 +176,7 @@ function updateList(response){
 
 function getVoiceMails(offset)
 { 
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&countOnList=5';
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
     let xmlHttp = new XMLHttpRequest();
 
     xmlHttp.onreadystatechange = function() { 
