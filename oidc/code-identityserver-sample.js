@@ -378,30 +378,32 @@ function resetGreetingContent()
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            log("Custom Greeting deleted")
         }
     }                
     xmlHttp.open("DELETE", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
+
 function uploadGreetingContent(){
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
     let formData = new FormData();
-    const selectedFile = document.getElementById('greetingFile').files[0];
-    formData.append("audio", selectedFile);                                
+    let selectedFile = document.getElementById('greetingFile').files[0];
+    formData.append("greetingFile", selectedFile);    
+
     xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            log("Custom Greeting uploaded");
         }
     }
-    for(const [key, value] of formData){
-        console.log(key, value);
-    }
+
     xmlHttp.open("POST", theUrl, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.setRequestHeader('F', "greetingFile=/" + selectedFile.name + ";filename=my-greeting-file"); 
     xmlHttp.send(formData);
 }
+
 
 function getUserSettings(){
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
