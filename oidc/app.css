@@ -20,3 +20,6 @@ form * {
     display: block;
     margin: 10px;
 }
+div{
+    padding: 5px;
+}
