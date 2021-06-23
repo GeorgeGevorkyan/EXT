@@ -13,8 +13,10 @@ document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click"
 document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
 document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
-document.getElementById('getGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3"); }, false);
-document.getElementById('getGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg"); }, false);
+document.getElementById('getDefaultGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3", 0); }, false);
+document.getElementById('getDefaultGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg", 0); }, false);
+document.getElementById('getCustomGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3", 1); }, false);
+document.getElementById('getCustomGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg", 1); }, false);
 document.getElementById('uploadGreetingContent').addEventListener("click", () =>{ uploadGreetingContent(); }, false);
 document.getElementById('getUserSettings').addEventListener("click", () =>{ getUserSettings(); }, false);
 document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
@@ -335,8 +337,8 @@ function getVoiceMailsContent(format, id){
 ///////////////////////////////
 // functions for VoiceMails Settings
 ///////////////////////////////
-function getGreetingContent(format){
-    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=0';
+function getGreetingContent(format, custom){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
