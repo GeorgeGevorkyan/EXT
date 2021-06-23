@@ -336,7 +336,6 @@ function getVoiceMailsContent(format, id){
 // functions for VoiceMails Settings
 ///////////////////////////////
 function getGreetingContent(format){
-    format = 'mp3';
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=0';
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
