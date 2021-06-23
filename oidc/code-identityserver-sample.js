@@ -375,8 +375,7 @@ function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, en
     let xmlHttp = new XMLHttpRequest();
 
     let data_raw = '{"pin": ' + pin + ', "hasCustomGreeting": ' + hasCustomGreeting + ', "isTranscriptionPermitted": ' + isTranscriptionPermitted + ', "enableTranscription":' + enableTranscription +
-     ', "receiveEmailNotifications": ' + receiveEmailNotifications + ', "emails": ["user1@example.org", "user2@example.com"], "includeVoiceMail": '+ includeVoiceMail + '}'
-    log(data_raw);
+     ', "receiveEmailNotifications": ' + receiveEmailNotifications + ', "emails": ["' + emails + '"], "includeVoiceMail": '+ includeVoiceMail + '}'
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             //UI changes
