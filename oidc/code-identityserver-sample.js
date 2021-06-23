@@ -1,13 +1,10 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-let count = 5;
-let pageNumber = 0;
-
 document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken("api.user.voice.voicemails");}, false);
-document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumber * count); }, false);
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumber > 0 ?--pageNumber:pageNumber) * count); }, false);
+document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); }, false);
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); }, false);
 document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
 document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
 document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
@@ -19,49 +16,22 @@ document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ ge
 document.getElementById('updateUserSettings').addEventListener("click", () =>{ updateUserSettings(document.getElementById("pin").value, document.getElementById("hasCustomGreeting").value, document.getElementById("isTranscriptionPermitted").value, document.getElementById("enableTranscription").value, document.getElementById("receiveEmailNotifications").value, document.getElementById("emails").value, document.getElementById("includeVoiceMail").value) }, false);
 document.getElementById('resetGreetingContent').addEventListener("click", () =>{ resetGreetingContent(); }, false);
 
-
-function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
-    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
-    let xmlHttp = new XMLHttpRequest();
-
-    let data_raw = '{"pin": ' + pin + ', "hasCustomGreeting": ' + hasCustomGreeting + ', "isTranscriptionPermitted": ' + isTranscriptionPermitted + ', "enableTranscription":' + enableTranscription +
-     ', "receiveEmailNotifications": ' + receiveEmailNotifications + ', "emails": ["user1@example.org", "user2@example.com"], "includeVoiceMail": '+ includeVoiceMail + '}'
-    log(data_raw);
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            //UI changes
-            getVoiceMails(pageNumber * count);
-        }
-    }                
-    xmlHttp.open("POST", theUrl, true); 
-    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send(data_raw);
-
-}
-
 ///////////////////////////////
 // config
 ///////////////////////////////
 Oidc.Log.logger = console;
 Oidc.Log.level = Oidc.Log.DEBUG;
-console.log("Using oidc-client version: ", Oidc.Version);
 let url = location.href.substring(0, location.href.lastIndexOf('/'));
 
 let settings = {
-    // authority: localStorage.getItem('cfg-authority'),
-    // client_id: localStorage.getItem('cfg-clientId'),
-    authority: "https://login.intermedia.net/user",
-    client_id: "BSTHred8hUOjxvZ0lMrdQ",
+    authority: localStorage.getItem('cfg-authority'),
+    client_id: localStorage.getItem('cfg-clientId'),
     redirect_uri: location.href.split('?')[0],
     response_type: 'code',
     scope: '',
-    // acr_values : localStorage.getItem('cfg-acr'),
-    acr_values: "deviceId:7f8b3ae9-f073-4b1e-b5af-468cb7432ad2",
-    // login_hint: localStorage.getItem('cfg-login'),
-    login_hint: "MrprodUser@test.net",
-    // extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
-    extraTokenParams: { acr_values: "deviceId:7f8b3ae9-f073-4b1e-b5af-468cb7432ad2" }
+    acr_values : localStorage.getItem('cfg-acr'),
+    login_hint: localStorage.getItem('cfg-login'),
+    extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
 };
 
 ///////////////////////////////
@@ -69,6 +39,9 @@ let settings = {
 ///////////////////////////////
 
 let idNumber = 0;
+const countOnList = 5; //amount on Voicemail list
+let pageNumberOfVoicemails = 0;
+
 function createNewTr(tr){
     let element = document.createElement('tr');
     document.getElementById('table').appendChild(element);
@@ -161,8 +134,36 @@ function createNewTr(tr){
     button11.innerHTML = "Change Status";
     td11.appendChild(button11);
     button11.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumber * count); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); }, false);
     idNumber++;
+}
+function updateList(){
+    document.getElementById('buttonCurr').hidden = false;   
+    document.getElementById('thead').hidden = false;  
+    if (pageNumberOfVoicemails > 0){   
+        document.getElementById('buttonPrev').hidden = false;
+    }
+    else{
+        document.getElementById('buttonPrev').hidden = true;   
+    }
+
+    if (response["records"].length == countOnList){
+        document.getElementById('buttonNext').hidden = false;
+    }else{
+        document.getElementById('buttonNext').hidden = true;
+    }
+
+    let myNode = document.getElementById("table");
+    while (myNode.childNodes.length > 2) {
+        myNode.removeChild(myNode.lastChild);
+     }
+    for (let index = 0; index < response["records"].length; index++) {
+        createNewTr(response["records"][index]);
+     }   
+     
+     document.getElementById('buttonCurr').innerHTML = pageNumberOfVoicemails + 1;
+     document.getElementById('buttonPrev').innerHTML = pageNumberOfVoicemails;
+     document.getElementById('buttonNext').innerHTML = pageNumberOfVoicemails + 2;
 }
 
 ///////////////////////////////
@@ -170,40 +171,15 @@ function createNewTr(tr){
 ///////////////////////////////
 
 function getVoiceMails(offset)
-{
-    document.getElementById('buttonCurr').hidden = false;   
-    document.getElementById('thead').hidden = false;   
-    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=5';
+{ 
+    let theUrl = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&countOnList=5';
     let xmlHttp = new XMLHttpRequest();
 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
             //UI changes
-            if (pageNumber > 0){   
-                document.getElementById('buttonPrev').hidden = false;
-            }
-            else{
-                document.getElementById('buttonPrev').hidden = true;   
-            }
-
-            if (response["records"].length == count){
-                document.getElementById('buttonNext').hidden = false;
-            }else{
-                document.getElementById('buttonNext').hidden = true;
-            }
-
-            let myNode = document.getElementById("table");
-            while (myNode.childNodes.length > 2) {
-                myNode.removeChild(myNode.lastChild);
-             }
-            for (let index = 0; index < response["records"].length; index++) {
-                createNewTr(response["records"][index]);
-             }   
-             
-             document.getElementById('buttonCurr').innerHTML = pageNumber + 1;
-             document.getElementById('buttonPrev').innerHTML = pageNumber;
-             document.getElementById('buttonNext').innerHTML = pageNumber + 2;
+            updateList();
          }                
     }
     xmlHttp.open("GET", theUrl, true); 
@@ -219,7 +195,7 @@ function deleteVoiceMailRecords(status)
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             //UI changes
-            getVoiceMails(pageNumber * count);
+            getVoiceMails(pageNumberOfVoicemails * countOnList);
         }
     }                
     xmlHttp.open("DELETE", theUrl, true); 
@@ -234,7 +210,7 @@ function deleteSelectedVoicemailRecords(ids){
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             //UI changes
-            getVoiceMails(pageNumber * count);
+            getVoiceMails(pageNumberOfVoicemails * countOnList);
         }
     }                
     xmlHttp.open("DELETE", theUrl, true); 
@@ -248,13 +224,13 @@ function updateVoiceMailRecordsStatus(status){
     let xmlHttp = new XMLHttpRequest();
 
     let data_raw = '{ "status": "' + status + '" }';
-    log(data_raw);
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             //UI changes
-            getVoiceMails(pageNumber * count);
+            getVoiceMails(pageNumberOfVoicemails * countOnList);
         }
     }                
+    
     xmlHttp.open("POST", theUrl, true); 
     xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
@@ -269,7 +245,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             //UI changes
-            getVoiceMails(pageNumber * count);
+            getVoiceMails(pageNumberOfVoicemails * countOnList);
         }
     }                
     xmlHttp.open("POST", theUrl, true); 
@@ -281,7 +257,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
 /** 
  * 
  * @status "read" or "unread".
- * @return {int} Returns current user total voicemails count.
+ * @return {int} Returns current user total voicemails countOnList.
  */
 function getVoiceMailsTotal(status){
     let theUrl = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
@@ -352,16 +328,16 @@ function getVoiceMailsContent(format, id){
 }
 
 function getGreetingContent(){
-    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greetingformat=mp3&custom=0';
+    format = 'mp3';
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=0';
     let xmlHttp = new XMLHttpRequest();
-    let blob;
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
             blob = new Blob([xmlHttp.response], {type : 'audio/' + format});
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = url;
-            a.download = "greeting." + format;
+            a.download = 'greeting.' + format;
             a.click();
             };
     }
@@ -386,6 +362,30 @@ function resetGreetingContent()
     xmlHttp.send();
 }
 
+///////////////////////////////
+// functions for VoiceMails Settings
+///////////////////////////////
+
+function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
+    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
+    let xmlHttp = new XMLHttpRequest();
+
+    let data_raw = '{"pin": ' + pin + ', "hasCustomGreeting": ' + hasCustomGreeting + ', "isTranscriptionPermitted": ' + isTranscriptionPermitted + ', "enableTranscription":' + enableTranscription +
+     ', "receiveEmailNotifications": ' + receiveEmailNotifications + ', "emails": ["user1@example.org", "user2@example.com"], "includeVoiceMail": '+ includeVoiceMail + '}'
+    log(data_raw);
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            //UI changes
+            log("User Settings updated");
+        }
+    }                
+    xmlHttp.open("POST", theUrl, true); 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send(data_raw);
+
+}
+
 function uploadGreetingContent(){
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
@@ -404,11 +404,10 @@ function uploadGreetingContent(){
     xmlHttp.send(formData);
 }
 
-
 function getUserSettings(){
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
     let xmlHttp = new XMLHttpRequest();
-    let blob;
+
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
             let response = JSON.parse(xmlHttp.responseText);
@@ -424,7 +423,7 @@ function getUserSettings(){
 function getVoicemailUsage(){
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/usage';
     let xmlHttp = new XMLHttpRequest();
-    let blob;
+
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
             let response = JSON.parse(xmlHttp.responseText);
@@ -437,7 +436,10 @@ function getVoicemailUsage(){
     xmlHttp.send();
 }
 
-//////////////////////////////
+
+///////////////////////////////
+// functions for Access Token
+///////////////////////////////
 
 let access_token = null;
 
