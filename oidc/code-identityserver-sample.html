@@ -10,51 +10,78 @@
         <div>
             <button id='getVoiceMailsToken'>Get VoiceMails Token</button>
         </div>
-        <div>
+        <div id="VoicemailFunctions">
+            <div>
             <button id='getVoiceMails'>Get VoiceMails</button>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='getVoiceMailsTotal'>Get VoiceMails Total</button>
             <select id="totalStatus">
                 <option value="read">read</option>
                 <option value="unread">unread</option>
               </select>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='updateVoiceMailRecordsStatus'>Update VoiceMail Records Status</button>
             <select id="updateStatus">
                 <option value="read">read</option>
                 <option value="unread">unread</option>
               </select>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='deleteVoiceMailRecords'>Delete VoiceMail Records</button>
             <select id="deleteStatus">
                 <option value="read">read</option>
                 <option value="unread">unread</option>
             </select>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='getVoiceMailRecord'>Get VoiceMail Record</button>
             <input id="id" placeholder="id"></input>
+            </div>
+            <div>
+                <table id="table">
+                    <thead id="thead" hidden>
+                        <tr>
+                        <td> id </td>
+                        <td> phoneNumber </td> 
+                        <td> displayName </td>
+                        <td> status </td>
+                        <td> duration </td>
+                        <td> whenCreated </td>
+                        <td> hasText </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        </tr> 
+                    </thead>
+                </table>
+                <div id="paging">
+                    <button id="buttonPrev" hidden></button>
+                    <button id="buttonCurr" disabled hidden></button>
+                    <button id="buttonNext" hidden></button>
+                </div>
+            </div>
         </div>
-        <div>
+        <div id="VoicemailSettingsFunctions">
+            <div>
             <button id='getGreetingContent'>Get Greeting Content</button>
-        </div>
-        <div>
+            </div>
+            <div>
             <input type="file" id='greetingFile' >
             <button id='uploadGreetingContent'>Upload Greeting Content</button>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='resetGreetingContent'>Reset Greeting Content</button>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='getUserSettings'>Get User Settings</button>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='getVoicemailUsage'>get Voicemail Usage</button>
-        </div>
-        <div>
+            </div>
+            <div>
             <button id='updateUserSettings'>Update User Settings</button>
             <input id="pin" placeholder="pin"></input>
             <input id="hasCustomGreeting" placeholder="hasCustomGreeting"></input>
@@ -63,28 +90,7 @@
             <input id="receiveEmailNotifications" placeholder="receiveEmailNotifications"></input>
             <input id="emails" placeholder="emails"></input>
             <input id="includeVoiceMail" placeholder="includeVoiceMail"></input>
-        </div> 
-        <table id="table">
-            <thead id="thead" hidden>
-                <tr>
-                <td> id </td>
-                <td> phoneNumber </td> 
-                <td> displayName </td>
-                <td> status </td>
-                <td> duration </td>
-                <td> whenCreated </td>
-                <td> hasText </td>
-                <td>  </td>
-                <td>  </td>
-                <td>  </td>
-                <td>  </td>
-               </tr> 
-            </thead>
-        </table>
-        <div id="paging">
-            <button id="buttonPrev" hidden></button>
-            <button id="buttonCurr" disabled hidden></button>
-            <button id="buttonNext" hidden></button>
+            </div> 
         </div>
         <pre id='out'></pre>
         <script src='oidc-client.js'></script>
