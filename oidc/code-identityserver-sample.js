@@ -1,6 +1,10 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+let idNumber = 0;
+const countOnList = 5; //amount on Voicemail list
+let pageNumberOfVoicemails = 0;
+
 document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); }, false);
@@ -41,9 +45,6 @@ let settings = {
 // functions for UI elements
 ///////////////////////////////
 
-let idNumber = 0;
-const countOnList = 5; //amount on Voicemail list
-let pageNumberOfVoicemails = 0;
 
 function createNewTr(tr){
     let element = document.createElement('tr');
@@ -140,7 +141,7 @@ function createNewTr(tr){
     document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); }, false);
     idNumber++;
 }
-function updateList(){
+function updateList(response){
     document.getElementById('buttonCurr').hidden = false;   
     document.getElementById('thead').hidden = false;  
     if (pageNumberOfVoicemails > 0){   
@@ -182,7 +183,7 @@ function getVoiceMails(offset)
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
             let response = JSON.parse(xmlHttp.responseText);
             //UI changes
-            updateList();
+            updateList(response);
          }                
     }
     xmlHttp.open("GET", theUrl, true); 
