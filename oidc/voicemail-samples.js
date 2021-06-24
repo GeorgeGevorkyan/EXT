@@ -209,7 +209,7 @@ function updateVoiceMailRecordsStatus(status){
     xmlHttp.open("POST", url, true); 
     xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send(data_raw);
+    xmlHttp.send(JSON.stringify(data_raw));
 }
 
 function updateSelectedVoiceMailRecordsStatus(status, ids){
@@ -231,7 +231,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
     xmlHttp.open("POST", url, true); 
     xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send(data_raw);
+    xmlHttp.send(JSON.stringify(data_raw));
 }
 
 /** 
