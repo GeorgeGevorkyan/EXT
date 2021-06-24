@@ -10,7 +10,7 @@ label {
     display: inline-block;
     width: 80px;
 }
-td{
+td {
     padding: 0 15px 5px 0;
 }
 li {
@@ -20,6 +20,11 @@ form * {
     display: block;
     margin: 10px;
 }
-div{
+
+div {
     padding: 5px;
+}
+
+select {
+    padding: 0 0 0 5px;
 }
