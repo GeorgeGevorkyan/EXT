@@ -25,11 +25,11 @@ let settings = {
 function getAccessToken(scope){
     settings.scope = scope;
     let mgr = new Oidc.UserManager(settings);
-    log("Going to sign in using following configuration", settings);
+    console.log("Going to sign in using following configuration", settings);
     mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
-        log("Redirecting to AdSTS...");
+        console.log("Redirecting to AdSTS...");
     }).catch(function(err) {
-        log(err);
+        console.log(err);
     });
 }
 
@@ -38,7 +38,7 @@ if (location.search.includes("code=", 1)) {
     mgr.signinCallback(settings).then(function(user) {
         localStorage.setItem('access_token', user.access_token);
     }).catch(function(err) {
-        log(err);
+       console.log(err);
 });
 }
 
