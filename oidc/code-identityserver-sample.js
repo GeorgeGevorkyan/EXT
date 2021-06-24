@@ -444,7 +444,9 @@ if (location.search.includes("code=", 1)) {
 });
 }
 
-
+///////////////////////////////
+// Event Handlers
+///////////////////////////////
 document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
 document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken("api.user.voice.voicemails");}, false);
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); }, false);
@@ -462,5 +464,3 @@ document.getElementById('getUserSettings').addEventListener("click", () =>{ getU
 document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
 document.getElementById('updateUserSettings').addEventListener("click", () =>{ updateUserSettings(document.getElementById("pin").value, document.getElementById("hasCustomGreeting").value, document.getElementById("isTranscriptionPermitted").value, document.getElementById("enableTranscription").value, document.getElementById("receiveEmailNotifications").value, document.getElementById("emails").value, document.getElementById("includeVoiceMail").value) }, false);
 document.getElementById('resetGreetingContent').addEventListener("click", () =>{ resetGreetingContent(); }, false);
-document.getElementById('unHiddenVoicemailFunctions').addEventListener("click", () =>{ document.getElementById('out').innerHTML ==""; document.getElementById('VoicemailFunctions').hidden = false; document.getElementById('VoicemailSettingsFunctions').hidden = true  }, false);
-document.getElementById('unHiddenVoicemailSettingsFunctions').addEventListener("click", () =>{ document.getElementById('out').innerHTML ==""; document.getElementById('VoicemailFunctions').hidden = true; document.getElementById('VoicemailSettingsFunctions').hidden = false }, false);
