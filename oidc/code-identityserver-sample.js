@@ -155,6 +155,7 @@ function updateList(response){
 ///////////////////////////////
 
 function getVoiceMails(offset){ 
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
     let xmlHttp = new XMLHttpRequest();
 
@@ -172,6 +173,7 @@ function getVoiceMails(offset){
 }
 
 function deleteVoiceMailRecords(status){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=' + status;
     let xmlHttp = new XMLHttpRequest();
 
@@ -187,6 +189,7 @@ function deleteVoiceMailRecords(status){
 }
 
 function deleteSelectedVoicemailRecords(ids){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = { 
@@ -207,6 +210,7 @@ function deleteSelectedVoicemailRecords(ids){
 }
 
 function updateVoiceMailRecordsStatus(status){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = { 
@@ -227,6 +231,7 @@ function updateVoiceMailRecordsStatus(status){
 }
 
 function updateSelectedVoiceMailRecordsStatus(status, ids){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = { 
@@ -253,6 +258,7 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
  * @return {int} Returns current user total voicemails countOnList.
  */
 function getVoiceMailsTotal(status){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
     let xmlHttp = new XMLHttpRequest();
 
@@ -269,6 +275,7 @@ function getVoiceMailsTotal(status){
 }
 
 function getVoiceMailRecord(id){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
     let xmlHttp = new XMLHttpRequest();
 
@@ -285,6 +292,7 @@ function getVoiceMailRecord(id){
 }
 
 function getVoiceMailsTranscription(id){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
     let xmlHttp = new XMLHttpRequest();
 
@@ -302,6 +310,7 @@ function getVoiceMailsTranscription(id){
 }
 
 function getVoiceMailsContent(format, id){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
     let xmlHttp = new XMLHttpRequest();
     let blob;
@@ -328,6 +337,7 @@ function getVoiceMailsContent(format, id){
 ///////////////////////////////
 
 function getGreetingContent(format, custom){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
     let xmlHttp = new XMLHttpRequest();
 
@@ -347,8 +357,8 @@ function getGreetingContent(format, custom){
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
-function resetGreetingContent()
-{
+function resetGreetingContent(){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
 
@@ -363,6 +373,7 @@ function resetGreetingContent()
 }
 
 function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
+    let access_token = localStorage.getItem("access_token");
     let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = {
@@ -389,6 +400,7 @@ function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, en
 }
 
 function uploadGreetingContent(){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let xmlHttp = new XMLHttpRequest();
     let formData = new FormData();
@@ -408,6 +420,7 @@ function uploadGreetingContent(){
 }
 
 function getUserSettings(){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
     let xmlHttp = new XMLHttpRequest();
 
@@ -424,6 +437,7 @@ function getUserSettings(){
 }
 
 function getVoicemailUsage(){
+    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/usage';
     let xmlHttp = new XMLHttpRequest();
 
@@ -443,8 +457,6 @@ function getVoicemailUsage(){
 // functions for Access Token
 ///////////////////////////////
 
-let access_token = getItem('access_token');
-
 function getAccessToken(scope){
     settings.scope = scope;
     let mgr = new Oidc.UserManager(settings);
@@ -460,7 +472,6 @@ if (location.search.includes("code=", 1)) {
     let mgr = new Oidc.UserManager(settings);
     mgr.signinCallback(settings).then(function(user) {
         localStorage.setItem('access_token', user.access_token);
-        access_token = getItem('access_token');
     }).catch(function(err) {
         log(err);
 });
