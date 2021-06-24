@@ -459,7 +459,8 @@ function getAccessToken(scope){
 if (location.search.includes("code=", 1)) {
     let mgr = new Oidc.UserManager(settings);
     mgr.signinCallback(settings).then(function(user) {
-        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('access_token', user.access_token);
+        access_token = getItem('access_token');
     }).catch(function(err) {
         log(err);
 });
