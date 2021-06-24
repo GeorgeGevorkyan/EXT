@@ -32,4 +32,6 @@ select {
 
 .functions{
     text-decoration: none;
+    border: 1px solid black;
+    padding: 0 0 0 10px;
 }

@@ -34,14 +34,14 @@ function resetGreetingContent(){
             log("Custom Greeting deleted")
         }
     }                
-    xmlHttp.open("DELETE", theUrl, true); 
+    xmlHttp.open("DELETE", url, true); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send();
 }
 
 function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
     let access_token = localStorage.getItem("access_token");
-    let theUrl = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
+    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
     let xmlHttp = new XMLHttpRequest();
     let data_raw = {
         "pin": pin,
@@ -59,7 +59,7 @@ function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, en
             log("User Settings updated");
         }
     }                
-    xmlHttp.open("POST", theUrl, true); 
+    xmlHttp.open("POST", url, true); 
     xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
     xmlHttp.send(JSON.stringify(data_raw));
