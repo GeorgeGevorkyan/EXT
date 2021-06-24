@@ -443,7 +443,7 @@ function getVoicemailUsage(){
 // functions for Access Token
 ///////////////////////////////
 
-let access_token = null;
+let access_token = getItem('access_token');
 
 function getAccessToken(scope){
     settings.scope = scope;
@@ -459,8 +459,7 @@ function getAccessToken(scope){
 if (location.search.includes("code=", 1)) {
     let mgr = new Oidc.UserManager(settings);
     mgr.signinCallback(settings).then(function(user) {
-        access_token = user.access_token;
-        //localStorage.setItem('VoiceMailsToken', access_token);
+        localStorage.setItem('access_token', access_token);
     }).catch(function(err) {
         log(err);
 });
