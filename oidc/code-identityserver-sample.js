@@ -1,31 +1,6 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-let idNumber = 0;
-const countOnList = 5; //amount on Voicemail list
-let pageNumberOfVoicemails = 0;
-
-document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
-document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken("api.user.voice.voicemails");}, false);
-document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); }, false);
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); }, false);
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
-document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
-document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
-document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
-document.getElementById('getDefaultGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3", 0); }, false);
-document.getElementById('getDefaultGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg", 0); }, false);
-document.getElementById('getCustomGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3", 1); }, false);
-document.getElementById('getCustomGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg", 1); }, false);
-document.getElementById('uploadGreetingContent').addEventListener("click", () =>{ uploadGreetingContent(); }, false);
-document.getElementById('getUserSettings').addEventListener("click", () =>{ getUserSettings(); }, false);
-document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
-document.getElementById('updateUserSettings').addEventListener("click", () =>{ updateUserSettings(document.getElementById("pin").value, document.getElementById("hasCustomGreeting").value, document.getElementById("isTranscriptionPermitted").value, document.getElementById("enableTranscription").value, document.getElementById("receiveEmailNotifications").value, document.getElementById("emails").value, document.getElementById("includeVoiceMail").value) }, false);
-document.getElementById('resetGreetingContent').addEventListener("click", () =>{ resetGreetingContent(); }, false);
-document.getElementById('unHiddenVoicemailFunctions').addEventListener("click", () =>{ document.getElementById('VoicemailFunctions').hidden = false; document.getElementById('VoicemailSettingsFunctions').hidden = true  }, false);
-document.getElementById('unHiddenVoicemailSettingsFunctions').addEventListener("click", () =>{ document.getElementById('VoicemailFunctions').hidden = true; document.getElementById('VoicemailSettingsFunctions').hidden = false }, false);
-
-
 ///////////////////////////////
 // config
 ///////////////////////////////
@@ -48,6 +23,9 @@ let settings = {
 // functions for UI elements
 ///////////////////////////////
 
+let idNumber = 0;
+const countOnList = 5; //amount on Voicemail list
+let pageNumberOfVoicemails = 0;
 
 function createNewTr(tr){
     let element = document.createElement('tr');
@@ -466,3 +444,23 @@ if (location.search.includes("code=", 1)) {
 });
 }
 
+
+document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
+document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken("api.user.voice.voicemails");}, false);
+document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); }, false);
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); }, false);
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
+document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
+document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
+document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
+document.getElementById('getDefaultGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3", 0); }, false);
+document.getElementById('getDefaultGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg", 0); }, false);
+document.getElementById('getCustomGreetingContentMp3').addEventListener("click", () =>{ getGreetingContent("mp3", 1); }, false);
+document.getElementById('getCustomGreetingContentOgg').addEventListener("click", () =>{ getGreetingContent("ogg", 1); }, false);
+document.getElementById('uploadGreetingContent').addEventListener("click", () =>{ uploadGreetingContent(); }, false);
+document.getElementById('getUserSettings').addEventListener("click", () =>{ getUserSettings(); }, false);
+document.getElementById('getVoicemailUsage').addEventListener("click", () =>{ getVoicemailUsage(); }, false);
+document.getElementById('updateUserSettings').addEventListener("click", () =>{ updateUserSettings(document.getElementById("pin").value, document.getElementById("hasCustomGreeting").value, document.getElementById("isTranscriptionPermitted").value, document.getElementById("enableTranscription").value, document.getElementById("receiveEmailNotifications").value, document.getElementById("emails").value, document.getElementById("includeVoiceMail").value) }, false);
+document.getElementById('resetGreetingContent').addEventListener("click", () =>{ resetGreetingContent(); }, false);
+document.getElementById('unHiddenVoicemailFunctions').addEventListener("click", () =>{ document.getElementById('VoicemailFunctions').hidden = false; document.getElementById('VoicemailSettingsFunctions').hidden = true  }, false);
+document.getElementById('unHiddenVoicemailSettingsFunctions').addEventListener("click", () =>{ document.getElementById('VoicemailFunctions').hidden = true; document.getElementById('VoicemailSettingsFunctions').hidden = false }, false);
