@@ -144,7 +144,7 @@ function makeRequest(method, url, data_raw){
         }
     };
 
-    if(body){
+    if(data_raw){
         options["headers"]["Content-Type"] = 'application/json';
         options["body"] = JSON.stringify(data_raw);
     }
@@ -154,8 +154,8 @@ function makeRequest(method, url, data_raw){
 
 function getVoiceMails(offset){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
-    makeRequest("GET", url).then( () => {
-        let response = JSON.parse(xmlHttp.responseText);
+    makeRequest("GET", url).then( (response) => {
+        let response = JSON.parse(response.responseText);
         //UI changes
         updateList(response);
     });
@@ -199,16 +199,16 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
     };
 
     makeRequest("POST", url, data_raw).then( () => {
-            //UI changes
-            getVoiceMails(pageNumberOfVoicemails * countOnList);
+        //UI changes
+        getVoiceMails(pageNumberOfVoicemails * countOnList);
     });      
 }
 
 function getVoiceMailsTotal(status){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
 
-    makeRequest("GET", url, data_raw).then( () => {
-        let response = JSON.parse(xmlHttp.responseText);
+    makeRequest("GET", url, data_raw).then( (response) => {
+        let response = JSON.parse(response.responseText);
         log(response);
     });
 }
@@ -216,9 +216,9 @@ function getVoiceMailsTotal(status){
 function getVoiceMailRecord(id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
     
-    makeRequest("GET", url).then( () => {
-            let response = JSON.parse(xmlHttp.responseText);
-            log(response);
+    makeRequest("GET", url).then( (response) => {
+        let response = JSON.parse(response.responseText);
+        log(response);
     });
 }
 
@@ -226,9 +226,9 @@ function getVoiceMailsTranscription(id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
    
     makeRequest("GET", url).then( () => {
-            let response = JSON.parse(xmlHttp.responseText);
-            log("Transcript of " + id + " VoiceMails: ");
-            log(response["text"]);
+        let response = JSON.parse(response.responseText);
+        log("Transcript of " + id + " VoiceMails: ");
+        log(response["text"]);
     });
 }
 
