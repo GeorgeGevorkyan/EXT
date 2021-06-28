@@ -135,183 +135,115 @@ function updateList(response){
 ///////////////////////////////
 // functions for VoiceMails
 ///////////////////////////////
-
-function getVoiceMails(offset){ 
+function makeRequest(method, url, data_raw){
     let access_token = localStorage.getItem("access_token");
-    let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
-    let xmlHttp = new XMLHttpRequest();
+    let options = {
+        method: method,
+        headers: {
+            'Authorization': `Bearer ` + access_token
+        }
+    };
 
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            let response = JSON.parse(xmlHttp.responseText);
-            //UI changes
-            updateList(response);
-         }                
+    if(body){
+        options["headers"]["Content-Type"] = 'application/json';
+        options["body"] = JSON.stringify(data_raw);
     }
 
-    xmlHttp.open("GET", url, true); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
+    return fetch(url, options);
+}
+
+function getVoiceMails(offset){ 
+    let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
+    makeRequest("GET", url).then( () => {
+        let response = JSON.parse(xmlHttp.responseText);
+        //UI changes
+        updateList(response);
+    });
 }
 
 function deleteVoiceMailRecords(status){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=' + status;
-    let xmlHttp = new XMLHttpRequest();
-
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            //UI changes
-            getVoiceMails(pageNumberOfVoicemails * countOnList);
-        }
-    }                
-    xmlHttp.open("DELETE", url, true); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
+    makeRequest("DELETE", url).then( () => {
+        getVoiceMails(pageNumberOfVoicemails * countOnList);
+    });
 }
 
 function deleteSelectedVoicemailRecords(ids){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
-    let xmlHttp = new XMLHttpRequest();
     let data_raw = { 
         "ids": [ids] 
     };
 
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            //UI changes
+    makeRequest("DELETE", url, data_raw).then( () => {
             getVoiceMails(pageNumberOfVoicemails * countOnList);
-        }
-    } 
-
-    xmlHttp.open("DELETE", url, true); 
-    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send(data_raw);
+    });
 }
 
 function updateVoiceMailRecordsStatus(status){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
-    let xmlHttp = new XMLHttpRequest();
     let data_raw = { 
         "status": status 
     };
 
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            //UI changes
-            getVoiceMails(pageNumberOfVoicemails * countOnList);
-        }
-    }                
-    
-    xmlHttp.open("POST", url, true); 
-    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send(JSON.stringify(data_raw));
+    makeRequest("POST", url, data_raw).then( () => {
+        //UI changes
+        getVoiceMails(pageNumberOfVoicemails * countOnList);
+    });
 }
 
 function updateSelectedVoiceMailRecordsStatus(status, ids){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
-    let xmlHttp = new XMLHttpRequest();
     let data_raw = { 
         "ids": [ids],
         "status": status
     };
 
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+    makeRequest("POST", url, data_raw).then( () => {
             //UI changes
             getVoiceMails(pageNumberOfVoicemails * countOnList);
-        }
-    }          
-
-    xmlHttp.open("POST", url, true); 
-    xmlHttp.setRequestHeader('Content-Type', 'application/json'); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send(JSON.stringify(data_raw));
+    });      
 }
 
-/** 
- * 
- * @status "read" or "unread".
- * @return {int} Returns current user total voicemails countOnList.
- */
 function getVoiceMailsTotal(status){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
-    let xmlHttp = new XMLHttpRequest();
 
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-            let response = JSON.parse(xmlHttp.responseText);
-            log(response);
-        }
-    } 
-
-    xmlHttp.open("GET", url, true); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
+    makeRequest("GET", url, data_raw).then( () => {
+        let response = JSON.parse(xmlHttp.responseText);
+        log(response);
+    });
 }
 
 function getVoiceMailRecord(id){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
-    let xmlHttp = new XMLHttpRequest();
-
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+    
+    makeRequest("GET", url).then( () => {
             let response = JSON.parse(xmlHttp.responseText);
             log(response);
-        }
-    }                
-
-    xmlHttp.open("GET", url, true); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
+    });
 }
 
 function getVoiceMailsTranscription(id){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
-    let xmlHttp = new XMLHttpRequest();
-
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+   
+    makeRequest("GET", url).then( () => {
             let response = JSON.parse(xmlHttp.responseText);
             log("Transcript of " + id + " VoiceMails: ");
             log(response["text"]);
-        }
-    }
-
-    xmlHttp.open("GET", url, true); 
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
+    });
 }
 
 function getVoiceMailsContent(format, id){
-    let access_token = localStorage.getItem("access_token");
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
-    let xmlHttp = new XMLHttpRequest();
     let blob;
 
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
-            blob = new Blob([xmlHttp.response], {type : 'audio/' + format});
-            let dataUrl = window.URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = dataUrl;
-            a.download = id + "." + format;
-            a.click();
-            };
-    }
-
-    xmlHttp.open("GET", url, true); 
-    xmlHttp.responseType = "arraybuffer";
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
+    makeRequest("GET", url).then( (response) => {
+        blob = new Blob([response.arrayBuffer()], {type : 'audio/' + format});
+        let dataUrl = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = id + "." + format;
+        a.click();
+    });
 }
 
 ///////////////////////////////
