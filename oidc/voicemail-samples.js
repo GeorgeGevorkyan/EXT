@@ -149,14 +149,15 @@ function makeRequest(method, url, data_raw){
         options["body"] = JSON.stringify(data_raw);
     }
 
-    return fetch(url, options);
+    return fetch(url, options).then(response => response.json());
 }
 
 function getVoiceMails(offset){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
-    makeRequest("GET", url).then( (response) => {
+    makeRequest("GET", url).then( json => {
         //UI changes
-        updateList(JSON.parse(response));
+        log(json);
+        updateList(json);
     });
 }
 
