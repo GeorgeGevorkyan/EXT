@@ -155,9 +155,8 @@ function makeRequest(method, url, data_raw){
 function getVoiceMails(offset){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
     makeRequest("GET", url).then( (response) => {
-        let response = JSON.parse(response.responseText);
         //UI changes
-        updateList(response);
+        updateList(JSON.parse(response.responseText));
     });
 }
 
@@ -208,8 +207,7 @@ function getVoiceMailsTotal(status){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
 
     makeRequest("GET", url, data_raw).then( (response) => {
-        let response = JSON.parse(response.responseText);
-        log(response);
+        log(JSON.parse(response.responseText));
     });
 }
 
@@ -217,18 +215,16 @@ function getVoiceMailRecord(id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
     
     makeRequest("GET", url).then( (response) => {
-        let response = JSON.parse(response.responseText);
-        log(response);
+        log(JSON.parse(response.responseText));
     });
 }
 
 function getVoiceMailsTranscription(id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
    
-    makeRequest("GET", url).then( () => {
-        let response = JSON.parse(response.responseText);
+    makeRequest("GET", url).then( (response) => {
         log("Transcript of " + id + " VoiceMails: ");
-        log(response["text"]);
+        log(JSON.parse(response.responseText)["text"]);
     });
 }
 
