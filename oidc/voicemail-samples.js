@@ -1,7 +1,7 @@
 
 
 ///////////////////////////////
-// functions for UI elements
+// functions for UI 
 ///////////////////////////////
 
 let idNumber = 0;
@@ -9,53 +9,53 @@ const countOnList = 5; //amount on Voicemail list
 let pageNumberOfVoicemails = 0;
 
 function createNewTr(tr){
-    let element = document.createElement('tr');
-    document.getElementById('table').appendChild(element);
+    let tableRow = document.createElement('tr');
+    document.getElementById('table').appendChild(tableRow);
     
     let td = document.createElement('td');
-    element.appendChild(td);
+    tableRow.appendChild(td);
     td.setAttribute('id', "td"+ idNumber);
     document.getElementById('td'+ idNumber).innerText = tr["id"];
     idNumber++;
     
     let td2 = document.createElement('td');
-    element.appendChild(td2);
+    tableRow.appendChild(td2);
     td2.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["sender"]["phoneNumber"];
     idNumber++;
 
     let td3 = document.createElement('td');
-    element.appendChild(td3);
+    tableRow.appendChild(td3);
     td3.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["sender"]["displayName"];
     idNumber++;
 
     let td4 = document.createElement('td');
-    element.appendChild(td4);
+    tableRow.appendChild(td4);
     td4.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["status"];
     idNumber++;
 
     let td5 = document.createElement('td');
-    element.appendChild(td5);
+    tableRow.appendChild(td5);
     td5.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["duration"];
     idNumber++;
 
     let td6 = document.createElement('td');
-    element.appendChild(td6);
+    tableRow.appendChild(td6);
     td6.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["whenCreated"];
     idNumber++;
 
     let td7 = document.createElement('td');
-    element.appendChild(td7);
+    tableRow.appendChild(td7);
     td7.setAttribute('id', "td" + idNumber);
     document.getElementById('td' + idNumber).innerText = tr["hasText"];
     idNumber++;
 
     let td8 = document.createElement('td');
-    element.appendChild(td8);
+    tableRow.appendChild(td8);
     td8.setAttribute('id', "td" + idNumber);
     let button8 = document.createElement('button');
     button8.innerHTML = "Transcription";
@@ -65,7 +65,7 @@ function createNewTr(tr){
     idNumber++;
 
     let td9 = document.createElement('td');
-    element.appendChild(td9);
+    tableRow.appendChild(td9);
     td9.setAttribute('id', "td" + idNumber);
     let oggButton = document.createElement('button');
     oggButton.innerHTML = "ogg";
@@ -81,7 +81,7 @@ function createNewTr(tr){
     idNumber++;
 
     let td10 = document.createElement('td');
-    element.appendChild(td10);
+    tableRow.appendChild(td10);
     td10.setAttribute('id', "td" + idNumber);
     let button10 = document.createElement('button');
     button10.innerHTML = "Delete";
@@ -91,7 +91,7 @@ function createNewTr(tr){
     idNumber++;
 
     let td11 = document.createElement('td');
-    element.appendChild(td11);
+    tableRow.appendChild(td11);
     td11.setAttribute('id', "td" + idNumber);
     let button11 = document.createElement('button');
     button11.innerHTML = "Change Status";
@@ -102,7 +102,7 @@ function createNewTr(tr){
 }
 
 function updateList(response){
-    let myNode = document.getElementById("table");
+    let tableNode = document.getElementById("table");
     document.getElementById('buttonCurr').hidden = false;   
     document.getElementById('thead').hidden = false;  
 
@@ -112,18 +112,18 @@ function updateList(response){
         document.getElementById('buttonPrev').hidden = true;   
     }
 
-    if (response["records"].length == countOnList) {
+    if (response.length == countOnList) {
         document.getElementById('buttonNext').hidden = false;
     } else{
         document.getElementById('buttonNext').hidden = true;
     }
 
-    while (myNode.childNodes.length > 2) {
+    while (tableNode.childNodes.length > 2) {
         myNode.removeChild(myNode.lastChild);
     }
 
-    for (let index = 0; index < response["records"].length; index++) {
-        createNewTr(response["records"][index]);
+    for (let index = 0; index < response.length; index++) {
+        createNewTr(response[index]);
     }   
      
     document.getElementById('buttonCurr').innerHTML = pageNumberOfVoicemails + 1;
