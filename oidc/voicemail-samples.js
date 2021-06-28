@@ -149,21 +149,19 @@ function makeRequest(method, url, data_raw){
         options["body"] = JSON.stringify(data_raw);
     }
 
-    return fetch(url, options).then(response => {
+    fetch(url, options).then(response => {
         if(response.ok){
-            response.json()
+            response.json().then( (json) => { return json;});
         }else{
-            throw new Error('Something went wrong');
+            return (new Error('Something went wrong'));
         }
     });
 }
 
 function getVoiceMails(offset){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
-    makeRequest("GET", url).then( json => {
-        //UI changes
-        updateList(json);
-    });
+    let json = makeRequest("GET", url);
+    updateList(json);
 }
 
 function deleteVoiceMailRecords(status){
