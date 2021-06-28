@@ -149,14 +149,19 @@ function makeRequest(method, url, data_raw){
         options["body"] = JSON.stringify(data_raw);
     }
 
-    return fetch(url, options).then(response => response.json());
+    return fetch(url, options).then(response => {
+        if(response.ok){
+            response.json()
+        }else{
+            throw new Error('Something went wrong');
+        }
+    });
 }
 
 function getVoiceMails(offset){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
     makeRequest("GET", url).then( json => {
         //UI changes
-        log(json);
         updateList(json);
     });
 }
@@ -207,25 +212,25 @@ function updateSelectedVoiceMailRecordsStatus(status, ids){
 function getVoiceMailsTotal(status){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
 
-    makeRequest("GET", url).then( (response) => {
-        log(JSON.parse(response));
+    makeRequest("GET", url).then( (json) => {
+        log(json);
     });
 }
 
 function getVoiceMailRecord(id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
     
-    makeRequest("GET", url).then( (response) => {
-        log(JSON.parse(response));
+    makeRequest("GET", url).then( (json) => {
+        log(json);
     });
 }
 
 function getVoiceMailsTranscription(id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
    
-    makeRequest("GET", url).then( (response) => {
+    makeRequest("GET", url).then( (json) => {
         log("Transcript of " + id + " VoiceMails: ");
-        log(JSON.parse(response)["text"]);
+        log(json["text"]);
     });
 }
 
@@ -233,8 +238,8 @@ function getVoiceMailsContent(format, id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
     let blob;
 
-    makeRequest("GET", url).then( (response) => {
-        blob = new Blob([response.arrayBuffer()], {type : 'audio/' + format});
+    makeRequest("GET", url).then( (json) => {
+        blob = new Blob([json.arrayBuffer()], {type : 'audio/' + format});
         let dataUrl = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
         a.href = dataUrl;
