@@ -93,7 +93,7 @@ function updateList(response){
     }
 
     while (tableNode.childNodes.length > 2) {
-        myNode.removeChild(myNode.lastChild);
+        tableNode.removeChild(myNode.lastChild);
     }
 
     for (let index = 0; index < response.length; index++) {
