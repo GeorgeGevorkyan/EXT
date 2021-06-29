@@ -110,7 +110,6 @@ function updateList(response){
 // functions for VoiceMails
 ///////////////////////////////
 function makeRequest(method, url, data_raw){
-    return new Promise( () => {
     let access_token = localStorage.getItem("access_token");
     let options = {
         method: method,
@@ -131,7 +130,6 @@ function makeRequest(method, url, data_raw){
             return (new Error('Something went wrong'));
         }
     });
-});
 }
 
 function getVoiceMails(offset){ 
