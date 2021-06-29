@@ -4,7 +4,6 @@
 // functions for UI 
 ///////////////////////////////
 
-let idNumber = 0;
 const countOnList = 5; //amount on Voicemail list
 let pageNumberOfVoicemails = 0;
 
@@ -14,91 +13,66 @@ function createNewTr(tr){
     
     let td = document.createElement('td');
     tableRow.appendChild(td);
-    td.setAttribute('id', "td"+ idNumber);
-    document.getElementById('td'+ idNumber).innerText = tr["id"];
-    idNumber++;
+    td.innerText = tr["id"];
     
     let td2 = document.createElement('td');
     tableRow.appendChild(td2);
-    td2.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["sender"]["phoneNumber"];
-    idNumber++;
+    td2.innerText = tr["sender"]["phoneNumber"];
 
     let td3 = document.createElement('td');
     tableRow.appendChild(td3);
-    td3.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["sender"]["displayName"];
-    idNumber++;
+    td3.innerText = tr["sender"]["displayName"];
 
     let td4 = document.createElement('td');
     tableRow.appendChild(td4);
-    td4.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["status"];
-    idNumber++;
+    td4.innerText = tr["status"];
 
     let td5 = document.createElement('td');
     tableRow.appendChild(td5);
-    td5.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["duration"];
-    idNumber++;
+    td5.innerText = tr["duration"];
 
     let td6 = document.createElement('td');
     tableRow.appendChild(td6);
-    td6.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["whenCreated"];
-    idNumber++;
+    td6.innerText = tr["whenCreated"];
 
     let td7 = document.createElement('td');
     tableRow.appendChild(td7);
-    td7.setAttribute('id', "td" + idNumber);
-    document.getElementById('td' + idNumber).innerText = tr["hasText"];
-    idNumber++;
+    td7.innerText = tr["hasText"];
 
     let td8 = document.createElement('td');
     tableRow.appendChild(td8);
-    td8.setAttribute('id', "td" + idNumber);
     let button8 = document.createElement('button');
     button8.innerHTML = "Transcription";
     td8.appendChild(button8);
-    button8.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
-    idNumber++;
+    button8.addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
 
     let td9 = document.createElement('td');
     tableRow.appendChild(td9);
-    td9.setAttribute('id', "td" + idNumber);
     let oggButton = document.createElement('button');
     oggButton.innerHTML = "ogg";
     td9.appendChild(oggButton);
-    oggButton.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("ogg", tr["id"]); }, false);
-    idNumber++;
+    oggButton.addEventListener("click", () => {  getVoiceMailsContent("ogg", tr["id"]);});
+
     let mp3Button = document.createElement('button');
     mp3Button.innerHTML = "mp3";
     td9.appendChild(mp3Button);
     mp3Button.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]); }, false);
+    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]);});
     idNumber++;
 
     let td10 = document.createElement('td');
     tableRow.appendChild(td10);
-    td10.setAttribute('id', "td" + idNumber);
     let button10 = document.createElement('button');
     button10.innerHTML = "Delete";
     td10.appendChild(button10);
-    button10.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]);  }, false);
-    idNumber++;
+    button10.addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]); });
 
     let td11 = document.createElement('td');
     tableRow.appendChild(td11);
-    td11.setAttribute('id', "td" + idNumber);
     let button11 = document.createElement('button');
     button11.innerHTML = "Change Status";
     td11.appendChild(button11);
-    button11.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); }, false);
-    idNumber++;
+    button11.addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); });
 }
 
 function updateList(response){
@@ -136,6 +110,7 @@ function updateList(response){
 // functions for VoiceMails
 ///////////////////////////////
 function makeRequest(method, url, data_raw){
+    return new Promise( () => {
     let access_token = localStorage.getItem("access_token");
     let options = {
         method: method,
@@ -149,13 +124,14 @@ function makeRequest(method, url, data_raw){
         options["body"] = JSON.stringify(data_raw);
     }
 
-    fetch(url, options).then(response => {
+    return fetch(url, options).then(response => {
         if(response.ok){
-            response.json().then( (json) => { return json;});
+            response.json();
         }else{
             return (new Error('Something went wrong'));
         }
     });
+});
 }
 
 function getVoiceMails(offset){ 
@@ -249,10 +225,10 @@ function getVoiceMailsContent(format, id){
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
-document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);}, false);
-document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); }, false);
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); }, false);
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); }, false);
-document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); }, false);
-document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); }, false);
-document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); }, false);
+document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);});
+document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); });
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); });
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); });
+document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); });
+document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); });
+document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); });
