@@ -1,5 +1,3 @@
-
-
 ///////////////////////////////
 // functions for UI 
 ///////////////////////////////
@@ -103,7 +101,6 @@ function updateList(response){
     document.getElementById('buttonNext').innerHTML = pageNumberOfVoicemails + 2;
 }
 
-
 ///////////////////////////////
 // functions for VoiceMails
 ///////////////////////////////
@@ -200,18 +197,14 @@ function getVoiceMailsTranscription(id){
 function getVoiceMailsContent(format, id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
 
-    const ctx =new AudioContext();
-    let audio; 
     makeRequest("GET", url)
-        .then( (response) => response.arrayBuffer())
-        .then( arrayBuffer => ctx.decodeAudioData(arrayBuffer ))
-        .then( decodedAudio => { audio = decodedAudio; })
-        let blob = new Blob([audio], {type : 'audio/' + format});
+        .then(response => response.blob())
+        .then(blob => {
         let dataUrl = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
         a.href = dataUrl;
         a.download = id + "." + format;
-        a.click();
+        a.click();});
 }
 
 ///////////////////////////////
