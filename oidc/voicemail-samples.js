@@ -56,9 +56,7 @@ function createNewTr(tr){
     let mp3Button = document.createElement('button');
     mp3Button.innerHTML = "mp3";
     td9.appendChild(mp3Button);
-    mp3Button.setAttribute('id', "button" + idNumber);
-    document.getElementById('button' + idNumber).addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]);});
-    idNumber++;
+    mp3Button.addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]);});
 
     let td10 = document.createElement('td');
     tableRow.appendChild(td10);
@@ -86,7 +84,7 @@ function updateList(response){
         document.getElementById('buttonPrev').hidden = true;   
     }
 
-    if (response.length == countOnList) {
+    if (response["records"].length == countOnList) {
         document.getElementById('buttonNext').hidden = false;
     } else{
         document.getElementById('buttonNext').hidden = true;
@@ -96,8 +94,8 @@ function updateList(response){
         tableNode.removeChild(tableNode.lastChild);
     }
 
-    for (let index = 0; index < response.length; index++) {
-        createNewTr(response[index]);
+    for (let index = 0; index < response["records"].length; index++) {
+        createNewTr(response["records"][index]);
     }   
      
     document.getElementById('buttonCurr').innerHTML = pageNumberOfVoicemails + 1;
