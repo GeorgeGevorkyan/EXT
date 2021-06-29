@@ -193,7 +193,7 @@ function getVoiceMailsTranscription(id){
    
     makeRequest("GET", url).then((response) => response.json()).then( (response) => {
         log("Transcript of " + id + " VoiceMails: ");
-        log(json["text"]);
+        log(response["text"]);
     });
 }
 
@@ -201,7 +201,7 @@ function getVoiceMailsContent(format, id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
     let blob;
 
-    makeRequest("GET", url).then( (json) => {
+    makeRequest("GET", url).then( (response) => {
         blob = new Blob([json.arrayBuffer()], {type : 'audio/' + format});
         let dataUrl = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
