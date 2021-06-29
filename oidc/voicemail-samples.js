@@ -199,16 +199,19 @@ function getVoiceMailsTranscription(id){
 
 function getVoiceMailsContent(format, id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
-    let blob;
 
-    makeRequest("GET", url).then( (response) => {
-        blob = new Blob([json.arrayBuffer()], {type : 'audio/' + format});
+    const ctx =new AudioContext();
+    let audio; 
+    makeRequest("GET", url)
+        .then( (response) => response.arrayBuffer())
+        .then( arrayBuffer => ctx.decodeAudioData(arrayBuffer ))
+        .then( decodedAudio => { audio = decodedAudio; })
+        let blob = new Blob([audio], {type : 'audio/' + format});
         let dataUrl = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
         a.href = dataUrl;
         a.download = id + "." + format;
         a.click();
-    });
 }
 
 ///////////////////////////////
