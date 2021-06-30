@@ -58,7 +58,7 @@ function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, en
         "includeVoiceMail": includeVoiceMail
     }
 
-    makeRequest("POST", url, data_raw).then(response => {
+    makeRequest("POST", url, false, data_raw).then(response => {
         //UI changes
         log("User Settings updated");
     });            
