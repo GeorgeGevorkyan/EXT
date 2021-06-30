@@ -1,7 +1,7 @@
 ///////////////////////////////
 // functions for VoiceMails Settings
 ///////////////////////////////
-function makeRequest(method, url, post_type, data_raw){
+function makeRequest(method, url, isFile, data_raw){
     let access_token = localStorage.getItem("access_token");
     let options = {
         method: method,
@@ -11,7 +11,7 @@ function makeRequest(method, url, post_type, data_raw){
     };
 
     if(data_raw){
-        if(post_type == "file"){
+        if(isFile == true){
             options["body"] = data_raw;
         }else{
         options["headers"]["Content-Type"] = 'application/json';
@@ -71,9 +71,27 @@ function uploadGreetingContent(){
     let selectedFile = document.getElementById('greetingFile').files[0];
     formData.append("greetingFile", selectedFile);    
 
-    makeRequest("POST", url, formData).then(response => {
+    makeRequest("POST", url, true, formData).then(response => {
             log("Custom Greeting uploaded");
     });
+
+    // let access_token = localStorage.getItem("access_token");
+    // let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
+    // let xmlHttp = new XMLHttpRequest();
+    // let formData = new FormData();
+
+    // let selectedFile = document.getElementById('greetingFile').files[0];
+    // formData.append("greetingFile", selectedFile);    
+
+    // xmlHttp.onreadystatechange = function() { 
+    //     if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+    //         log("Custom Greeting uploaded");
+    //     }
+    // }
+
+    // xmlHttp.open("POST", url, true); 
+    // xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    // xmlHttp.send(formData);
 }
 
 function getUserSettings(){
