@@ -32,6 +32,9 @@ function getGreetingContent(format, custom){
         a.href = dataUrl;
         a.download = 'greeting.' + format;
         a.click();
+    })
+    .catch( error => {
+        log(error);
     });
 }
 
