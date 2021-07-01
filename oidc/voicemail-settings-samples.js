@@ -25,6 +25,7 @@ function makeRequest(method, url, isFile, data_raw){
 function getGreetingContent(format, custom){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
     makeRequest("GET", url)
+    .then(res => res.ok ? res : Promise.reject("Custom greeting is not found"))
     .then(response => response.blob())
     .then(blob => {
         let dataUrl = window.URL.createObjectURL(blob);
@@ -41,7 +42,7 @@ function getGreetingContent(format, custom){
 function resetGreetingContent(){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
 
-    makeRequest("DELETE", url).then(response => {
+    makeRequest("DELETE", url).then( () => {
         log("Custom Greeting deleted")
     });             
 }
@@ -58,7 +59,7 @@ function updateUserSettings(pin, hasCustomGreeting, isTranscriptionPermitted, en
         "includeVoiceMail": includeVoiceMail
     }
 
-    makeRequest("POST", url, false, data_raw).then(response => {
+    makeRequest("POST", url, false, data_raw).then( () => {
         //UI changes
         log("User Settings updated");
     });            
@@ -71,42 +72,27 @@ function uploadGreetingContent(){
     let selectedFile = document.getElementById('greetingFile').files[0];
     formData.append("greetingFile", selectedFile);    
 
-    makeRequest("POST", url, true, formData).then(response => {
-            log("Custom Greeting uploaded");
+    makeRequest("POST", url, true, formData)
+    .then(response => response.ok ? response : Promise.reject("Something goes wrong"))
+    .then(response => { log("Custom Greeting uploaded");
     });
-
-    // let access_token = localStorage.getItem("access_token");
-    // let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
-    // let xmlHttp = new XMLHttpRequest();
-    // let formData = new FormData();
-
-    // let selectedFile = document.getElementById('greetingFile').files[0];
-    // formData.append("greetingFile", selectedFile);    
-
-    // xmlHttp.onreadystatechange = function() { 
-    //     if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-    //         log("Custom Greeting uploaded");
-    //     }
-    // }
-
-    // xmlHttp.open("POST", url, true); 
-    // xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    // xmlHttp.send(formData);
 }
 
 function getUserSettings(){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
 
-    makeRequest("GET", url).then( response => response.json()).then( response => {
-        log(response);
+    makeRequest("GET", url)
+    .then( response => response.json())
+    .then( response => { log(response);
     });
 }
 
 function getVoicemailUsage(){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/usage';
 
-    makeRequest("GET", url).then( response => response.json()).then( response => {
-        log(response);
+    makeRequest("GET", url)
+    .then( response => response.json())
+    .then( response => { log(response);
     });
 }
 
