@@ -12,6 +12,8 @@
             <a class='functions' href="VoicemailSettingsFunctions.html" id='unHiddenVoicemailSettingsFunctions'>Voicemail Settings Functions</a>
         </div>
         <div id="VoicemailSettingsFunctions" >    
+        <section>
+                <h2>Greeting Content</h2>
             <div>
                 Get Default Greeting Content
                 <button id='getDefaultGreetingContentMp3'>mp3</button>
@@ -33,10 +35,13 @@
             <button id='resetGreetingContent'>Reset Greeting Content</button>
             </div>
             <div>
-            <button id='getUserSettings'>Get User Settings</button>
-            </div>
-            <div>
             <button id='getVoicemailUsage'>Get Voicemail Usage</button>
+            </div>
+        </section>
+        <section>
+            <h2>Voicemail user settings</h2>
+            <div>
+            <button id='getUserSettings'>Get User Settings</button>
             </div>
             <div class='updateSettingsBox'>
             <button id='updateUserSettings'>Update User Settings</button>
@@ -74,7 +79,8 @@
                     <option value="false">false</option>
                 </select>
             </div>
-            </div> 
+            </div>
+        </section> 
         </div>
         <pre id='out'></pre>
         <script src='log.js'></script>
