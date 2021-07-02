@@ -12,9 +12,37 @@
             <a class='functions' href="VoicemailSettingsFunctions.html" id='unHiddenVoicemailSettingsFunctions'>Voicemail Settings Functions</a>
         </div>
         <div id="VoicemailFunctions" >
-            <div>
-            <button id='getVoiceMails'>Get VoiceMails</button>
-            </div>
+            <section>
+                <h2>Voice mails Table</h2>
+                <textarea>Get Voicemails returns list of Voicemails with possible methods for them</textarea>
+                <div>
+                    <button id='getVoiceMails'>Get VoiceMails</button>
+                </div>
+                <div>
+                    <table id="table">
+                        <thead id="thead" hidden>
+                            <tr>
+                            <td> id </td>
+                            <td> phoneNumber </td> 
+                            <td> displayName </td>
+                            <td> status </td>
+                            <td> duration </td>
+                            <td> whenCreated </td>
+                            <td> HasText </td>
+                            <td><a href="https://developer.intermedia.com/api/spec/calling/index.html#get-/voice/v2/voicemails/{id}/_transcript"> Transcription </a></td>
+                            <td><a href="https://developer.intermedia.com/api/spec/calling/index.html#get-/voice/v2/voicemails/{id}/_content"> Download </a></td>
+                            <td><a href ="https://developer.intermedia.com/api/spec/calling/index.html#delete-/voice/v2/voicemails/_selected"> Delete </a></td>
+                            <td><a href = "https://developer.intermedia.com/api/spec/calling/index.html#post-/voice/v2/voicemails/_selected/_metadata"> Change Status </a></td>
+                            </tr> 
+                        </thead>
+                    </table>
+                    <div id="paging">
+                        <button id="buttonPrev" hidden></button>
+                        <button id="buttonCurr" disabled hidden></button>
+                        <button id="buttonNext" hidden></button>
+                    </div>
+                </div>
+            </section>
             <div>
             <button id='getVoiceMailsTotal'>Get VoiceMails Total</button>
             <select id="totalStatus">
@@ -39,30 +67,6 @@
             <div>
             <button id='getVoiceMailRecord'>Get VoiceMail Record</button>
             <input id="id" placeholder="id"></input>
-            </div>
-            <div>
-                <table id="table">
-                    <thead id="thead" hidden>
-                        <tr>
-                        <td> id </td>
-                        <td> phoneNumber </td> 
-                        <td> displayName </td>
-                        <td> status </td>
-                        <td> duration </td>
-                        <td> whenCreated </td>
-                        <td> hasText </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        </tr> 
-                    </thead>
-                </table>
-                <div id="paging">
-                    <button id="buttonPrev" hidden></button>
-                    <button id="buttonCurr" disabled hidden></button>
-                    <button id="buttonNext" hidden></button>
-                </div>
             </div>
         </div>
         <pre id='out'></pre>
