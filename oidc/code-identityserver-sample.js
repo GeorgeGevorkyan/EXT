@@ -36,12 +36,13 @@ function getAccessToken(scope){
 if (location.search.includes("code=", 1)) {
     let mgr = new Oidc.UserManager(settings);
     mgr.signinCallback(settings).then(function(user) {
+        document.getElementById('waitText').hidden = false;
         localStorage.setItem('access_token', user.access_token);
         document.getElementById('functions').hidden = false;
-        document.getElementById('waitText').hidden = true;
     }).catch(function(err) {
        console.log(err);
-});
+    });
+    document.getElementById('waitText').hidden = true;
 }
 
 ///////////////////////////////
