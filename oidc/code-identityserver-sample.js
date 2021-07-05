@@ -38,6 +38,7 @@ if (location.search.includes("code=", 1)) {
     mgr.signinCallback(settings).then(function(user) {
         localStorage.setItem('access_token', user.access_token);
         document.getElementById('functions').hidden = false;
+        document.getElementById('waitText').hidden = true;
     }).catch(function(err) {
        console.log(err);
 });
