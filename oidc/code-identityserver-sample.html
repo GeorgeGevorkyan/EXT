@@ -7,15 +7,20 @@
     <body>
         <a href="index.html"> Back to configuration </a> <br>
         <a href="code-identityserver-sample.html"> Authorize again </a> <br> <br>
-        <div>
+        <section>
             <div>Before start using API samples, you need to get an access token.</div>
+        </section>
+        <section>
+        <div>
             <button id='getVoiceMailsToken'>Get VoiceMails Token</button>
         </div>
-        <div id="waitText" hidden>Wait...</div>
-        <div id="functions" hidden>
+        <div id="waitText" hidden>Wait... </div>
+        <div id="VoiceMailfunctions" hidden>
             <a class='functions' href="VoicemailFunctions.html" >Voicemail Functions</a>
             <a class='functions' href="VoicemailSettingsFunctions.html" >Voicemail Settings Functions</a>
         </div>
+        </section>
+        <br><br>
         <script src='oidc-client.js'></script>
         <script src='code-identityserver-sample.js'></script>
         <script src='jwt-decode.js'></script>
