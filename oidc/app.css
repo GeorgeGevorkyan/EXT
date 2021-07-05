@@ -30,6 +30,10 @@ select {
     padding: 0 0 0 5px;
 }
 
+.table{
+    border: 1px;
+}
+
 .functions{
     text-decoration: none;
     border: 1px solid black;
