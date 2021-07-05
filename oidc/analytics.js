@@ -8,8 +8,8 @@ function getAnalyticToken(){
         },
         body: {
             'grant_type': 'client_credentials',
-            'client_id': localStorage.getItem('client-id'),
-            'client_secret': localStorage.getItem('client-secret'),
+            'client_id': document.getElementById('client-id').value,
+            'client_secret': document.getElementById('client-secret').value,
             'scope': 'api.service.analytics.main'
         }
     };
