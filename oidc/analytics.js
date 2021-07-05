@@ -1,5 +1,5 @@
 
-function getS2SAccessToken(){
+function getAnalyticToke(){
     let url = 'https://login.intermedia.net/user/connect/token';
     let options = {
         method: method,
