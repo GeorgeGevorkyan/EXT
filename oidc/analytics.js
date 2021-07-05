@@ -2,7 +2,7 @@
 function getAnalyticToken(){
     let url = 'https://login.intermedia.net/user/connect/token';
     let options = {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
