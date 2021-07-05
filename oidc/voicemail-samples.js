@@ -32,7 +32,7 @@ function createNewTr(tr){
     let td6 = document.createElement('td');
     tableRow.appendChild(td6);
     let date = new Date(tr["whenCreated"]);
-    td6.innerText = date.getMonth() + date.getDay() + date.getFullYear() + ', ' + date.getHours() + date.getMinutes();
+    td6.innerText = date.getMonth() + ', ' + date.getDay()  + ', ' +  date.getFullYear() + ', ' + date.getHours()  + ':' +  date.getMinutes();
 
     let td7 = document.createElement('td');
     tableRow.appendChild(td7);

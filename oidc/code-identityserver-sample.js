@@ -34,9 +34,9 @@ function getAccessToken(scope){
 }
 
 if (location.search.includes("code=", 1)) {
+    document.getElementById('waitText').hidden = false;
     let mgr = new Oidc.UserManager(settings);
     mgr.signinCallback(settings).then(function(user) {
-        document.getElementById('waitText').hidden = false;
         localStorage.setItem('access_token', user.access_token);
         document.getElementById('functions').hidden = false;
     }).catch(function(err) {
