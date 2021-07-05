@@ -7,7 +7,7 @@ function getAnalyticToken(){
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: {
-            'grant_type': localStorage.getItem('client_credentials'),
+            'grant_type': 'client_credentials',
             'client_id': localStorage.getItem('client-id'),
             'client_secret': localStorage.getItem('client-secret'),
             'scope': 'api.service.analytics.main'
