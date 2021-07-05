@@ -1,5 +1,5 @@
 
-function getAnalyticToke(){
+function getAnalyticToken(){
     let url = 'https://login.intermedia.net/user/connect/token';
     let options = {
         method: method,
