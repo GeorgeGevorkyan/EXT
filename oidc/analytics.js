@@ -6,12 +6,9 @@ function getAnalyticToken(){
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: {
-            'grant_type': 'client_credentials',
-            'client_id': document.getElementById('client-id').value,
-            'client_secret': document.getElementById('client-secret').value,
-            'scope': 'api.service.analytics.main'
-        }
+        body:'grant_type=client_credentials&client_id=' + document.getElementById('client-id').value +
+            '&client_secret=' + document.getElementById('client-secret').value +
+            '&scope=api.service.analytics.main'
     };
 
     fetch(url, options)
