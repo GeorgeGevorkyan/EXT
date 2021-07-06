@@ -51,9 +51,8 @@ function getDetailedCalls(){
     }
     makeRequest("POST", url, false, body)
         .then( response => response.json())
-        .then( response => { log(response);
+        .then( response => { log(response);});
 }
-
 
 ///////////////////////////////
 // Event Handlers
