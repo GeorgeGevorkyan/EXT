@@ -17,6 +17,7 @@ function getAnalyticToken(){
     .then((response) => response.json())
     .then((response) => {
         localStorage.setItem('analytics_token', response['access_token']);
+        log("Token " + response['access_token']);
     })
     .catch((error) => {
         console.log(error);
