@@ -58,3 +58,4 @@ function getDetailedCalls(){
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
+document.getElementById('getDetailedCalls').addEventListener("click", () => { getDetailedCalls();});
