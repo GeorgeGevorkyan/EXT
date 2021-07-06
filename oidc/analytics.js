@@ -6,7 +6,9 @@ function getAnalyticToken(){
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body:'grant_type=client_credentials&client_id=' + document.getElementById('client-id').value +
+        body:
+            'grant_type=client_credentials'+
+            '&client_id=' + document.getElementById('client-id').value +
             '&client_secret=' + document.getElementById('client-secret').value +
             '&scope=api.service.analytics.main'
     };
@@ -14,12 +16,31 @@ function getAnalyticToken(){
     fetch(url, options)
     .then((response) => response.json())
     .then((response) => {
-        localStorage.setItem('analytics_token', response['analytics_token']);
-        log(response['analytics_token']);
+        localStorage.setItem('analytics_token', response['access_token']);
     })
     .catch((error) => {
         console.log(error);
     });;
+}
+
+///////////////////////////////
+// functions for Analytics
+///////////////////////////////
+function makeRequest(method, url, data_raw){
+    let access_token = localStorage.getItem("access_token");
+    let options = {
+        method: method,
+        headers: {
+            'Authorization': `Bearer ` + access_token
+        }
+    };
+
+    if(data_raw){
+        options["headers"]["Content-Type"] = 'application/json';
+        options["body"] = JSON.stringify(data_raw);
+    }
+
+    return fetch(url, options);
 }
 
 ///////////////////////////////
