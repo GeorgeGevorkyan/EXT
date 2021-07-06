@@ -55,6 +55,28 @@ function getDetailedCalls(){
         .then( response => { log(response);});
 }
 
+function getUserCalls(){
+    let url = 'https://api.intermedia.net/analytics/calls/user';
+    let body = { 
+        "userIds": [0, 10000000] 
+    }
+
+    makeRequest("POST", url, false, body)
+        .then( response => response.json())
+        .then( response => { log(response);});
+}
+
+function getUserFilters(){
+    let url = 'https://api.intermedia.net/analytics/calls/user/filters';
+    let body = { 
+        "userIds": [12345, 22222] 
+    }
+
+    makeRequest("POST", url, false, body)
+        .then( response => response.json())
+        .then( response => { log(response);});
+}
+
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
