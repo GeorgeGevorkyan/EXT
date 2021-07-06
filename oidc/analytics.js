@@ -82,3 +82,5 @@ function getUserFilters(){
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
 document.getElementById('getDetailedCalls').addEventListener("click", () => { getDetailedCalls();});
+document.getElementById('getUserCalls').addEventListener("click", () => { getUserCalls();});
+document.getElementById('getUserFilters').addEventListener("click", () => { getUserFilters();});
