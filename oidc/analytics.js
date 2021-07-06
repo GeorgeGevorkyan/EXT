@@ -27,11 +27,11 @@ function getAnalyticToken(){
 // functions for Analytics
 ///////////////////////////////
 function makeRequest(method, url, data_raw){
-    let access_token = localStorage.getItem("access_token");
+    let analytics_token = localStorage.getItem("analytics_token");
     let options = {
         method: method,
         headers: {
-            'Authorization': `Bearer ` + access_token
+            'Authorization': `Bearer ` + analytics_token
         }
     };
 
@@ -42,6 +42,18 @@ function makeRequest(method, url, data_raw){
 
     return fetch(url, options);
 }
+
+function getDetailedCalls(){
+    let url = 'https://api.intermedia.net/analytics/calls/call/detail';
+    let body = { 
+        "chargeable" : ["yes"],
+        "callAttributes": ["outbound", "answered"] 
+    }
+    makeRequest("POST", url, false, body)
+        .then( response => response.json())
+        .then( response => { log(response);
+}
+
 
 ///////////////////////////////
 // Event Handlers
