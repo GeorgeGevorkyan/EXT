@@ -25,9 +25,9 @@ function getMultipleAvatars(avatarIds){
     .then(response => {
         for (let index = 0; index < response.length; index++) {
             const avatarElement = response[index];
-            log(avatarElement[avatarId]);
-            log(avatarElement[contactId]);
-            let blob = avatarElement[avatar].blob();
+            log(avatarElement['avatarId']);
+            log(avatarElement['contactId']);
+            let blob = avatarElement['avatar'].blob();
             let dataUrl = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = dataUrl;
@@ -42,9 +42,9 @@ function getAvatar(avatarId){
     makeRequest("GET", url)
         .then((response) => response.json())
         .then(response => {
-            log(response[avatarId]);
-            log(response[contactId]);
-            let blob = response[avatar].blob();
+            log(response['avatarId']);
+            log(response['contactId']);
+            let blob = response['avatar'].blob();
             let dataUrl = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = dataUrl;
