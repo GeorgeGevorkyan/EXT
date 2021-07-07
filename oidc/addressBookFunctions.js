@@ -40,8 +40,8 @@ function getMultipleAvatars(avatarIds){
 function getAvatar(avatarId){ 
     let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
     makeRequest("GET", url)
+        .then((response) => response.json())
         .then((response) => {
-            const response = response.json();
             log(text['avatarId']);
             log(text['contactId']);
             let blob = new Blob([response['avatar'].arrayBuffer()], {type : 'image/' + 'png'});
