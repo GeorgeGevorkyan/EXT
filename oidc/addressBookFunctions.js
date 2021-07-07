@@ -21,18 +21,36 @@ function getMultipleAvatars(avatarIds){
         'avatarIds' : [avatarIds]
     }
     makeRequest("POST", url)
-        .then((response) => response.json())
-        .then((response) => {log(response);});
+    .then((response) => response.json())
+    .then(response => {
+        for (let index = 0; index < response.length; index++) {
+            const avatarElement = response[index];
+            log(avatarElement[avatarId]);
+            log(avatarElement[contactId]);
+            let blob = avatarElement[avatar].blob();
+            let dataUrl = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = dataUrl;
+            a.download = avatarId + ".png";
+            a.click();
+        }
+    });
 }
 
 function getAvatar(avatarId){ 
     let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
-    let body = {
-        'avatarId' : avatarId
-    }
     makeRequest("GET", url)
         .then((response) => response.json())
-        .then((response) => {log(response);});
+        .then(response => {
+            log(response[avatarId]);
+            log(response[contactId]);
+            let blob = response[avatar].blob();
+            let dataUrl = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = dataUrl;
+            a.download = avatarId + ".png";
+            a.click();
+        });
 }
 
 function getContacts(){ 
