@@ -48,4 +48,4 @@ if (location.search.includes("code=", 1)) {
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
-document.getElementById('getVoiceMailsToken').addEventListener("click", () => { getAccessToken('api.user.voice.voicemails');});
+document.getElementById('getToken').addEventListener("click", () => { getAccessToken('api.user.voice.voicemails api.user.address-book');});
