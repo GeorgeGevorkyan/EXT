@@ -73,8 +73,9 @@ function getSingleContact(id){
 
 
 
-document.getElementById('getContacts').addEventListener("click", () =>{ getContacts(document.getElementById('avatarIds'));});
-document.getElementById('getAvatar').addEventListener("click", () =>{ getAvatar();});
+document.getElementById('getContacts').addEventListener("click", () =>{ getContacts();});
+document.getElementById('getMultipleAvatars').addEventListener("click", () =>{ getMultipleAvatars(document.getElementById('avatarIds').value);});
+document.getElementById('getAvatar').addEventListener("click", () =>{ getAvatar(document.getElementById('avatarId').value);});
 document.getElementById('getUserDetails').addEventListener("click", () =>{ getUserDetails();});
-document.getElementById('getContactsByJIDs').addEventListener("click", () =>{ getContactsByJIDs(document.getElementById('jids'));});
-document.getElementById('getSingleContact').addEventListener("click", () =>{ getSingleContact(document.getElementById('id'));});
+document.getElementById('getContactsByJIDs').addEventListener("click", () =>{ getContactsByJIDs(document.getElementById('jids').value);});
+document.getElementById('getSingleContact').addEventListener("click", () =>{ getSingleContact(document.getElementById('id').value);});
