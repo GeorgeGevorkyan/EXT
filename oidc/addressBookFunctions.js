@@ -27,6 +27,9 @@ function getMultipleAvatars(avatarIds){
 
 function getAvatar(avatarId){ 
     let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
+    let body = {
+        'avatarId' : avatarId
+    }
     makeRequest("GET", url)
         .then((response) => response.json())
         .then((response) => {log(response);});
