@@ -63,7 +63,7 @@ function getUserCalls(dateFrom, dateTo){
 function getUserFilters(dateFrom, dateTo){
     let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
 
-    makeRequest("POST", url, false, body)
+    makeRequest("POST", url)
         .then( response => response.json())
         .then( response => { log(response);});
 }
