@@ -45,7 +45,7 @@ function makeRequest(method, url, data_raw){
 }
 
 function getDetailedCalls(dateFrom, dateTo){
-    let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom' + dateFrom +'&dateTo' + dateTo;
+    let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom' + dateFrom +'Z&dateTo' + dateTo + 'Z';
     let body = { 
         "chargeable" : ["yes"],
         "callAttributes": ["outbound", "answered"] 
