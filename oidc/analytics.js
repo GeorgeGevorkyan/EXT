@@ -53,8 +53,9 @@ function getDetailedCalls(dateFrom, dateTo){
 }
 
 function getUserCalls(dateFrom, dateTo){
-    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
-
+    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=2021-07-01T01:30:00.000Z&dateTo=' + dateTo + 'Z';;
+    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=2021-07-01T01:30:00.000Z&dateTo=2021-07-07T01:30:00.000Z';
+   
     makeRequest("POST", url)
         .then( response => response.json())
         .then( response => { log(response);});

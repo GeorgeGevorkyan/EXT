@@ -38,19 +38,38 @@ function getMultipleAvatars(avatarIds){
 }
 
 function getAvatar(avatarId){ 
-    let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
-    makeRequest("GET", url)
-        .then((response) => response.json())
-        .then((response) => {
-            log(text['avatarId']);
-            log(text['contactId']);
-            let blob = new Blob([response['avatar'].arrayBuffer()], {type : 'image/' + 'png'});
+     let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
+    // makeRequest("GET", url)
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //         let blob = new Blob([response['avatar']], {type : 'image/' + 'png'});
+    //         let dataUrl = window.URL.createObjectURL(blob);
+    //         let a = document.createElement('a');
+    //         a.href = dataUrl;
+    //         a.download = avatarId + '.png';
+    //         a.click();
+    //     });
+    let access_token = localStorage.getItem("access_token");
+    let xmlHttp = new XMLHttpRequest();
+    let blob;
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
+            blob = new Blob([xmlHttp.response], {type : 'audio/' + format});
             let dataUrl = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = dataUrl;
-            a.download = avatarId + '.png';
+            a.download = id + "." + format;
             a.click();
-        });
+            };
+    }
+
+    xmlHttp.open("GET", url, true); 
+    xmlHttp.responseType = "arraybuffer";
+    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
+    xmlHttp.send();
+
+
+
 }
 
 function getContacts(){ 
