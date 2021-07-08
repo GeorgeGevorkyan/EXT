@@ -50,6 +50,7 @@ function getDetailedCalls(dateFrom, dateTo){
         "chargeable" : ["yes"],
         "callAttributes": ["outbound", "answered"] 
     }
+    
     makeRequest("POST", url, false, body)
         .then( response => response.json())
         .then( response => { log(response); });
