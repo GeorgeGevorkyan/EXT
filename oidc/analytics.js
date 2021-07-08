@@ -44,15 +44,15 @@ function makeRequest(method, url, data_raw){
     return fetch(url, options);
 }
 
-function getDetailedCalls(){
-    let url = 'https://api.intermedia.net/analytics/calls/call/detail';
+function getDetailedCalls(dateFrom, dateTo){
+    let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom' + dateFrom +'&dateTo' + dateTo;
     let body = { 
         "chargeable" : ["yes"],
         "callAttributes": ["outbound", "answered"] 
     }
     makeRequest("POST", url, false, body)
         .then( response => response.json())
-        .then( response => { log(response);});
+        .then( response => { log(response); });
 }
 
 function getUserCalls(){
@@ -81,6 +81,6 @@ function getUserFilters(){
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
-document.getElementById('getDetailedCalls').addEventListener("click", () => { getDetailedCalls();});
+document.getElementById('getDetailedCalls').addEventListener("click", () => { getDetailedCalls(document.getElementById('dateFrom'), document.getElementById('dateTo'));});
 document.getElementById('getUserCalls').addEventListener("click", () => { getUserCalls();});
 document.getElementById('getUserFilters').addEventListener("click", () => { getUserFilters();});
