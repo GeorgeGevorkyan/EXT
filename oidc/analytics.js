@@ -46,32 +46,22 @@ function makeRequest(method, url, data_raw){
 
 function getDetailedCalls(dateFrom, dateTo){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
-    let body = { 
-        "chargeable" : ["yes"],
-        "callAttributes": ["outbound", "answered"] 
-    }
     
     makeRequest("POST", url, false, body)
         .then( response => response.json())
         .then( response => { log(response); });
 }
 
-function getUserCalls(){
+function getUserCalls(dateFrom, dateTo){
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
-    let body = { 
-        "userIds": [0, 10000000] 
-    }
 
     makeRequest("POST", url, false, body)
         .then( response => response.json())
         .then( response => { log(response);});
 }
 
-function getUserFilters(){
+function getUserFilters(dateFrom, dateTo){
     let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
-    let body = { 
-        "userIds": [12345, 22222] 
-    }
 
     makeRequest("POST", url, false, body)
         .then( response => response.json())
