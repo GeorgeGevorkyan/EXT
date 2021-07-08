@@ -83,5 +83,5 @@ function getUserFilters(){
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
 document.getElementById('getDetailedCalls').addEventListener("click", () => { getDetailedCalls(document.getElementById('dateFromDetailedCalls').value, document.getElementById('dateToDetailedCalls').value);});
-document.getElementById('getUserCalls').addEventListener("click", () => { getUserCalls();});
-document.getElementById('getUserFilters').addEventListener("click", () => { getUserFilters();});
+document.getElementById('getUserCalls').addEventListener("click", () => { getUserCalls(document.getElementById('dateFromUserCalls').value, document.getElementById('dateToUserCalls').value);});
+document.getElementById('getUserFilters').addEventListener("click", () => { getUserFilters(document.getElementById('dateFromUserFilters').value, document.getElementById('dateToUserFilters').value);});
