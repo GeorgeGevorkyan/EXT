@@ -54,11 +54,11 @@ function getAvatar(avatarId){
     let blob;
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
-            blob = new Blob([xmlHttp.response], {type : 'audio/' + format});
+            blob = new Blob([xmlHttp.response], {type : 'image/png'});
             let dataUrl = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = dataUrl;
-            a.download = id + "." + format;
+            a.download = "image.png";
             a.click();
             };
     }
