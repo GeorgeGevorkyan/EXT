@@ -41,8 +41,7 @@ function getAvatar(avatarId){
      let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
     makeRequest("GET", url)
         .then((response) => {
-            let a = response;
-            log(res.clone().json());
+            log(response.clone().json());
             return response['avatar'].blob();
         })
         .then((response) => {
