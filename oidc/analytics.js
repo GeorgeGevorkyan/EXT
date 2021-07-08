@@ -57,7 +57,7 @@ function getDetailedCalls(dateFrom, dateTo){
 }
 
 function getUserCalls(){
-    let url = 'https://api.intermedia.net/analytics/calls/user';
+    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
     let body = { 
         "userIds": [0, 10000000] 
     }
@@ -68,7 +68,7 @@ function getUserCalls(){
 }
 
 function getUserFilters(){
-    let url = 'https://api.intermedia.net/analytics/calls/user/filters';
+    let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
     let body = { 
         "userIds": [12345, 22222] 
     }
