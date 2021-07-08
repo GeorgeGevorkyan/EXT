@@ -47,7 +47,7 @@ function makeRequest(method, url, data_raw){
 function getDetailedCalls(dateFrom, dateTo){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     
-    makeRequest("POST", url, false, body)
+    makeRequest("POST", url)
         .then( response => response.json())
         .then( response => { log(response); });
 }
@@ -55,7 +55,7 @@ function getDetailedCalls(dateFrom, dateTo){
 function getUserCalls(dateFrom, dateTo){
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
 
-    makeRequest("POST", url, false, body)
+    makeRequest("POST", url)
         .then( response => response.json())
         .then( response => { log(response);});
 }
