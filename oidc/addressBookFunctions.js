@@ -39,37 +39,20 @@ function getMultipleAvatars(avatarIds){
 
 function getAvatar(avatarId){ 
      let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
-    // makeRequest("GET", url)
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //         let blob = new Blob([response['avatar']], {type : 'image/' + 'png'});
-    //         let dataUrl = window.URL.createObjectURL(blob);
-    //         let a = document.createElement('a');
-    //         a.href = dataUrl;
-    //         a.download = avatarId + '.png';
-    //         a.click();
-    //     });
-    let access_token = localStorage.getItem("access_token");
-    let xmlHttp = new XMLHttpRequest();
-    let blob;
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){ 
-            blob = new Blob([xmlHttp.response], {type : 'image/png'});
+    makeRequest("GET", url)
+        .then((response) => {
+            let a = response;
+            log(response.json());
+            return response.blob();
+        })
+        .then((response) => {
+            let blob = new Blob([response['avatar']], {type : 'image/' + 'png'});
             let dataUrl = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = dataUrl;
-            a.download = "image.png";
+            a.download = avatarId + '.png';
             a.click();
-            };
-    }
-
-    xmlHttp.open("GET", url, true); 
-    xmlHttp.responseType = "arraybuffer";
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + access_token); 
-    xmlHttp.send();
-
-
-
+        });
 }
 
 function getContacts(){ 
