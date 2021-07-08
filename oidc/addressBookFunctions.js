@@ -42,8 +42,8 @@ function getAvatar(avatarId){
     makeRequest("GET", url)
         .then((response) => {
             let a = response;
-            log(response.json());
-            return response.blob();
+            log(res.clone().json());
+            return response['avatar'].blob();
         })
         .then((response) => {
             let blob = new Blob([response['avatar']], {type : 'image/' + 'png'});
