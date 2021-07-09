@@ -44,24 +44,57 @@ function makeRequest(method, url, data_raw){
     return fetch(url, options);
 }
 
-function getDetailedCalls(dateFrom, dateTo){
+function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     
+    if(timezone){
+        url = url + "&timezone=" + timezone;
+    }
+    if(sortColumn){
+        url = url + "&sortColumn" + sortColumn;
+    }
+    if(descending){
+        url = url + "&descending" + descending;
+    }
+    if(offset){
+        url = url + "&offset" + offset;
+    }   
+    if(size){
+        url = url + "&size" + size;
+    }    
+    if(accountId){
+        url = url + "&accountId" + accountId;
+    }
+
     makeRequest("POST", url)
         .then( response => response.json())
         .then( response => { log(response); });
 }
 
-function getUserCalls(dateFrom, dateTo){
+function getUserCalls(dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + dateFrom + 'Z&dateTo=' + dateTo + 'Z';
+    
+    if(timezone){
+        url = url + "&timezone=" + timezone;
+    }
+    if(accountId){
+        url = url + "&accountId" + accountId;
+    }
 
     makeRequest("POST", url)
         .then( response => response.json())
         .then( response => { log(response);});
 }
 
-function getUserFilters(dateFrom, dateTo){
+function getUserFilters(dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
+    
+    if(timezone){
+        url = url + "&timezone=" + timezone;
+    }
+    if(accountId){
+        url = url + "&accountId" + accountId;
+    }
 
     makeRequest("POST", url)
         .then( response => response.json())
@@ -72,6 +105,25 @@ function getUserFilters(dateFrom, dateTo){
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
-document.getElementById('getDetailedCalls').addEventListener("click", () => { getDetailedCalls(document.getElementById('dateFromDetailedCalls').value, document.getElementById('dateToDetailedCalls').value);});
-document.getElementById('getUserCalls').addEventListener("click", () => { getUserCalls(document.getElementById('dateFromUserCalls').value, document.getElementById('dateToUserCalls').value);});
-document.getElementById('getUserFilters').addEventListener("click", () => { getUserFilters(document.getElementById('dateFromUserFilters').value, document.getElementById('dateToUserFilters').value);});
+document.getElementById('getDetailedCalls').addEventListener("click", () => { 
+    getDetailedCalls(document.getElementById('dateFromDetailedCalls').value,
+                     document.getElementById('dateToDetailedCalls').value,
+                     document.getElementById('timezone').value,
+                     document.getElementById('sortColumn').value,
+                     document.getElementById('descending').value,
+                     document.getElementById('offset').value,
+                     document.getElementById('size').value,
+                     document.getElementById('accountId').value);
+                    });
+document.getElementById('getUserCalls').addEventListener("click", () => { 
+    getUserCalls(document.getElementById('dateFromUserCalls').value,
+                 document.getElementById('dateToUserCalls').value,
+                 document.getElementById('timezone').value,
+                 document.getElementById('accountId').value);
+                });
+document.getElementById('getUserFilters').addEventListener("click", () => { 
+    getUserFilters(document.getElementById('dateFromUserFilters').value,
+                   document.getElementById('dateToUserFilters').value,
+                   document.getElementById('timezone').value,
+                   document.getElementById('accountId').value);
+                });
