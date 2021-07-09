@@ -54,25 +54,26 @@ function getAvatar(avatarId){
         });
 } 
 
-function getContacts(){ 
-    let url = 'https://api.intermedia.net/address-book/v3/contacts';
+function getContacts(params){ 
+    let url = 'https://api.intermedia.net/address-book/v3/contacts' + params;
+       
     makeRequest("GET", url)
         .then((response) => response.json())
         .then((response) => {log(response);});
 }
 
-function getUserDetails(){ 
-    let url = 'https://api.intermedia.net/address-book/v3/contacts/_me';
+function getUserDetails(params){ 
+    let url = 'https://api.intermedia.net/address-book/v3/contacts/_me' + params;
     makeRequest("GET", url)
         .then((response) => response.json())
         .then((response) => {log(response);});
 }
 
-function getContactsByJIDs(jids){ 
-    let url = 'https://api.intermedia.net/address-book/v3/contacts/_search';
-    let array = jids.split(",");
+function getContactsByJIDs(jids, params){ 
+    let url = 'https://api.intermedia.net/address-book/v3/contacts/_search' + params;
+    let jidsArray = jids.split(",");
     let body = {
-        "jids" : array
+        "jids" : jidsArray
     }
 
     makeRequest("POST", url, body)
@@ -80,8 +81,8 @@ function getContactsByJIDs(jids){
         .then((response) => { log(response); });
 }
 
-function getSingleContact(id){ 
-    let url = 'https://api.intermedia.net/address-book/v3/contacts/' + id;
+function getSingleContact(id, params){ 
+    let url = 'https://api.intermedia.net/address-book/v3/contacts/' + id + params;
     makeRequest("GET", url)
         .then((response) => response.json())
         .then((response) => {log(response);});
@@ -94,9 +95,50 @@ function getSingleContact(id){
 
 
 
-document.getElementById('getContacts').addEventListener("click", () =>{ getContacts();});
+document.getElementById('getContacts').addEventListener("click", () =>{ 
+    let params;
+    if(document.getElementById('query').value){
+        params = params + "&query=" + document.getElementById('query');
+    }
+       
+    if(document.getElementById('phone').value){
+        url = url + "&phone=" + document.getElementById('phone');
+    }
+       
+    if(document.getElementById('scope').value){
+        url = url + "&scope=" + document.getElementById('scope');
+    }
+       
+    if(document.getElementById('getContactsid').value + document.getElementById('getContactsLegacyid') + document.getElementById('getContacts_all')){
+        url = url + "&fields=" + document.getElementById('getContactsid').value + ',' + document.getElementById('getContactsLegacyid') + ',' + document.getElementById('getContacts_all');
+    }
+
+    getContacts(params? ('?' + params): null);
+});
 // document.getElementById('getMultipleAvatars').addEventListener("click", () =>{ getMultipleAvatars(document.getElementById('avatarIds').value);});
 // document.getElementById('getAvatar').addEventListener("click", () =>{ getAvatar(document.getElementById('avatarId').value);});
-document.getElementById('getUserDetails').addEventListener("click", () =>{ getUserDetails();});
-document.getElementById('getContactsByJIDs').addEventListener("click", () =>{ getContactsByJIDs(document.getElementById('jids').value);});
-document.getElementById('getSingleContact').addEventListener("click", () =>{ getSingleContact(document.getElementById('id').value);});
+document.getElementById('getUserDetails').addEventListener("click", () =>{
+    let params;
+    if(document.getElementById('getUserDetailsid').value + document.getElementById('getUserDetailsLegacyid') + document.getElementById('getUserDetails_all')){
+        url = url + "&fields=" + document.getElementById('getUserDetailsid').value + ',' + document.getElementById('getUserDetailsLegacyid') + ',' + document.getElementById('getUserDetails_all');
+    }
+
+    getUserDetails(params? ('?' + params): null);
+    });
+
+document.getElementById('getContactsByJIDs').addEventListener("click", () =>{ 
+    let params;
+    if(document.getElementById('getContactsByJIDsid').value + document.getElementById('getContactsByJIDsLegacyid') + document.getElementById('getContactsByJIDs_all')){
+        url = url + "&fields=" + document.getElementById('getContactsByJIDsid').value + ',' + document.getElementById('getContactsByJIDsLegacyid') + ',' + document.getElementById('getContactsByJIDs_all');
+    }
+
+    getContactsByJIDs(document.getElementById('jids').value, params ? ('?' + params): null);
+});
+document.getElementById('getSingleContact').addEventListener("click", () =>{ 
+    let params;
+    if(document.getElementById('getSingleContactid').value + document.getElementById('getSingleContactLegacyid') + document.getElementById('getSingleContact_all')){
+        url = url + "&fields=" + document.getElementById('getSingleContactid').value + ',' + document.getElementById('getSingleContactLegacyid') + ',' + document.getElementById('getSingleContact_all');
+    }
+
+    getSingleContact(document.getElementById('id').value, params ? ('?' + params): null);
+});

@@ -24,17 +24,98 @@
                 </div> -->
                 <div>
                     <button id='getContacts'>Get Contacts</button>
+                    <details>
+                        <summary>Optional settings</summary>
+                        <div>
+                            <input id="query" placeholder="query"></input>
+                        </div>
+                        <div>
+                            <input id="phone" placeholder="phone"></input>
+                        </div>
+                        <div>
+                            <select id="scope">
+                                <option value="1">1</option>
+                                <option value="0">0</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox" id="getContactsid" value="id" placeholder="fields"></input>
+                                <label for="horns">Horns</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="getContactsLegacyid" value="legacyid">
+                                <label for="horns">Horns</label>
+                            </div>    
+                            <div>
+                                <input type="checkbox" id="getContacts_all" value="_all">
+                                <label for="horns">Horns</label>
+                            </div>                      
+                        </div>
+                    </div>
+                    </details>
                 </div>
                 <div>
                     <button id='getUserDetails'>Get User Details</button>
+                    <details>
+                        <summary>Optional settings</summary>
+                        <div>
+                            <div>
+                                <input type="checkbox" id="getUserDetailsid" value="id" placeholder="fields"></input>
+                                <label for="horns">Horns</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="getUserDetailsLegacyid" value="legacyid">
+                                <label for="horns">Horns</label>
+                            </div>    
+                            <div>
+                                <input type="checkbox" id="getUserDetails_all" value="_all">
+                                <label for="horns">Horns</label>
+                            </div>                      
+                        </div>
+                    </details>
                 </div>
                 <div>
                     <button id='getContactsByJIDs'>Get contacts by JIDs</button>
                     <input id="jids" placeholder="jids"></input>
+                    <details>
+                        <summary>Optional settings</summary>
+                        <div>
+                            <div>
+                                <input type="checkbox" id="getContactsByJIDsid" value="id" placeholder="fields"></input>
+                                <label for="horns">Horns</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="getContactsByJIDsLegacyid" value="legacyid">
+                                <label for="horns">Horns</label>
+                            </div>    
+                            <div>
+                                <input type="checkbox" id="getContactsByJIDs_all" value="_all">
+                                <label for="horns">Horns</label>
+                            </div>                      
+                        </div>
+                    </details>
                 </div>
                 <div>
                     <button id='getSingleContact'>Get single contact</button>
                     <input id="id" placeholder="id"></input>
+                    <details>
+                        <summary>Optional settings</summary>
+                        <div>
+                            <div>
+                                <input type="checkbox" id="getSingleContactid" value="id" placeholder="fields"></input>
+                                <label for="horns">Horns</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="getSingleContactLegacyid" value="legacyid">
+                                <label for="horns">Horns</label>
+                            </div>    
+                            <div>
+                                <input type="checkbox" id="getSingleContact_all" value="_all">
+                                <label for="horns">Horns</label>
+                            </div>                      
+                        </div>
+                    </details>
                 </div>
             </section>
             <div>
