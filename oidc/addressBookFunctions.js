@@ -52,7 +52,7 @@ function getAvatar(avatarId){
             a.download = avatarId + '.png';
             a.click();
         });
-}
+} 
 
 function getContacts(){ 
     let url = 'https://api.intermedia.net/address-book/v3/contacts';
@@ -70,9 +70,11 @@ function getUserDetails(){
 
 function getContactsByJIDs(jids){ 
     let url = 'https://api.intermedia.net/address-book/v3/contacts/_search';
+    let array = jids.split(",");
     let body = {
-        'jids' : [jids]
+        "jids" : array
     }
+
     makeRequest("POST", url, body)
         .then((response) => response.json())
         .then((response) => { log(response); });
