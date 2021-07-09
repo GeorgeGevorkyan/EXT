@@ -35,7 +35,7 @@ select {
     border: 1px solid black;
     padding: 0 1px 0 1px;
 }
-.updateSettingsBox{
+.box{
     border: 1px solid black;
     padding: 2px;
 }
