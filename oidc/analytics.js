@@ -46,25 +46,27 @@ function makeRequest(method, url, data_raw){
 
 function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
-    
+    let params = '';
     if(timezone){
-        url = url + "&timezone=" + timezone;
+        params = params + "&timezone=" + timezone;
     }
     if(sortColumn){
-        url = url + "&sortColumn" + sortColumn;
+        params = params + "&sortColumn" + sortColumn;
     }
     if(descending){
-        url = url + "&descending" + descending;
+        params = params + "&descending" + descending;
     }
     if(offset){
-        url = url + "&offset" + offset;
+        params = params + "&offset" + offset;
     }   
     if(size){
-        url = url + "&size" + size;
+        params = params + "&size" + size;
     }    
     if(accountId){
-        url = url + "&accountId" + accountId;
+        params = params + "&accountId" + accountId;
     }
+
+    url = url + ( params ? ('?' + params): '');
 
     makeRequest("POST", url)
         .then( response => response.json())
@@ -74,12 +76,16 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
 function getUserCalls(dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + dateFrom + 'Z&dateTo=' + dateTo + 'Z';
     
+    let params = '';
+
     if(timezone){
-        url = url + "&timezone=" + timezone;
+        params = params + "&timezone=" + timezone;
     }
     if(accountId){
-        url = url + "&accountId" + accountId;
+        params = params + "&accountId=" + accountId;
     }
+
+    url = url + ( params ? ('?' + params): '');
 
     makeRequest("POST", url)
         .then( response => response.json())
@@ -87,14 +93,17 @@ function getUserCalls(dateFrom, dateTo, accountId, timezone){
 }
 
 function getUserFilters(dateFrom, dateTo, accountId, timezone){
-    let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';;
-    
+    let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
+    let params = '';
+
     if(timezone){
-        url = url + "&timezone=" + timezone;
+        params = params + "&timezone=" + timezone;
     }
     if(accountId){
-        url = url + "&accountId" + accountId;
+        params = params + "&accountId=" + accountId;
     }
+
+    url = url + ( params ? ('?' + params): '');
 
     makeRequest("POST", url)
         .then( response => response.json())
