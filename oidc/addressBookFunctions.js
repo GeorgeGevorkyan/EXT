@@ -108,17 +108,20 @@ document.getElementById('getContacts').addEventListener("click", () =>{
     if(document.getElementById('scope').value){
         params = params + "&scope=" + document.getElementById('scope').value;
     }
-       
-    if(document.getElementById('getContactsid').checked){
-        params = params + "&fields=" + document.getElementById('getContactsid').value;
+    
+    let getContactsid = document.getElementById('getContactsid').checked;
+    if(getContactsid){
+        params = params + "&fields=" + getContactsid.value;
     }
 
-    if(document.getElementById('getContactsLegacyid').checked){
-        params = params + document.getElementById('getContactsLegacyid').value;
+    let getContactsLegacyid = document.getElementById('getContactsLegacyid').checked;
+    if(getContactsLegacyid){
+        params = params + (getContactsid ? "," : null) + getContactsLegacyid.value;
     }
 
-    if(document.getElementById('getContacts_all').checked){
-        params = params + document.getElementById('getContacts_all').value;
+    let getContacts_all = document.getElementById('getContacts_all').checked;
+    if(getContacts_all){
+        params = params + (getContactsLegacyid ? "," : null) + getContacts_all.value;
     }
 
     getContacts(params? ('?' + params): null);
