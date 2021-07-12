@@ -109,18 +109,18 @@ document.getElementById('getContacts').addEventListener("click", () =>{
         params = params + "&scope=" + document.getElementById('scope').value;
     }
     
-    let getContactsid = document.getElementById('getContactsid').checked;
-    if(getContactsid){
+    let getContactsid = document.getElementById('getContactsid');
+    if(getContactsid.checked){
         params = params + "&fields=" + getContactsid.value;
     }
 
-    let getContactsLegacyid = document.getElementById('getContactsLegacyid').checked;
-    if(getContactsLegacyid){
+    let getContactsLegacyid = document.getElementById('getContactsLegacyid');
+    if(getContactsLegacyid.checked){
         params = params + (getContactsid ? "," : null) + getContactsLegacyid.value;
     }
 
-    let getContacts_all = document.getElementById('getContacts_all').checked;
-    if(getContacts_all){
+    let getContacts_all = document.getElementById('getContacts_all');
+    if(getContacts_all.checked){
         params = params + (getContactsLegacyid ? "," : null) + getContacts_all.value;
     }
 
