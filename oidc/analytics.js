@@ -51,19 +51,19 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
         params = params + "&timezone=" + timezone;
     }
     if(sortColumn){
-        params = params + "&sortColumn" + sortColumn;
+        params = params + "&sortColumn=" + sortColumn;
     }
     if(descending){
-        params = params + "&descending" + descending;
+        params = params + "&descending=" + descending;
     }
     if(offset){
-        params = params + "&offset" + offset;
+        params = params + "&offset=" + offset;
     }   
     if(size){
-        params = params + "&size" + size;
+        params = params + "&size=" + size;
     }    
     if(accountId){
-        params = params + "&accountId" + accountId;
+        params = params + "&accountId=" + accountId;
     }
 
     url = url + ( params ? ('?' + params): '');
