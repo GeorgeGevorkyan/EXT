@@ -109,14 +109,22 @@ document.getElementById('getContacts').addEventListener("click", () =>{
         params = params + "&scope=" + document.getElementById('scope').value;
     }
        
-    if(document.getElementById('getContactsid').value + document.getElementById('getContactsLegacyid') + document.getElementById('getContacts_all')){
-        params = params + "&fields=" + document.getElementById('getContactsid').value + ',' + document.getElementById('getContactsLegacyid').value + ',' + document.getElementById('getContacts_all').value;
+    if(document.getElementById('getContactsid').checked){
+        params = params + "&fields=" + document.getElementById('getContactsid').value;
+    }
+
+    if(document.getElementById('getContactsLegacyid').checked){
+        params = params + document.getElementById('getContactsLegacyid').value;
+    }
+
+    if(document.getElementById('getContacts_all').checked){
+        params = params + document.getElementById('getContacts_all').value;
     }
 
     getContacts(params? ('?' + params): null);
 });
-// document.getElementById('getMultipleAvatars').addEventListener("click", () =>{ getMultipleAvatars(document.getElementById('avatarIds').value);});
-// document.getElementById('getAvatar').addEventListener("click", () =>{ getAvatar(document.getElementById('avatarId').value);});
+
+
 document.getElementById('getUserDetails').addEventListener("click", () =>{
     let params;
     if(document.getElementById('getUserDetailsid').value + document.getElementById('getUserDetailsLegacyid') + document.getElementById('getUserDetails_all')){
