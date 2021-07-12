@@ -129,7 +129,7 @@ document.getElementById('getContacts').addEventListener("click", () =>{
 
 
 document.getElementById('getUserDetails').addEventListener("click", () =>{
-    let params;
+    let params ='';
     
     let getUserDetailsid = document.getElementById('getUserDetailsid');
     if(getUserDetailsid.checked){
@@ -151,7 +151,7 @@ document.getElementById('getUserDetails').addEventListener("click", () =>{
     });
 
 document.getElementById('getContactsByJIDs').addEventListener("click", () =>{ 
-    let params;
+    let params ='';
     
     let getContactsByJIDsid = document.getElementById('getContactsByJIDsid');
     if(getContactsByJIDsid.checked){
@@ -171,11 +171,11 @@ document.getElementById('getContactsByJIDs').addEventListener("click", () =>{
     getContactsByJIDs(document.getElementById('jids').value, params ? ('?' + params): null);
 });
 document.getElementById('getSingleContact').addEventListener("click", () =>{ 
-    let params = "&fields=";
+    let params = '';
 
     let getSingleContactid = document.getElementById('getSingleContactid');
     if(getSingleContactid.checked){
-        params = params + getSingleContactid.value;
+        params = params + "&fields=" +  getSingleContactid.value;
     }
 
     let getSingleContactLegacyid = document.getElementById('getSingleContactLegacyid');
