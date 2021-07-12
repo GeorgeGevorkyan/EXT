@@ -74,7 +74,7 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
 }
 
 function getUserCalls(dateFrom, dateTo, accountId, timezone){ 
-    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + 'Z&dateTo=' + new Date(dateTo).toISOString();
+    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
     let params = '';
 
     if(timezone){
