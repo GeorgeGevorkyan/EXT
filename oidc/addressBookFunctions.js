@@ -171,11 +171,11 @@ document.getElementById('getContactsByJIDs').addEventListener("click", () =>{
     getContactsByJIDs(document.getElementById('jids').value, params ? ('?' + params): null);
 });
 document.getElementById('getSingleContact').addEventListener("click", () =>{ 
-    let params;
+    let params = "&fields=";
 
     let getSingleContactid = document.getElementById('getSingleContactid');
     if(getSingleContactid.checked){
-        params = params + "&fields=" + getSingleContactid.value;
+        params = params + getSingleContactid.value;
     }
 
     let getSingleContactLegacyid = document.getElementById('getSingleContactLegacyid');
