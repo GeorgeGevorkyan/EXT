@@ -117,12 +117,12 @@ document.getElementById('getContacts').addEventListener("click", () =>{
 
     let getContactsLegacyid = document.getElementById('getContactsLegacyid');
     if(getContactsLegacyid.checked){
-        fields = fields  + (getContactsid ? "," : null) + getContactsLegacyid.value;
+        fields = fields  + (getContactsid.value ? "," : null) + getContactsLegacyid.value;
     }
 
     let getContacts_all = document.getElementById('getContacts_all');
     if(getContacts_all.checked){
-        fields = fields  + (getContactsLegacyid ? "," : null) + getContacts_all.value;
+        fields = fields  + (getContactsLegacyid.value ? "," : null) + getContacts_all.value;
     }
     params = params + (fields != '&fields='? (fields): '');
     getContacts(params? ('?' + params): null);
