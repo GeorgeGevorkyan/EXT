@@ -115,7 +115,7 @@ document.getElementById('getContacts').addEventListener("click", () =>{
         fields = fields  + getContactsid.value;
     }
 
-    let getContactsLegacyid = document.getElementById('getContactsLegacyid');
+    let getContactsLegacyid = document.getElementById('getContactslegacyId');
     if(getContactsLegacyid.checked){
         fields = fields  + (getContactsid.checked ? "," : '') + getContactsLegacyid.value;
     }
@@ -138,7 +138,7 @@ document.getElementById('getUserDetails').addEventListener("click", () =>{
         fields = fields  + getContactsid.value;
     }
 
-    let getContactsLegacyid = document.getElementById('getContactsLegacyid');
+    let getContactsLegacyid = document.getElementById('getContactslegacyId');
     if(getContactsLegacyid.checked){
         fields = fields  + (getContactsid ? "," : '') + getContactsLegacyid.value;
     }
@@ -161,7 +161,7 @@ document.getElementById('getContactsByJIDs').addEventListener("click", () =>{
         fields = fields  + getContactsid.value;
     }
 
-    let getContactsLegacyid = document.getElementById('getContactsLegacyid');
+    let getContactsLegacyid = document.getElementById('getContactslegacyId');
     if(getContactsLegacyid.checked){
         fields = fields  + (getContactsid ? "," : '') + getContactsLegacyid.value;
     }
@@ -183,7 +183,7 @@ document.getElementById('getSingleContact').addEventListener("click", () =>{
         fields = fields  + getContactsid.value;
     }
 
-    let getContactsLegacyid = document.getElementById('getContactsLegacyid');
+    let getContactsLegacyid = document.getElementById('getContactslegacyId');
     if(getContactsLegacyid.checked){
         fields = fields  + (getContactsid ? "," : '') + getContactsLegacyid.value;
     }
