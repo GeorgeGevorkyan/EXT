@@ -121,18 +121,18 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
                      document.getElementById('sortColumn').value,
                      document.getElementById('descending').value,
                      document.getElementById('offset').value,
-                     document.getElementById('size').value,
-                     document.getElementById('accountId').value);
+                     document.getElementById('getDetailedCallsSize').value,
+                     document.getElementById('getDetailedCallsAccountId').value);
                     });
 document.getElementById('getUserCalls').addEventListener("click", () => { 
     getUserCalls(document.getElementById('dateFromUserCalls').value,
                  document.getElementById('dateToUserCalls').value,
-                 document.getElementById('timezone').value,
-                 document.getElementById('accountId').value);
+                 document.getElementById('getUserCallsTimezone').value,
+                 document.getElementById('getUserCallsAccountId').value);
                 });
 document.getElementById('getUserFilters').addEventListener("click", () => { 
     getUserFilters(document.getElementById('dateFromUserFilters').value,
                    document.getElementById('dateToUserFilters').value,
-                   document.getElementById('timezone').value,
-                   document.getElementById('accountId').value);
+                   document.getElementById('getUserFiltersTimezone').value,
+                   document.getElementById('getUserFiltersAccountId').value);
                 });
