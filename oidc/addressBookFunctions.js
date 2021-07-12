@@ -98,19 +98,19 @@ function getSingleContact(id, params){
 document.getElementById('getContacts').addEventListener("click", () =>{ 
     let params;
     if(document.getElementById('query').value){
-        params = params + "&query=" + document.getElementById('query');
+        params = params + "&query=" + document.getElementById('query').value;
     }
        
     if(document.getElementById('phone').value){
-        params = params + "&phone=" + document.getElementById('phone');
+        params = params + "&phone=" + document.getElementById('phone').value;
     }
        
     if(document.getElementById('scope').value){
-        params = params + "&scope=" + document.getElementById('scope');
+        params = params + "&scope=" + document.getElementById('scope').value;
     }
        
     if(document.getElementById('getContactsid').value + document.getElementById('getContactsLegacyid') + document.getElementById('getContacts_all')){
-        params = params + "&fields=" + document.getElementById('getContactsid').value + ',' + document.getElementById('getContactsLegacyid') + ',' + document.getElementById('getContacts_all');
+        params = params + "&fields=" + document.getElementById('getContactsid').value + ',' + document.getElementById('getContactsLegacyid').value + ',' + document.getElementById('getContacts_all').value;
     }
 
     getContacts(params? ('?' + params): null);
