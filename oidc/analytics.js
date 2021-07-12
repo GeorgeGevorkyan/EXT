@@ -66,7 +66,7 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
         params = params + "&accountId=" + accountId;
     }
 
-    url = url + ( params ? ('?' + params): '');
+    url = url + params;
 
     makeRequest("POST", url)
         .then( response => response.json())
@@ -85,7 +85,7 @@ function getUserCalls(dateFrom, dateTo, accountId, timezone){
         params = params + "&accountId=" + accountId;
     }
 
-    url = url + ( params ? ('?' + params): '');
+    url = url + params;
 
     makeRequest("POST", url)
         .then( response => response.json())
@@ -103,7 +103,7 @@ function getUserFilters(dateFrom, dateTo, accountId, timezone){
         params = params + "&accountId=" + accountId;
     }
 
-    url = url + ( params ? ('?' + params): '');
+    url = url + params;
 
     makeRequest("POST", url)
         .then( response => response.json())
