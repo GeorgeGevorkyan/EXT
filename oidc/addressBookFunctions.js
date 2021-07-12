@@ -96,7 +96,7 @@ function getSingleContact(id, params){
 
 
 document.getElementById('getContacts').addEventListener("click", () =>{ 
-    let params;
+    let params ='';
     if(document.getElementById('query').value){
         params = params + "&query=" + document.getElementById('query').value;
     }
