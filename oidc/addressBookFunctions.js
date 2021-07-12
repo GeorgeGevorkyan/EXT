@@ -102,15 +102,15 @@ document.getElementById('getContacts').addEventListener("click", () =>{
     }
        
     if(document.getElementById('phone').value){
-        url = url + "&phone=" + document.getElementById('phone');
+        params = params + "&phone=" + document.getElementById('phone');
     }
        
     if(document.getElementById('scope').value){
-        url = url + "&scope=" + document.getElementById('scope');
+        params = params + "&scope=" + document.getElementById('scope');
     }
        
     if(document.getElementById('getContactsid').value + document.getElementById('getContactsLegacyid') + document.getElementById('getContacts_all')){
-        url = url + "&fields=" + document.getElementById('getContactsid').value + ',' + document.getElementById('getContactsLegacyid') + ',' + document.getElementById('getContacts_all');
+        params = params + "&fields=" + document.getElementById('getContactsid').value + ',' + document.getElementById('getContactsLegacyid') + ',' + document.getElementById('getContacts_all');
     }
 
     getContacts(params? ('?' + params): null);
