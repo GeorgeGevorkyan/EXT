@@ -128,7 +128,8 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
                      document.getElementById('getDetailedCallsAccountId').value);
                     });
 document.getElementById('getUserCalls').addEventListener("click", () => { 
-    getUserCalls(document.getElementById('dateFromUserCalls').value,
+    getUserCalls(document.getElementById('userIds').value,
+                document.getElementById('dateFromUserCalls').value,
                  document.getElementById('dateToUserCalls').value,
                  document.getElementById('getUserCallsTimezone').value,
                  document.getElementById('getUserCallsAccountId').value);
