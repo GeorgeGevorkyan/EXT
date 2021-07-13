@@ -38,7 +38,7 @@ function makeRequest(method, url, data_raw){
 
     if(data_raw){
         options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = data_raw;
+        options["body"] = JSON.stringify(data_raw);
     }
 
     return fetch(url, options);
