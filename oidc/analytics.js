@@ -78,7 +78,7 @@ function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){
     let params = '';
     userIds = userIds.split(",");
     let data_raw = {
-        "userIds": [userIds]
+        "userIds": userIds
     }
 
     if(timezone){
