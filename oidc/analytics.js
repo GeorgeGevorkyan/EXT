@@ -73,9 +73,13 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
         .then( response => { log(response); });
 }
 
-function getUserCalls(dateFrom, dateTo, accountId, timezone){ 
+function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){ 
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
     let params = '';
+
+    let data_raw = {
+        "userIds": [userIds]
+    }
 
     if(timezone){
         params = params + "&timezone=" + timezone;
@@ -86,15 +90,15 @@ function getUserCalls(dateFrom, dateTo, accountId, timezone){
 
     url = url + params;
 
-    makeRequest("POST", url)
+    makeRequest("POST", url, data_raw)
         .then( response => response.json())
         .then( response => { log(response);});
 }
 
-function getUserFilters(dateFrom, dateTo, accountId, timezone){
+function getUserFilters(userIds, dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
-
+    
     if(timezone){
         params = params + "&timezone=" + timezone;
     }
