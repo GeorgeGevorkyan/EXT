@@ -123,7 +123,7 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
     let status = document.getElementById('status').value;
     let body;
 
-    if(chargeable == 'select'){
+    if(chargeable != 'select'){
         body['chargeable'] = chargeable;
     }
     
