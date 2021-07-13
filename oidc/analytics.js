@@ -95,7 +95,7 @@ function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){
         .then( response => { log(response);});
 }
 
-function getUserFilters(userIds, dateFrom, dateTo, accountId, timezone){
+function getUserFilters(dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
     
