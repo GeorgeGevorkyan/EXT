@@ -38,7 +38,7 @@ function makeRequest(method, url, data_raw){
 
     if(data_raw){
         options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = JSON.stringify(data_raw);
+        options["body"] = data_raw;
     }
 
     return fetch(url, options);
@@ -76,7 +76,7 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
 function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){ 
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
     let params = '';
-
+    userIds = userIds.split(",");
     let data_raw = {
         "userIds": [userIds]
     }
