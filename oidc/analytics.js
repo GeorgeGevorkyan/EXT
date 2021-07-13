@@ -44,7 +44,7 @@ function makeRequest(method, url, data_raw){
     return fetch(url, options);
 }
 
-function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId){
+function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId, body){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
     if(timezone){
@@ -68,7 +68,7 @@ function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, of
 
     url = url + params;
 
-    makeRequest("POST", url)
+    makeRequest("POST", url, body)
         .then( response => response.json())
         .then( response => { log(response); });
 }
@@ -118,25 +118,40 @@ function getUserFilters(dateFrom, dateTo, accountId, timezone){
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
 document.getElementById('getDetailedCalls').addEventListener("click", () => { 
+    let chargeable = document.getElementById('chargeable').value;
+    let bound = document.getElementById('bound').value;
+    let status = document.getElementById('status').value;
+    let body;
+
+    if(chargeable){
+        body['chargeable'] = chargeable;
+    }
+    
+    if(bound && status){
+        body['callAttributes'] =[bound, status];
+    }
+
     getDetailedCalls(document.getElementById('dateFromDetailedCalls').value,
-                     document.getElementById('dateToDetailedCalls').value,
-                     document.getElementById('timezone').value,
-                     document.getElementById('sortColumn').value,
-                     document.getElementById('descending').value,
-                     document.getElementById('offset').value,
-                     document.getElementById('getDetailedCallsSize').value,
-                     document.getElementById('getDetailedCallsAccountId').value);
-                    });
+        document.getElementById('dateToDetailedCalls').value,
+        document.getElementById('timezone').value,
+        document.getElementById('sortColumn').value,
+        document.getElementById('descending').value,
+        document.getElementById('offset').value,
+        document.getElementById('getDetailedCallsSize').value,
+        document.getElementById('getDetailedCallsAccountId').value,
+        body ? body : null);
+    });
 document.getElementById('getUserCalls').addEventListener("click", () => { 
     getUserCalls(document.getElementById('userIds').value,
-                document.getElementById('dateFromUserCalls').value,
-                 document.getElementById('dateToUserCalls').value,
-                 document.getElementById('getUserCallsTimezone').value,
-                 document.getElementById('getUserCallsAccountId').value);
-                });
+        document.getElementById('dateFromUserCalls').value,
+        document.getElementById('dateToUserCalls').value,
+        document.getElementById('getUserCallsTimezone').value,
+        document.getElementById('getUserCallsAccountId').value);
+    });
+    
 document.getElementById('getUserFilters').addEventListener("click", () => { 
     getUserFilters(document.getElementById('dateFromUserFilters').value,
-                   document.getElementById('dateToUserFilters').value,
-                   document.getElementById('getUserFiltersTimezone').value,
-                   document.getElementById('getUserFiltersAccountId').value);
-                });
+        document.getElementById('dateToUserFilters').value,
+        document.getElementById('getUserFiltersTimezone').value,
+        document.getElementById('getUserFiltersAccountId').value);
+    });
