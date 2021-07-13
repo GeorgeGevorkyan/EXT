@@ -123,11 +123,11 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
     let status = document.getElementById('status').value;
     let body;
 
-    if(chargeable){
+    if(chargeable == 'select'){
         body['chargeable'] = chargeable;
     }
     
-    if(bound && status){
+    if(bound != 'select' && status != 'select'){
         body['callAttributes'] =[bound, status];
     }
 
