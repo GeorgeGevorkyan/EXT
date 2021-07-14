@@ -89,10 +89,29 @@ function getSingleContact(id, params){
 }
 
 function changeFieldsStatus(){
-    if(document.getElementById('getSingleContactid').checked || document.getElementById('getSingleContact_all').checked){
-        document.getElementById('getSingleContactlegacyId').hidden = false;
+
+    if(document.getElementById('getContactsid').checked || document.getElementById('getContact_all').checked){
+        document.getElementById('getContactlegacyId').disabled = false;
     }else{
-        document.getElementById('getSingleContactlegacyId').hidden = true;
+        document.getElementById('getContactlegacyId').disabled = true;
+    }
+
+    if(document.getElementById('getUserDetailsid').checked || document.getElementById('getUserDetails_all').checked){
+        document.getElementById('getUserDetailslegacyId').disabled = false;
+    }else{
+        document.getElementById('getUserDetailslegacyId').disabled = true;
+    }
+
+    if(document.getElementById('getContactsByJIDsid').checked || document.getElementById('getContactsByJIDs_all').checked){
+        document.getElementById('getContactsByJIDslegacyId').disabled = false;
+    }else{
+        document.getElementById('getContactsByJIDslegacyId').disabled = true;
+    }
+
+    if(document.getElementById('getSingleContactid').checked || document.getElementById('getSingleContact_all').checked){
+        document.getElementById('getSingleContactlegacyId').disabled = false;
+    }else{
+        document.getElementById('getSingleContactlegacyId').disabled = true;
     }
 }
 
