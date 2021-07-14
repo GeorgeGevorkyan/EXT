@@ -90,12 +90,6 @@ function getSingleContact(id, params){
 
 function changeFieldsStatus(){
 
-    if(document.getElementById('getContactsid').checked || document.getElementById('getContact_all').checked){
-        document.getElementById('getContactlegacyId').disabled = false;
-    }else{
-        document.getElementById('getContactlegacyId').disabled = true;
-    }
-
     if(document.getElementById('getUserDetailsid').checked || document.getElementById('getUserDetails_all').checked){
         document.getElementById('getUserDetailslegacyId').disabled = false;
     }else{
@@ -219,4 +213,68 @@ document.getElementById('getSingleContact').addEventListener("click", () =>{
     params = params + (fields != '&fields='? (fields): '');
 
     getSingleContact(document.getElementById('id').value, params ? ('?' + params): '');
+});
+
+document.getElementById('getContactsid').addEventListener("click", () =>{
+    if(document.getElementById('getContactsid').checked){
+        document.getElementById('getContactlegacyId').disabled = false;
+    }else{
+        document.getElementById('getContactlegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getContacts_all').addEventListener("click", () =>{
+    if(document.getElementById('getContacts_all').checked){
+        document.getElementById('getContactlegacyId').disabled = false;
+    }else{
+        document.getElementById('getContactlegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getUserDetailsid').addEventListener("click", () =>{
+    if(document.getElementById('getUserDetailsid').checked){
+        document.getElementById('getUserDetailslegacyId').disabled = false;
+    }else{
+        document.getElementById('getUserDetailslegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getUserDetails_all').addEventListener("click", () =>{
+    if(document.getElementById('getUserDetails_all').checked){
+        document.getElementById('getUserDetailslegacyId').disabled = false;
+    }else{
+        document.getElementById('getUserDetailslegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getContactsByJIDsid').addEventListener("click", () =>{
+    if(document.getElementById('getContactsByJIDsid').checked){
+        document.getElementById('getContactsByJIDslegacyId').disabled = false;
+    }else{
+        document.getElementById('getContactsByJIDslegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getContactsByJIDs_all').addEventListener("click", () =>{
+    if(document.getElementById('getContactsByJIDs_all').checked){
+        document.getElementById('getContactsByJIDslegacyId').disabled = false;
+    }else{
+        document.getElementById('getContactsByJIDslegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getSingleContactid').addEventListener("click", () =>{
+    if(document.getElementById('getSingleContactid').checked){
+        document.getElementById('getSingleContactlegacyId').disabled = false;
+    }else{
+        document.getElementById('getSingleContactlegacyId').disabled = true;
+    }
+});
+
+document.getElementById('getSingleContact_all').addEventListener("click", () =>{
+    if(document.getElementById('getSingleContact_all').checked){
+        document.getElementById('getSingleContactlegacyId').disabled = false;
+    }else{
+        document.getElementById('getSingleContactlegacyId').disabled = true;
+    }
 });
