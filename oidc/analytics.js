@@ -121,7 +121,7 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
     let chargeable = document.getElementById('chargeable').value;
     let bound = document.getElementById('bound').value;
     let status = document.getElementById('status').value;
-    let body;
+    let body = {};
 
     if(chargeable != 'select'){
         body['chargeable'] = chargeable;
