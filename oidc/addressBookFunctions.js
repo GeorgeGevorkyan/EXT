@@ -88,7 +88,13 @@ function getSingleContact(id, params){
         .then((response) => {log(response);});
 }
 
-
+function changeFieldsStatus(){
+    if(document.getElementById('getSingleContactid').checked || document.getElementById('getSingleContact_all').checked){
+        document.getElementById('getSingleContactlegacyId').hidden = false;
+    }else{
+        document.getElementById('getSingleContactlegacyId').hidden = true;
+    }
+}
 
 
 
@@ -128,7 +134,6 @@ document.getElementById('getContacts').addEventListener("click", () =>{
     getContacts(params? ('?' + params): '');
 });
 
-
 document.getElementById('getUserDetails').addEventListener("click", () =>{
     let params ='';
     
@@ -150,7 +155,7 @@ document.getElementById('getUserDetails').addEventListener("click", () =>{
     params = params + (fields != '&fields='? (fields): '');
 
     getUserDetails(params? ('?' + params): '');
-    });
+});
 
 document.getElementById('getContactsByJIDs').addEventListener("click", () =>{ 
     let params ='';
