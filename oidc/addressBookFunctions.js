@@ -201,18 +201,18 @@ function changeFieldsStatus(id, legacyId, _all){
 
 document.getElementById('getContactsid').addEventListener("click", () =>{
    let id = document.getElementById('getContactsid');
-   let legacyId = document.getElementById('getContactlegacyId');
+   let legacyId = document.getElementById('getContactslegacyId');
    let _all = document.getElementById('getContacts_all');
 
    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getContacts_all').addEventListener("click", () =>{
-   let id = document.getElementById('getContactsid');
-   let legacyId = document.getElementById('getContactlegacyId');
-   let _all = document.getElementById('getContacts_all');
-   
-   changeFieldsStatus(id, legacyId, _all);
+    let id = document.getElementById('getContactsid');
+    let legacyId = document.getElementById('getContactslegacyId');
+    let _all = document.getElementById('getContacts_all');
+ 
+    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getUserDetailsid').addEventListener("click", () =>{
