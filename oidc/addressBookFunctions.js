@@ -88,7 +88,21 @@ function getSingleContact(id, params){
         .then((response) => {log(response);});
 }
 
+///////////////////////////////
+// functions for UI 
+///////////////////////////////
+function changeFieldsStatus(id, legacyId, _all){
+    if(id.checked || _all.checked){
+        legacyId.disabled = false;
+    }else{
+        legacyId.disabled = true;
+        legacyId.checked = false;
+    }
+}
 
+///////////////////////////////
+// Event Handlers
+///////////////////////////////
 document.getElementById('getContacts').addEventListener("click", () =>{ 
     let params ='';
     if(document.getElementById('query').value){
@@ -189,15 +203,6 @@ document.getElementById('getSingleContact').addEventListener("click", () =>{
 
     getSingleContact(document.getElementById('id').value, params ? ('?' + params): '');
 });
-
-function changeFieldsStatus(id, legacyId, _all){
-    if(id.checked || _all.checked){
-        legacyId.disabled = false;
-    }else{
-        legacyId.disabled = true;
-        legacyId.checked = false;
-    }
-}
 
 document.getElementById('getContactsid').addEventListener("click", () =>{
    let id = document.getElementById('getContactsid');

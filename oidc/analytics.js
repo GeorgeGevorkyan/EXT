@@ -1,4 +1,3 @@
-
 function getAnalyticToken(){
     let url = 'https://login.intermedia.net/user/connect/token';
     let options = {
@@ -141,18 +140,17 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
         document.getElementById('getDetailedCallsSize').value,
         document.getElementById('getDetailedCallsAccountId').value,
         body ? body : null);
-    });
+});
 document.getElementById('getUserCalls').addEventListener("click", () => { 
     getUserCalls(document.getElementById('userIds').value,
         document.getElementById('dateFromUserCalls').value,
         document.getElementById('dateToUserCalls').value,
         document.getElementById('getUserCallsTimezone').value,
         document.getElementById('getUserCallsAccountId').value);
-    });
-    
+});
 document.getElementById('getUserFilters').addEventListener("click", () => { 
     getUserFilters(document.getElementById('dateFromUserFilters').value,
         document.getElementById('dateToUserFilters').value,
         document.getElementById('getUserFiltersTimezone').value,
         document.getElementById('getUserFiltersAccountId').value);
-    });
+});
