@@ -47,6 +47,7 @@ function makeRequest(method, url, data_raw){
 function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId, body){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
+    
     if(timezone){
         params = params + "&timezone=" + timezone;
     }
@@ -124,7 +125,7 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
     let body = {};
 
     if(chargeable != 'select'){
-        body['chargeable'] = chargeable;
+        body['chargeable'] = [chargeable];
     }
     
     if(bound != 'select' && status != 'select'){
