@@ -88,31 +88,6 @@ function getSingleContact(id, params){
         .then((response) => {log(response);});
 }
 
-function changeFieldsStatus(){
-
-    if(document.getElementById('getUserDetailsid').checked || document.getElementById('getUserDetails_all').checked){
-        document.getElementById('getUserDetailslegacyId').disabled = false;
-    }else{
-        document.getElementById('getUserDetailslegacyId').disabled = true;
-    }
-
-    if(document.getElementById('getContactsByJIDsid').checked || document.getElementById('getContactsByJIDs_all').checked){
-        document.getElementById('getContactsByJIDslegacyId').disabled = false;
-    }else{
-        document.getElementById('getContactsByJIDslegacyId').disabled = true;
-    }
-
-    if(document.getElementById('getSingleContactid').checked || document.getElementById('getSingleContact_all').checked){
-        document.getElementById('getSingleContactlegacyId').disabled = false;
-    }else{
-        document.getElementById('getSingleContactlegacyId').disabled = true;
-    }
-}
-
-
-
-
-
 
 document.getElementById('getContacts').addEventListener("click", () =>{ 
     let params ='';
@@ -215,66 +190,75 @@ document.getElementById('getSingleContact').addEventListener("click", () =>{
     getSingleContact(document.getElementById('id').value, params ? ('?' + params): '');
 });
 
-document.getElementById('getContactsid').addEventListener("click", () =>{
-    if(document.getElementById('getContactsid').checked){
-        document.getElementById('getContactlegacyId').disabled = false;
+function changeFieldsStatus(id, legacyId, _all){
+    if(id.checked || _all.checked){
+        legacyId.disabled = false;
     }else{
-        document.getElementById('getContactlegacyId').disabled = true;
+        legacyId.disabled = true;
+        legacyId.checked = false;
     }
+}
+
+document.getElementById('getContactsid').addEventListener("click", () =>{
+   let id = document.getElementById('getContactsid');
+   let legacyId = document.getElementById('getContactlegacyId');
+   let _all = document.getElementById('getContacts_all');
+
+   changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getContacts_all').addEventListener("click", () =>{
-    if(document.getElementById('getContacts_all').checked){
-        document.getElementById('getContactlegacyId').disabled = false;
-    }else{
-        document.getElementById('getContactlegacyId').disabled = true;
-    }
+   let id = document.getElementById('getContactsid');
+   let legacyId = document.getElementById('getContactlegacyId');
+   let _all = document.getElementById('getContacts_all');
+   
+   changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getUserDetailsid').addEventListener("click", () =>{
-    if(document.getElementById('getUserDetailsid').checked){
-        document.getElementById('getUserDetailslegacyId').disabled = false;
-    }else{
-        document.getElementById('getUserDetailslegacyId').disabled = true;
-    }
+    let id = document.getElementById('getUserDetailsid');
+    let legacyId = document.getElementById('getUserDetailslegacyId');
+    let _all = document.getElementById('getUserDetails_all');
+    
+    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getUserDetails_all').addEventListener("click", () =>{
-    if(document.getElementById('getUserDetails_all').checked){
-        document.getElementById('getUserDetailslegacyId').disabled = false;
-    }else{
-        document.getElementById('getUserDetailslegacyId').disabled = true;
-    }
+    let id = document.getElementById('getUserDetailsid');
+    let legacyId = document.getElementById('getUserDetailslegacyId');
+    let _all = document.getElementById('getUserDetails_all');
+    
+    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getContactsByJIDsid').addEventListener("click", () =>{
-    if(document.getElementById('getContactsByJIDsid').checked){
-        document.getElementById('getContactsByJIDslegacyId').disabled = false;
-    }else{
-        document.getElementById('getContactsByJIDslegacyId').disabled = true;
-    }
+    let id = document.getElementById('getContactsByJIDsid');
+    let legacyId = document.getElementById('getContactsByJIDslegacyId');
+    let _all = document.getElementById('getContactsByJIDs_all');
+    
+    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getContactsByJIDs_all').addEventListener("click", () =>{
-    if(document.getElementById('getContactsByJIDs_all').checked){
-        document.getElementById('getContactsByJIDslegacyId').disabled = false;
-    }else{
-        document.getElementById('getContactsByJIDslegacyId').disabled = true;
-    }
+    let id = document.getElementById('getContactsByJIDsid');
+    let legacyId = document.getElementById('getContactsByJIDslegacyId');
+    let _all = document.getElementById('getContactsByJIDs_all');
+    
+    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getSingleContactid').addEventListener("click", () =>{
-    if(document.getElementById('getSingleContactid').checked){
-        document.getElementById('getSingleContactlegacyId').disabled = false;
-    }else{
-        document.getElementById('getSingleContactlegacyId').disabled = true;
-    }
+    let id = document.getElementById('getSingleContactid');
+    let legacyId = document.getElementById('getSingleContactlegacyId');
+    let _all = document.getElementById('getSingleContact_all');
+    
+    changeFieldsStatus(id, legacyId, _all);
 });
 
 document.getElementById('getSingleContact_all').addEventListener("click", () =>{
-    if(document.getElementById('getSingleContact_all').checked){
-        document.getElementById('getSingleContactlegacyId').disabled = false;
-    }else{
-        document.getElementById('getSingleContactlegacyId').disabled = true;
-    }
+    let id = document.getElementById('getSingleContactid');
+    let legacyId = document.getElementById('getSingleContactlegacyId');
+    let _all = document.getElementById('getSingleContact_all');
+    
+    changeFieldsStatus(id, legacyId, _all);
 });
