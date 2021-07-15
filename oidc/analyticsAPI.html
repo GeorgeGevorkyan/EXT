@@ -42,6 +42,9 @@
                         <option value='answered'>answered</option>
                         <option value='unanswered'>unanswered</option>
                     </select>
+                    <div class="tooltip">Help
+                        <span class="tooltiptext">If you use call Attributes, both parameters should be chosen</span>
+                    </div>
                 </div>
                 <details>
                     <summary>Optional settings
@@ -96,10 +99,13 @@
                         <a href='https://developer.intermedia.com/api/spec/analytics/index.html#post-/analytics/calls/user'>Guide</a>
                     </summary>
                     <div>
-                        <input id="getUserCallsAccountId" placeholder="accountId"></input>
+                        <input id="getUserCallsTimezone" placeholder="timezone"></input>
                     </div>
                     <div>
-                        <input id="getUserCallsTimezone" placeholder="timezone"></input>
+                        <input id="getUserCallsAccountId" placeholder="accountId"></input>
+                        <div class="tooltip">Help
+                            <span class="tooltiptext">For Parthers only</span>
+                        </div>
                     </div>
                 </details>
             </div>
@@ -112,10 +118,13 @@
                         <a href='https://developer.intermedia.com/api/spec/analytics/index.html#post-/analytics/calls/user/filters'>Guide</a>
                     </summary>
                     <div>
-                        <input id="getUserFiltersAccountId" placeholder="accountId"></input>
+                        <input id="getUserFiltersTimezone" placeholder="timezone"></input>
                     </div>
                     <div>
-                        <input id="getUserFiltersTimezone" placeholder="timezone"></input>
+                        <input id="getUserFiltersAccountId" placeholder="accountId"></input>
+                        <div class="tooltip">Help
+                            <span class="tooltiptext">For Parthers only</span>
+                        </div>
                     </div>
                 </details>
             </div>
