@@ -9,13 +9,14 @@ input {
 }
 label {
     display: inline-block;
-    width: 80px;
+    padding: 0 15px 0 0;
 }
 td {
     padding: 0 15px 5px 0;
 }
 li {
     padding: 4px;
+    list-style-type: none;
 }
 form * {
     display: block;
