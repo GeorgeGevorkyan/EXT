@@ -15,45 +15,6 @@ function makeRequest(method, url, data_raw){
     return fetch(url, options);
 }
 
-function getMultipleAvatars(avatarIds){ 
-    let url = 'https://api.intermedia.net/address-book/v3/avatars/_search';
-    let body = {
-        'avatarIds' : [avatarIds]
-    }
-    makeRequest("POST", url)
-    .then((response) => response.json())
-    .then(response => {
-        for (let index = 0; index < response.length; index++) {
-            const avatarElement = response[index];
-            log(avatarElement['avatarId']);
-            log(avatarElement['contactId']);
-            let blob = avatarElement['avatar'].blob();
-            let dataUrl = window.URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = dataUrl;
-            a.download = avatarId + ".png";
-            a.click();
-        }
-    });
-}
-
-function getAvatar(avatarId){ 
-     let url = 'https://api.intermedia.net/address-book/v3/avatars/'+ avatarId;
-    makeRequest("GET", url)
-        .then((response) => {
-            log(response.clone().json());
-            return response['avatar'].blob();
-        })
-        .then((response) => {
-            let blob = new Blob([response['avatar']], {type : 'image/' + 'png'});
-            let dataUrl = window.URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = dataUrl;
-            a.download = avatarId + '.png';
-            a.click();
-        });
-} 
-
 function getContacts(params){ 
     let url = 'https://api.intermedia.net/address-book/v3/contacts' + params;
        
