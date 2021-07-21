@@ -1,4 +1,4 @@
-export function getAnalyticToken(){
+function getAnalyticToken(){
     let url = 'https://login.intermedia.net/user/connect/token';
     let options = {
         method: 'POST',
@@ -43,7 +43,7 @@ function makeRequest(method, url, data_raw){
     return fetch(url, options);
 }
 
-export function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId, body){
+function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId, body){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
     
@@ -73,7 +73,7 @@ export function getDetailedCalls(dateFrom, dateTo, timezone, sortColumn, descend
         .then( response => { log(response); });
 }
 
-export function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){ 
+function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){ 
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
     let params = '';
     userIds = userIds.split(",");
@@ -95,7 +95,7 @@ export function getUserCalls(userIds, dateFrom, dateTo, accountId, timezone){
         .then( response => { log(response);});
 }
 
-export function getUserFilters(dateFrom, dateTo, accountId, timezone){
+function getUserFilters(dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
     
