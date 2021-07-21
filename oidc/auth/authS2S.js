@@ -1,4 +1,4 @@
-async function getAnalyticToken(client_id, client_secret){
+function getAnalyticToken(client_id, client_secret){
     let url = 'https://login.intermedia.net/user/connect/token';
     let options = {
         method: 'POST',
