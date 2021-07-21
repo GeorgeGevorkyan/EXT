@@ -136,7 +136,11 @@
     </body>
     <script src='../../log.js'></script>
     <script src='../../oidc-client.js'></script>
-    <script type='module' src='analyticsUI.js'></script>
-    <!-- <script src='../../API/analyticsAPI.js'></script> -->
+    <!-- <script type='module' src='analyticsUI.js'></script>
+    <script src='../../API/analyticsAPI.js'></script> -->
+    <script type='module'>
+         import { hello } from 'analyticsUI.js';
+         hello();
+    </script>
 </html>
 

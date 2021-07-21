@@ -43,4 +43,6 @@ import {getDetailedCalls, getUserCalls, getUserFilters, getAnalyticToken} from '
 //         document.getElementById('getUserFiltersAccountId').value);
 // });
 
+export function hello(){
 log('connected');
+}
