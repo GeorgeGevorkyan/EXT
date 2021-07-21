@@ -3,7 +3,10 @@ function init(){
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
-document.getElementById('getAnalyticToken').addEventListener("click", () => { getAnalyticToken();});
+document.getElementById('getAnalyticToken').addEventListener("click", () => { 
+    localStorage.setItem('analytics_token', getAnalyticToken());
+});
+
 document.getElementById('getDetailedCalls').addEventListener("click", () => { 
     let chargeable = document.getElementById('chargeable').value;
     let bound = document.getElementById('bound').value;
@@ -18,7 +21,8 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
         body['callAttributes'] =[bound, status];
     }
 
-    getDetailedCalls(document.getElementById('dateFromDetailedCalls').value,
+    getDetailedCalls(localStorage.getItem('analytics_token'),
+        document.getElementById('dateFromDetailedCalls').value,
         document.getElementById('dateToDetailedCalls').value,
         document.getElementById('timezone').value,
         document.getElementById('sortColumn').value,
@@ -28,15 +32,19 @@ document.getElementById('getDetailedCalls').addEventListener("click", () => {
         document.getElementById('getDetailedCallsAccountId').value,
         body ? body : null);
 });
+
 document.getElementById('getUserCalls').addEventListener("click", () => { 
-    getUserCalls(document.getElementById('userIds').value,
+    getUserCalls(localStorage.getItem('analytics_token'),
+        document.getElementById('userIds').value,
         document.getElementById('dateFromUserCalls').value,
         document.getElementById('dateToUserCalls').value,
         document.getElementById('getUserCallsTimezone').value,
         document.getElementById('getUserCallsAccountId').value);
 });
+
 document.getElementById('getUserFilters').addEventListener("click", () => { 
-    getUserFilters(document.getElementById('dateFromUserFilters').value,
+    getUserFilters(localStorage.getItem('analytics_token'),
+        document.getElementById('dateFromUserFilters').value,
         document.getElementById('dateToUserFilters').value,
         document.getElementById('getUserFiltersTimezone').value,
         document.getElementById('getUserFiltersAccountId').value);
