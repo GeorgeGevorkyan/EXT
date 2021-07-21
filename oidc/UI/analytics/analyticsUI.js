@@ -4,7 +4,8 @@ function init(){
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { 
-    localStorage.setItem('analytics_token', getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value));
+    let token = getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
+    localStorage.setItem('analytics_token', token);
 });
 
 document.getElementById('getDetailedCalls').addEventListener("click", () => { 
