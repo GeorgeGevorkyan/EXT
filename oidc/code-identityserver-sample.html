@@ -32,16 +32,16 @@
         </div>
         <div id="waitText" hidden>Wait... </div>
         <div id="APIs" hidden>
-            <a class='functions' href="voicemailAPI.html" >Voicemail API</a>
-            <a class='functions' href="voicemailSettingsAPI.html" >Voicemail Settings API</a>
-            <a class='functions' href="addressBookAPI.html">Address Book API</a>
+            <a class='functions' href="UI/voice/voicemail/voicemailAPI.html" >Voicemail API</a>
+            <a class='functions' href="UI/voice/voicemail settings/voicemailSettingsAPI.html" >Voicemail Settings API</a>
+            <a class='functions' href="UI/address book/addressBookAPI.html">Address Book API</a>
         </div>
         </section>
         <br><br>
         <script src='oidc-client.js'></script>
         <script src='code-identityserver-sample.js'></script>
         <script src='jwt-decode.js'></script>
-        <script src='log.js'></script>
+        <script src='UI/log.js'></script>
         <script>
             let url = location.href.split('?')[0];
             document.getElementById('redirectUrl').value = url.substring(0, url.lastIndexOf('/')) + '/code-identityserver-sample.html'; 
