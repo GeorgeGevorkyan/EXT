@@ -1,10 +1,11 @@
 
-function init(){
+async function init(){
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { 
-    let token = getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value).then( token => localStorage.setItem('analytics_token', token));
+    let token = await getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
+    localStorage.setItem('analytics_token', token);
     log(localStorage.getItem('analytics_token'));
 });
 
