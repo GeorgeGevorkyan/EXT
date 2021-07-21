@@ -1,6 +1,5 @@
-import { getContacts, getUserDetails, getContactsByJIDs,getSingleContact } from "../../API/addressBookAPI";
-
-
+function init(){
+    
 ///////////////////////////////
 // functions for UI 
 ///////////////////////////////
@@ -180,3 +179,4 @@ document.getElementById('getSingleContact_all').addEventListener("click", () =>{
     
     changeFieldsStatus(id, legacyId, _all);
 });
+}
