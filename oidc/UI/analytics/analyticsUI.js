@@ -1,4 +1,4 @@
-import {getDetailedCalls, getUserCalls, getUserFilters, getAnalyticToken} from './analyticsAPI';
+import {getDetailedCalls, getUserCalls, getUserFilters, getAnalyticToken} from '../../API/analyticsAPI';
 
 
 ///////////////////////////////

@@ -1,4 +1,4 @@
-import { getContacts, getUserDetails, getContactsByJIDs,getSingleContact } from "./addressBookAPI";
+import { getContacts, getUserDetails, getContactsByJIDs,getSingleContact } from "../../API/addressBookAPI";
 
 
 ///////////////////////////////
