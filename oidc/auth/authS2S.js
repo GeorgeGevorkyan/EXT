@@ -12,7 +12,7 @@ function getAnalyticToken(client_id, client_secret){
             '&scope=api.service.analytics.main'
     };
     log("1");
-    fetch(url, options)
+    await fetch(url, options)
     .then((response) => response.json())
     .then((response) => {
         //localStorage.setItem('analytics_token', response['access_token']);
