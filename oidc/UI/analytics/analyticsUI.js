@@ -5,6 +5,7 @@ function init(){
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { 
     let token = getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
+    log(token);
     localStorage.setItem('analytics_token', token);
     log(localStorage.getItem('analytics_token'));
 });
