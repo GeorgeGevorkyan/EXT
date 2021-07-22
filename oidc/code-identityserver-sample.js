@@ -21,7 +21,7 @@ let settings = {
 ///////////////////////////////
 // functions for Access Token
 ///////////////////////////////
-function onGetPKCEToken(){
+function onGetPKCEToken(scope){
     settings.authority = localStorage.getItem('cfg-authority');
     settings.client_id = localStorage.getItem('cfg-clientId');
     settings.acr_values = localStorage.getItem('cfg-acr');
@@ -76,7 +76,7 @@ function loadConfiguration(){
 
 window.onload = readConfig;
 
-document.getElementById('getToken').addEventListener("click", () => { getAccessToken('api.user.voice.voicemails api.user.address-book');});
+document.getElementById('getToken').addEventListener("click", () => { onGetPKCEToken('api.user.voice.voicemails api.user.address-book');});
 document.getElementById('redirectUrl').value = url.substring(0, url.lastIndexOf('/')) + '/code-identityserver-sample.html'; 
 document.getElementById('submit').addEventListener("click", applyConfiguration, false);
 document.getElementById('load').addEventListener("click", loadConfiguration, false);
