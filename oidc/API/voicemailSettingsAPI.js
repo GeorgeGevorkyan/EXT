@@ -1,26 +1,7 @@
 ///////////////////////////////
 // functions for VoiceMails Settings
 ///////////////////////////////
-function makeRequest(method, url, isFile, data_raw){
-    let access_token = localStorage.getItem("access_token");
-    let options = {
-        method: method,
-        headers: {
-            'Authorization': `Bearer ` + access_token
-        }
-    };
 
-    if(data_raw){
-        if(isFile == true){
-            options["body"] = data_raw;
-        }else{
-        options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = JSON.stringify(data_raw);
-        }
-    }
-
-    return fetch(url, options);
-}
 
 function getGreetingContent(format, custom){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
