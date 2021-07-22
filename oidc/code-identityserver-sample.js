@@ -8,35 +8,28 @@ Oidc.Log.logger = console;
 Oidc.Log.level = Oidc.Log.DEBUG;
 
 let settings = {
-    authority: localStorage.getItem('cfg-authority'),
-    client_id: localStorage.getItem('cfg-clientId'),
-    redirect_uri: location.href.split('?')[0],
+    authority: '',
+    client_id: '',
+    redirect_uri: '',
     response_type: 'code',
     scope: '',
-    acr_values : localStorage.getItem('cfg-acr'),
-    login_hint: localStorage.getItem('cfg-login'),
-    extraTokenParams: { acr_values: localStorage.getItem('cfg-acr') }
+    acr_values : '',
+    login_hint: '',
+    extraTokenParams: ''
 };
 
 ///////////////////////////////
 // functions for Access Token
 ///////////////////////////////
-
-function getAccessToken(scope){
+function onGetPKCEToken(){
     settings.authority = localStorage.getItem('cfg-authority');
     settings.client_id = localStorage.getItem('cfg-clientId');
     settings.acr_values = localStorage.getItem('cfg-acr');
     settings.login_hint = localStorage.getItem('cfg-login');
+    settings.redirect_uri = location.href.split('?')[0];
     settings.extraTokenParams = { acr_values: localStorage.getItem('cfg-acr') }
     settings.scope = scope;
-    
-    let mgr = new Oidc.UserManager(settings);
-    console.log("Going to sign in using following configuration", settings);
-    mgr.signinRedirect({useReplaceToNavigate:true}).then(function() {
-        console.log("Redirecting to AdSTS...");
-    }).catch(function(err) {
-        console.log(err);
-    });
+    getAccessToken(settings)
 }
 
 if (location.search.includes("code=", 1)) {
@@ -54,4 +47,36 @@ if (location.search.includes("code=", 1)) {
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
+let url = location.href.split('?')[0];
+
+function readConfig() {
+    log("Current configuration:");
+    log(`cfg-authority = ${localStorage.getItem('cfg-authority')}`);
+    log(`cfg-clientId = ${localStorage.getItem('cfg-clientId')}`);
+    log(`cfg-acr = ${localStorage.getItem('cfg-acr')}`);
+    log(`cfg-login = ${localStorage.getItem('cfg-login')}`);
+}
+function applyConfiguration(){
+    const authority = document.getElementById('authority').value;
+    const clientId = document.getElementById('clientId').value;
+    const deviceId = document.getElementById('deviceId').value;
+    const login = document.getElementById('login').value;
+    localStorage.setItem('cfg-authority', authority);
+    localStorage.setItem('cfg-clientId', clientId);
+    localStorage.setItem('cfg-acr', `deviceId:${deviceId}`);
+    localStorage.setItem('cfg-login', login);
+    readConfig();
+}
+function loadConfiguration(){
+    document.getElementById('authority').value = localStorage.getItem('cfg-authority');
+    document.getElementById('clientId').value = localStorage.getItem('cfg-clientId');
+    document.getElementById('deviceId').value = localStorage.getItem('cfg-acr').substr("deviceId:".length);
+    document.getElementById('login').value = localStorage.getItem('cfg-login');
+}
+
+window.onload = readConfig;
+
 document.getElementById('getToken').addEventListener("click", () => { getAccessToken('api.user.voice.voicemails api.user.address-book');});
+document.getElementById('redirectUrl').value = url.substring(0, url.lastIndexOf('/')) + '/code-identityserver-sample.html'; 
+document.getElementById('submit').addEventListener("click", applyConfiguration, false);
+document.getElementById('load').addEventListener("click", loadConfiguration, false);

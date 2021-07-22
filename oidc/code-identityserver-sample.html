@@ -42,36 +42,5 @@
         <script src='code-identityserver-sample.js'></script>
         <script src='jwt-decode.js'></script>
         <script src='UI/log.js'></script>
-        <script>
-            let url = location.href.split('?')[0];
-            document.getElementById('redirectUrl').value = url.substring(0, url.lastIndexOf('/')) + '/code-identityserver-sample.html'; 
-            document.getElementById('submit').addEventListener("click", applyConfiguration, false);
-            document.getElementById('load').addEventListener("click", loadConfiguration, false);
-            function readConfig() {
-                log("Current configuration:");
-                log(`cfg-authority = ${localStorage.getItem('cfg-authority')}`);
-                log(`cfg-clientId = ${localStorage.getItem('cfg-clientId')}`);
-                log(`cfg-acr = ${localStorage.getItem('cfg-acr')}`);
-                log(`cfg-login = ${localStorage.getItem('cfg-login')}`);
-            }
-            function applyConfiguration(){
-                const authority = document.getElementById('authority').value;
-                const clientId = document.getElementById('clientId').value;
-                const deviceId = document.getElementById('deviceId').value;
-                const login = document.getElementById('login').value;
-                localStorage.setItem('cfg-authority', authority);
-                localStorage.setItem('cfg-clientId', clientId);
-                localStorage.setItem('cfg-acr', `deviceId:${deviceId}`);
-                localStorage.setItem('cfg-login', login);
-                readConfig();
-            }
-            function loadConfiguration(){
-                document.getElementById('authority').value = localStorage.getItem('cfg-authority');
-                document.getElementById('clientId').value = localStorage.getItem('cfg-clientId');
-                document.getElementById('deviceId').value = localStorage.getItem('cfg-acr').substr("deviceId:".length);
-                document.getElementById('login').value = localStorage.getItem('cfg-login');
-            }
-            window.onload = readConfig;
-        </script>
     </body>
 </html>
