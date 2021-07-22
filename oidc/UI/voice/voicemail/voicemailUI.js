@@ -106,12 +106,12 @@ function updateList(response){
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
-document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(0);});
-document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(++pageNumberOfVoicemails * countOnList); });
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); });
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(document.getElementById("updateStatus").value); });
-document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(document.getElementById("deleteStatus").value); });
-document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(document.getElementById("totalStatus").value); });
-document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord( document.getElementById("id").value); });
+document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(localStorage.getItem('access_token'), 0);});
+document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'), ++pageNumberOfVoicemails * countOnList); });
+document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'),(pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); });
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(localStorage.getItem('access_token'), document.getElementById("updateStatus").value); });
+document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(localStorage.getItem('access_token'), document.getElementById("deleteStatus").value); });
+document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(localStorage.getItem('access_token'), document.getElementById("totalStatus").value); });
+document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord(localStorage.getItem('access_token'), document.getElementById("id").value); });
 
 }

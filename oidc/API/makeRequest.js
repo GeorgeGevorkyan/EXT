@@ -11,8 +11,8 @@ function makeRequest(method, url, isFile, data_raw){
         if(isFile == true){
             options["body"] = data_raw;
         }else{
-        options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = JSON.stringify(data_raw);
+            options["headers"]["Content-Type"] = 'application/json';
+            options["body"] = JSON.stringify(data_raw);
         }
     }
 
