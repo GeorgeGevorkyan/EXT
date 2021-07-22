@@ -1,18 +1,17 @@
-function makeRequest(method, url, isFile, data_raw){
-    let access_token = localStorage.getItem("access_token");
+function makeRequest(token, method, url, body, isFile, contentType ='application/json'){
     let options = {
         method: method,
         headers: {
-            'Authorization': `Bearer ` + access_token
+            'Authorization': `Bearer ` + token
         }
     };
 
-    if(data_raw){
+    if(body){
         if(isFile == true){
-            options["body"] = data_raw;
-        }else{
-            options["headers"]["Content-Type"] = 'application/json';
-            options["body"] = JSON.stringify(data_raw);
+            options["body"] = body;
+        }else if(isFile == false){
+            options["headers"]["Content-Type"] = contentType;
+            options["body"] = JSON.stringify(body);
         }
     }
 

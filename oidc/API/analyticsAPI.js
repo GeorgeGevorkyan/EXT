@@ -1,22 +1,6 @@
 ///////////////////////////////
 // functions for Analytics
 ///////////////////////////////
-function makeRequest(token, method, url, data_raw){
-    let analytics_token = token;
-    let options = {
-        method: method,
-        headers: {
-            'Authorization': `Bearer ` + analytics_token
-        }
-    };
-
-    if(data_raw){
-        options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = JSON.stringify(data_raw);
-    }
-
-    return fetch(url, options);
-}
 
 function getDetailedCalls(token, dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId, body){
     let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
@@ -52,7 +36,7 @@ function getUserCalls(token, userIds, dateFrom, dateTo, accountId, timezone){
     let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
     let params = '';
     userIds = userIds.split(",");
-    let data_raw = {
+    let body = {
         "userIds": userIds
     }
 
@@ -65,7 +49,7 @@ function getUserCalls(token, userIds, dateFrom, dateTo, accountId, timezone){
 
     url = url + params;
 
-    makeRequest(token, "POST", url, data_raw)
+    makeRequest(token, "POST", url, body)
         .then( response => response.json())
         .then( response => { log(response);});
 }

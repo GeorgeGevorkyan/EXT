@@ -2,22 +2,6 @@
 ///////////////////////////////
 // functions for VoiceMails
 ///////////////////////////////
-function makeRequest(token, method, url, data_raw){
-    let access_token = localStorage.getItem("access_token");
-    let options = {
-        method: method,
-        headers: {
-            'Authorization': `Bearer ` + access_token
-        }
-    };
-
-    if(data_raw){
-        options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = JSON.stringify(data_raw);
-    }
-
-    return fetch(url, options);
-}
 
 function getVoiceMails(token, offset){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
@@ -44,11 +28,11 @@ function deleteSelectedVoicemailRecords(token, ids){
 
 function updateVoiceMailRecordsStatus(token, status){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
-    let data_raw = { 
+    let body = { 
         "status": status 
     };
 
-    makeRequest(token, "POST", url, data_raw).then( () => {
+    makeRequest(token, "POST", url, body).then( () => {
         //UI changes
         getVoiceMails(pageNumberOfVoicemails * countOnList);
     });
@@ -56,12 +40,12 @@ function updateVoiceMailRecordsStatus(token, status){
 
 function updateSelectedVoiceMailRecordsStatus(token, status, ids){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
-    let data_raw = { 
+    let body = { 
         "ids": [ids],
         "status": status
     };
 
-    makeRequest(token, "POST", url, data_raw).then( () => {
+    makeRequest(token, "POST", url, body).then( () => {
         //UI changes
         getVoiceMails(pageNumberOfVoicemails * countOnList);
     });      
@@ -95,7 +79,7 @@ function getVoiceMailsTranscription(token, id){
 function getVoiceMailsContent(token, format, id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
 
-    makeRequest("GET", url)
+    makeRequest(token, "GET", url)
         .then(response => response.blob())
         .then(blob => {
         let dataUrl = window.URL.createObjectURL(blob);

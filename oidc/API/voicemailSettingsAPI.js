@@ -30,7 +30,7 @@ function resetGreetingContent(token){
 
 function updateUserSettings(token, pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
-    let data_raw = {
+    let body = {
         "pin": pin,
         "hasCustomGreeting": hasCustomGreeting,
         "isTranscriptionPermitted": isTranscriptionPermitted,
@@ -40,7 +40,7 @@ function updateUserSettings(token, pin, hasCustomGreeting, isTranscriptionPermit
         "includeVoiceMail": includeVoiceMail
     }
 
-    makeRequest(token, "POST", url, false, data_raw).then( () => {
+    makeRequest(token, "POST", url, body).then( () => {
         //UI changes
         log("User Settings updated");
     });            
@@ -53,7 +53,7 @@ function uploadGreetingContent(token){
     let selectedFile = document.getElementById('greetingFile').files[0];
     formData.append("greetingFile", selectedFile);    
 
-    makeRequest(token, "POST", url, true, formData)
+    makeRequest(token, "POST", url, formData, true)
     .then(response => response.ok ? response : Promise.reject("Something goes wrong"))
     .then(response => { log("Custom Greeting uploaded");
     });

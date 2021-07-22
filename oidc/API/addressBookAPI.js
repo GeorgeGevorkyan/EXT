@@ -1,21 +1,6 @@
 let baseUrl = 'https://api.intermedia.net';
 
 
-function makeRequest(token, method, url, data_raw){
-    let options = {
-        method: method,
-        headers: {
-            'Authorization': `Bearer ` + token
-        }
-    };
-
-    if(data_raw){
-        options["headers"]["Content-Type"] = 'application/json';
-        options["body"] = JSON.stringify(data_raw);
-    }
-
-    return fetch(url, options);
-}
 
 function getContacts(token, params){ 
     let url = baseUrl + '/address-book/v3/contacts' + params;
