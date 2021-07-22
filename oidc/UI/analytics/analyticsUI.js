@@ -1,12 +1,18 @@
 
+async function onAuth(){
+    let token = await getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
+    localStorage.setItem('analytics_token', token);
+    log(localStorage.getItem('analytics_token'));
+}
+
+
+
 function init(){
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getAnalyticToken').addEventListener("click", () => { 
-    let token = getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
-    localStorage.setItem('analytics_token', token);
-    log(localStorage.getItem('analytics_token'));
+    onAuth();
 });
 
 document.getElementById('getDetailedCalls').addEventListener("click", () => { 

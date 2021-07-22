@@ -12,16 +12,18 @@ async function getAnalyticToken(client_id, client_secret){
             '&scope=api.service.analytics.main'
     };
     log("1");
+    let token;
     await fetch(url, options)
     .then((response) => response.json())
     .then((response) => {
         //localStorage.setItem('analytics_token', response['access_token']);
         log("2");
         log("Token " + response['access_token']);
-        return response['access_token'];
+        token = response['access_token'];
     })
     .catch((error) => {
         console.log(error);
     });;
     log("3");
+    return token;
 }
