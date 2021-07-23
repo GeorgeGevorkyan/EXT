@@ -60,9 +60,9 @@ async function getUserSettings(token){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
 
     let res;
-    makeRequest(token, "GET", url)
+    await makeRequest(token, "GET", url)
         .then( response => response.json())
-        .then( response => { res =response });
+        .then( response => { res = response });
     return res;
 }
 
