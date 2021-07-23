@@ -107,7 +107,7 @@ function updateList(response){
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getVoiceMails').addEventListener("click", () =>{ 
-    let res = getVoiceMails(localStorage.getItem('access_token'), 0, countOnList);
+    let res =await getVoiceMails(localStorage.getItem('access_token'), 0, countOnList);
     updateList(res);
 });
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'), ++pageNumberOfVoicemails * countOnList); });
