@@ -64,14 +64,14 @@ function createNewTr(tr){
     let button10 = document.createElement('button');
     button10.innerHTML = "Delete";
     td10.appendChild(button10);
-    button10.addEventListener("click", () => {  deleteSelectedVoicemailRecords(token, tr["id"]); onGetVoiceMails(pageNumberOfVoicemails); });
+    button10.addEventListener("click",async () => { await deleteSelectedVoicemailRecords(token, tr["id"]); onGetVoiceMails(pageNumberOfVoicemails); });
 
     let td11 = document.createElement('td');
     tableRow.appendChild(td11);
     let button11 = document.createElement('button');
     button11.innerHTML = "Change Status";
     td11.appendChild(button11);
-    button11.addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(token, tr["status"] == "read"? "unread": "read", tr["id"]); onGetVoiceMails(pageNumberOfVoicemails); });
+    button11.addEventListener("click",async () => { await updateSelectedVoiceMailRecordsStatus(token, tr["status"] == "read"? "unread": "read", tr["id"]); onGetVoiceMails(pageNumberOfVoicemails); });
 }
 
 function updateList(response){

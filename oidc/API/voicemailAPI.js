@@ -69,7 +69,6 @@ async function getVoiceMailRecord(token, id){
 }
 
 
-//TODO
 async function getVoiceMailsTranscription(token, id){
     let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
    
@@ -77,7 +76,7 @@ async function getVoiceMailsTranscription(token, id){
     await makeRequest(token, "GET", url)
         .then((response) => response.json())
         .then( (response) => {
-            res = response;
+            res = response["text"];
         });
     
     return res;
@@ -92,5 +91,5 @@ async function getVoiceMailsContent(token, format, id){
         .then(blob => {
             res = blob;
         });
-    return blob;
+    return res;
 }
