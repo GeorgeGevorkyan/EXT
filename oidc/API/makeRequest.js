@@ -6,13 +6,15 @@ function makeRequest(token, method, url, body, isFile, contentType ='application
         }
     };
 
-    if(body){
+    if(typeof body != 'string'){
         if(isFile == true){
             options["body"] = body;
         }else if(isFile == false){
             options["headers"]["Content-Type"] = contentType;
             options["body"] = JSON.stringify(body);
         }
+    }else{
+        options["body"] = body;
     }
 
     return fetch(url, options);
