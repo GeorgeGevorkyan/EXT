@@ -1,13 +1,13 @@
 
 async function onAuth(){
-    let token = await getAnalyticToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
-    localStorage.setItem('analytics_token', token);
+    let token = await getS2SToken(document.getElementById('client-id').value, document.getElementById('client-secret').value);
+    localStorage.setItem('S2SToken', token);
     log("Token " + token);
 }
 
 function init() {
 
-    document.getElementById('getAnalyticToken').addEventListener("click", () => { 
+    document.getElementById('getS2SToken').addEventListener("click", () => { 
         onAuth();
     });
 
@@ -25,7 +25,7 @@ function init() {
             body['callAttributes'] =[bound, status];
         }
 
-        getDetailedCalls(localStorage.getItem('analytics_token'),
+        getDetailedCalls(localStorage.getItem('S2SToken'),
             document.getElementById('dateFromDetailedCalls').value,
             document.getElementById('dateToDetailedCalls').value,
             document.getElementById('timezone').value,
@@ -38,7 +38,7 @@ function init() {
     });
 
     document.getElementById('getUserCalls').addEventListener("click", () => { 
-        getUserCalls(localStorage.getItem('analytics_token'),
+        getUserCalls(localStorage.getItem('S2SToken'),
             document.getElementById('userIds').value,
             document.getElementById('dateFromUserCalls').value,
             document.getElementById('dateToUserCalls').value,
@@ -47,7 +47,7 @@ function init() {
     });
 
     document.getElementById('getUserFilters').addEventListener("click", () => { 
-        getUserFilters(localStorage.getItem('analytics_token'),
+        getUserFilters(localStorage.getItem('S2SToken'),
             document.getElementById('dateFromUserFilters').value,
             document.getElementById('dateToUserFilters').value,
             document.getElementById('getUserFiltersTimezone').value,
