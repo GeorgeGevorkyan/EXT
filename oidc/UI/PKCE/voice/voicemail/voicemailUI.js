@@ -64,14 +64,14 @@ function createNewTr(tr){
     let button10 = document.createElement('button');
     button10.innerHTML = "Delete";
     td10.appendChild(button10);
-    button10.addEventListener("click", () => {  deleteSelectedVoicemailRecords(token, tr["id"]); });
+    button10.addEventListener("click", () => {  deleteSelectedVoicemailRecords(token, tr["id"]); onGetVoiceMails(pageNumberOfVoicemails); });
 
     let td11 = document.createElement('td');
     tableRow.appendChild(td11);
     let button11 = document.createElement('button');
     button11.innerHTML = "Change Status";
     td11.appendChild(button11);
-    button11.addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(token, tr["status"] == "read"? "unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); });
+    button11.addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(token, tr["status"] == "read"? "unread": "read", tr["id"]); onGetVoiceMails(pageNumberOfVoicemails); });
 }
 
 function updateList(response){
@@ -110,7 +110,7 @@ async function onGetVoiceMails(offset){
 }
 
 async function onGetVoiceMailsContent(token, format, id){
-    let blob = await getVoiceMailsContentl(token, format, id);
+    let blob = await getVoiceMailsContent(token, format, id);
 
     let dataUrl = window.URL.createObjectURL(blob);
     let a = document.createElement('a');
