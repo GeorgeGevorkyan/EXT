@@ -3,9 +3,13 @@
 // functions for VoiceMails
 ///////////////////////////////
 
-function getVoiceMails(token, offset){ 
+async function getVoiceMails(token, offset, countOnList){ 
     let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
-    makeRequest(token, "GET", url).then((response) => response.json()).then((response) => {updateList(response);});
+    let res;
+    await makeRequest(token, "GET", url)
+        .then((response) => response.json())
+        .then((response) => { res = response });
+    return res;
 }
 
 function deleteVoiceMailRecords(token, status){

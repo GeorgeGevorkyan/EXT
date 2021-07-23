@@ -106,7 +106,10 @@ function updateList(response){
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
-document.getElementById('getVoiceMails').addEventListener("click", () =>{ getVoiceMails(localStorage.getItem('access_token'), 0);});
+document.getElementById('getVoiceMails').addEventListener("click", () =>{ 
+    let res = getVoiceMails(localStorage.getItem('access_token'), 0, countOnList);
+    updateList(res);
+});
 document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'), ++pageNumberOfVoicemails * countOnList); });
 document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'),(pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); });
 document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(localStorage.getItem('access_token'), document.getElementById("updateStatus").value); });
