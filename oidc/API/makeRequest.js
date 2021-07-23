@@ -15,6 +15,7 @@ function makeRequest(token, method, url, body, isFile, contentType ='application
         }
     }else{
         options["body"] = body;
+        options["headers"]["Content-Type"] = contentType;
     }
 
     return fetch(url, options);
