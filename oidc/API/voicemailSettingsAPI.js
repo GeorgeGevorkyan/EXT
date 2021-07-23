@@ -3,32 +3,29 @@
 ///////////////////////////////
 
 
-function getGreetingContent(token, format, custom){
+async function getGreetingContent(token, format, custom){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
-    makeRequest(token, "GET", url)
-    .then(res => res.ok ? res : Promise.reject("Custom greeting is not found"))
-    .then(response => response.blob())
-    .then(blob => {
-        let dataUrl = window.URL.createObjectURL(blob);
-        let a = document.createElement('a');
-        a.href = dataUrl;
-        a.download = 'greeting.' + format;
-        a.click();
-    })
-    .catch( error => {
-        log(error);
-    });
+    let res;
+    
+    await makeRequest(token, "GET", url)
+        .then(res => res.ok ? res : Promise.reject("Custom greeting is not found"))
+        .then(response => response.blob())
+        .then(blob => res = blob)
+        .catch( error => {
+            res = error;
+        });
+    return res;
 }
 
 function resetGreetingContent(token){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
 
-    makeRequest(token, "DELETE", url).then( () => {
-        log("Custom Greeting deleted")
-    });             
+    let res;
+    makeRequest(token, "DELETE", url).then( (response) => {res = response});    
+    return res;         
 }
 
-function updateUserSettings(token, pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
+async function updateUserSettings(token, pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
     let body = {
         "pin": pin,
@@ -39,33 +36,34 @@ function updateUserSettings(token, pin, hasCustomGreeting, isTranscriptionPermit
         "emails": [emails],
         "includeVoiceMail": includeVoiceMail
     }
+    let res;
 
-    makeRequest(token, "POST", url, body).then( () => {
-        //UI changes
-        log("User Settings updated");
-    });            
+    await makeRequest(token, "POST", url, body).then( (response) => { res = response; });     
+    return res;       
 }
 
-function uploadGreetingContent(token){
+async function uploadGreetingContent(token){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
     let formData = new FormData();
 
     let selectedFile = document.getElementById('greetingFile').files[0];
     formData.append("greetingFile", selectedFile);    
 
-    makeRequest(token, "POST", url, formData, true)
-    .then(response => response.ok ? response : Promise.reject("Something goes wrong"))
-    .then(response => { log("Custom Greeting uploaded");
-    });
+    let res;
+    await makeRequest(token, "POST", url, formData, true)
+        .then(response => response.ok ? response : Promise.reject("Something goes wrong"))
+        .then(response => { res = response});
+    return res; 
 }
 
-function getUserSettings(token){
+async function getUserSettings(token){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
 
+    let res;
     makeRequest(token, "GET", url)
-    .then( response => response.json())
-    .then( response => { log(response);
-    });
+        .then( response => response.json())
+        .then( response => { res =response });
+    return res;
 }
 
 async function getVoicemailUsage(token){
