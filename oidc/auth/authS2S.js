@@ -3,8 +3,8 @@ async function getS2SToken(client_id, client_secret){
     let token;
     let body = 
         'grant_type=client_credentials'+
-        '&client_id=' + clientId + 
-        '&client_secret=' + clientSecret;
+        '&client_id=' + client_id + 
+        '&client_secret=' + client_secret;
         '&scope=api.service.analytics.main';
 
     await makeRequest(undefined, 'POST', url, body, false, 'application/x-www-form-urlencoded')
