@@ -7,7 +7,7 @@ async function getS2SToken(client_id, client_secret){
         '&client_secret=' + client_secret +
         '&scope=api.service.analytics.main';
 
-    await makeRequest(_, 'POST', url, body, false, 'application/x-www-form-urlencoded')
+    await makeRequest(undefined, 'POST', url, body, false, 'application/x-www-form-urlencoded')
         .then((response) => response.json())
         .then((response) => {
             token = response['access_token'];
