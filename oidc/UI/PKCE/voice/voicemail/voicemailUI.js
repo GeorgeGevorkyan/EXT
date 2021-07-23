@@ -51,12 +51,12 @@ function createNewTr(tr){
     let oggButton = document.createElement('button');
     oggButton.innerHTML = "ogg";
     td9.appendChild(oggButton);
-    oggButton.addEventListener("click", () => {  getVoiceMailsContent("ogg", tr["id"]);});
+    oggButton.addEventListener("click", () => {  onGetVoiceMailsContent(localStorage.getItem('access_token'), "ogg", tr["id"]);});
 
     let mp3Button = document.createElement('button');
     mp3Button.innerHTML = "mp3";
     td9.appendChild(mp3Button);
-    mp3Button.addEventListener("click", () => {  getVoiceMailsContent("mp3", tr["id"]);});
+    mp3Button.addEventListener("click", () => {  onGetVoiceMailsContent(localStorage.getItem('access_token'), "mp3", tr["id"]);});
 
     let td10 = document.createElement('td');
     tableRow.appendChild(td10);
@@ -103,18 +103,54 @@ function updateList(response){
     document.getElementById('buttonNext').innerHTML = pageNumberOfVoicemails + 2;
 }
 
+async function onGetVoiceMails(offset){
+    let res = await getVoiceMails(localStorage.getItem('access_token'), 0, countOnList);
+    updateList(res);
+}
+
+async function onGetVoiceMailsContent(token, format, id){
+    let blob = await getVoiceMailsContentl(token, format, id);
+
+    let dataUrl = window.URL.createObjectURL(blob);
+    let a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = id + "." + format;
+    a.click();
+}
+
 ///////////////////////////////
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getVoiceMails').addEventListener("click", () =>{ 
-    let res =await getVoiceMails(localStorage.getItem('access_token'), 0, countOnList);
-    updateList(res);
+    onGetVoiceMails();
 });
-document.getElementById('buttonNext').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'), ++pageNumberOfVoicemails * countOnList); });
-document.getElementById('buttonPrev').addEventListener("click", () => { getVoiceMails(localStorage.getItem('access_token'),(pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList); });
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", () =>{ updateVoiceMailRecordsStatus(localStorage.getItem('access_token'), document.getElementById("updateStatus").value); });
-document.getElementById('deleteVoiceMailRecords').addEventListener("click", () =>{ deleteVoiceMailRecords(localStorage.getItem('access_token'), document.getElementById("deleteStatus").value); });
-document.getElementById('getVoiceMailsTotal').addEventListener("click", () =>{ getVoiceMailsTotal(localStorage.getItem('access_token'), document.getElementById("totalStatus").value); });
-document.getElementById('getVoiceMailRecord').addEventListener("click", () =>{ getVoiceMailRecord(localStorage.getItem('access_token'), document.getElementById("id").value); });
+
+document.getElementById('buttonNext').addEventListener("click", () => {
+    onGetVoiceMails(++pageNumberOfVoicemails * countOnList);
+});
+
+document.getElementById('buttonPrev').addEventListener("click", () => { 
+    onGetVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList);
+});
+
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", async () =>{ 
+    await updateVoiceMailRecordsStatus(localStorage.getItem('access_token'), document.getElementById("updateStatus").value);
+    onGetVoiceMails(pageNumberOfVoicemails);
+});
+
+document.getElementById('deleteVoiceMailRecords').addEventListener("click", async () =>{ 
+    await deleteVoiceMailRecords(localStorage.getItem('access_token'), document.getElementById("deleteStatus").value); 
+    onGetVoiceMails(pageNumberOfVoicemails);
+});
+
+document.getElementById('getVoiceMailsTotal').addEventListener("click", async () =>{ 
+    let res = await getVoiceMailsTotal(localStorage.getItem('access_token'), document.getElementById("totalStatus").value); 
+    log(res);
+});
+
+document.getElementById('getVoiceMailRecord').addEventListener("click", async () =>{ 
+    let res = await getVoiceMailRecord(localStorage.getItem('access_token'), document.getElementById("id").value);
+    log(res);
+});
 
 }

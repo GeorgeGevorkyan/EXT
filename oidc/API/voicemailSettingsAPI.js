@@ -68,11 +68,13 @@ function getUserSettings(token){
     });
 }
 
-function getVoicemailUsage(token){
+async function getVoicemailUsage(token){
     let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/usage';
 
-    makeRequest(token, "GET", url)
-    .then( response => response.json())
-    .then( response => { log(response);
-    });
+    let res;
+    await makeRequest(token, "GET", url)
+        .then( response => response.json())
+        .then( response => { res = response});
+    
+    return res;
 }
