@@ -2,7 +2,7 @@ async function getS2SToken(client_id, client_secret){
     let url = 'https://login.intermedia.net/user/connect/token';
     let token;
     let body = 
-        'grant_type=' + grantType + 
+        'grant_type=client_credentials'+
         '&client_id=' + clientId + 
         '&client_secret=' + clientSecret;
         '&scope=api.service.analytics.main';
