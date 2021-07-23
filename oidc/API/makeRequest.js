@@ -9,7 +9,7 @@ function makeRequest(token, method, url, body, isFile, contentType ='application
     if(typeof body != 'string'){
         if(isFile == true){
             options["body"] = body;
-        }else if(isFile == false){
+        }else{
             options["headers"]["Content-Type"] = contentType;
             options["body"] = JSON.stringify(body);
         }

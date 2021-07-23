@@ -7,6 +7,7 @@ const countOnList = 5; //amount on Voicemail list
 let pageNumberOfVoicemails = 0;
 
 function createNewTr(tr){
+    let token = localStorage.getItem('access_token');
     let tableRow = document.createElement('tr');
     document.getElementById('table').appendChild(tableRow);
     
@@ -44,33 +45,33 @@ function createNewTr(tr){
     let button8 = document.createElement('button');
     button8.innerHTML = "Transcription";
     td8.appendChild(button8);
-    button8.addEventListener("click", () => { getVoiceMailsTranscription(tr["id"]); }, false);
+    button8.addEventListener("click", () => { getVoiceMailsTranscription(token, tr["id"]); }, false);
 
     let td9 = document.createElement('td');
     tableRow.appendChild(td9);
     let oggButton = document.createElement('button');
     oggButton.innerHTML = "ogg";
     td9.appendChild(oggButton);
-    oggButton.addEventListener("click", () => {  onGetVoiceMailsContent(localStorage.getItem('access_token'), "ogg", tr["id"]);});
+    oggButton.addEventListener("click", () => {  onGetVoiceMailsContent(token, "ogg", tr["id"]);});
 
     let mp3Button = document.createElement('button');
     mp3Button.innerHTML = "mp3";
     td9.appendChild(mp3Button);
-    mp3Button.addEventListener("click", () => {  onGetVoiceMailsContent(localStorage.getItem('access_token'), "mp3", tr["id"]);});
+    mp3Button.addEventListener("click", () => {  onGetVoiceMailsContent(token, "mp3", tr["id"]);});
 
     let td10 = document.createElement('td');
     tableRow.appendChild(td10);
     let button10 = document.createElement('button');
     button10.innerHTML = "Delete";
     td10.appendChild(button10);
-    button10.addEventListener("click", () => {  deleteSelectedVoicemailRecords(tr["id"]); });
+    button10.addEventListener("click", () => {  deleteSelectedVoicemailRecords(token, tr["id"]); });
 
     let td11 = document.createElement('td');
     tableRow.appendChild(td11);
     let button11 = document.createElement('button');
     button11.innerHTML = "Change Status";
     td11.appendChild(button11);
-    button11.addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(tr["status"] == "read"?"unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); });
+    button11.addEventListener("click", () => { updateSelectedVoiceMailRecordsStatus(token, tr["status"] == "read"? "unread": "read", tr["id"]);  getVoiceMails(pageNumberOfVoicemails * countOnList); });
 }
 
 function updateList(response){
