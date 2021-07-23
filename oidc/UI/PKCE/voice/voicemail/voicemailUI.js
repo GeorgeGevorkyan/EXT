@@ -105,7 +105,7 @@ function updateList(response){
 }
 
 async function onGetVoiceMails(offset){
-    let res = await getVoiceMails(localStorage.getItem('access_token'), 0, countOnList);
+    let res = await getVoiceMails(localStorage.getItem('access_token'), offset, countOnList);
     updateList(res);
 }
 
@@ -123,7 +123,7 @@ async function onGetVoiceMailsContent(token, format, id){
 // Event Handlers
 ///////////////////////////////
 document.getElementById('getVoiceMails').addEventListener("click", () =>{ 
-    onGetVoiceMails();
+    onGetVoiceMails(0);
 });
 
 document.getElementById('buttonNext').addEventListener("click", () => {
