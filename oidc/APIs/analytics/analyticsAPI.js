@@ -1,9 +1,13 @@
+let baseUrl = 'https://api.intermedia.net';
+
+
+
 ///////////////////////////////
 // functions for Analytics
 ///////////////////////////////
 
 function getDetailedCalls(token, dateFrom, dateTo, timezone, sortColumn, descending, offset, size, accountId, body){
-    let url = 'https://api.intermedia.net/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
+    let url = baseUrl + '/analytics/calls/call/detail?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
     
     if(timezone){
@@ -33,7 +37,7 @@ function getDetailedCalls(token, dateFrom, dateTo, timezone, sortColumn, descend
 }
 
 function getUserCalls(token, userIds, dateFrom, dateTo, accountId, timezone){ 
-    let url = 'https://api.intermedia.net/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
+    let url = baseUrl + '/analytics/calls/user?dateFrom=' + new Date(dateFrom).toISOString() + '&dateTo=' + new Date(dateTo).toISOString();
     let params = '';
     userIds = userIds.split(",");
     let body = {
@@ -55,7 +59,7 @@ function getUserCalls(token, userIds, dateFrom, dateTo, accountId, timezone){
 }
 
 function getUserFilters(token, dateFrom, dateTo, accountId, timezone){
-    let url = 'https://api.intermedia.net/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
+    let url = baseUrl + '/analytics/calls/user/filters?dateFrom=' + dateFrom +'Z&dateTo=' + dateTo + 'Z';
     let params = '';
     
     if(timezone){

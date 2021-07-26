@@ -1,10 +1,11 @@
+let baseUrl = 'https://api.intermedia.net';
 
 ///////////////////////////////
 // functions for VoiceMails
 ///////////////////////////////
 
 async function getVoiceMails(token, offset, countOnList){ 
-    let url = 'https://api.intermedia.net/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
+    let url = baseUrl + '/voice/v2/voicemails?offset=' + offset + '&count=' + countOnList;
     let res;
     await makeRequest(token, "GET", url)
         .then((response) => response.json())
@@ -13,12 +14,12 @@ async function getVoiceMails(token, offset, countOnList){
 }
 
 async function deleteVoiceMailRecords(token, status){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/_all?status=' + status;
+    let url = baseUrl + '/voice/v2/voicemails/_all?status=' + status;
     await makeRequest(token, "DELETE", url);
 }
 
 async function deleteSelectedVoicemailRecords(token, ids){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected';
+    let url = baseUrl + '/voice/v2/voicemails/_selected';
     let data_raw = { 
         "ids": [ids] 
     };
@@ -27,7 +28,7 @@ async function deleteSelectedVoicemailRecords(token, ids){
 }
 
 async function updateVoiceMailRecordsStatus(token, status){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/_all/_metadata';
+    let url = baseUrl + '/voice/v2/voicemails/_all/_metadata';
     let body = { 
         "status": status 
     };
@@ -36,7 +37,7 @@ async function updateVoiceMailRecordsStatus(token, status){
 }
 
 async function updateSelectedVoiceMailRecordsStatus(token, status, ids){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/_selected/_metadata';
+    let url = baseUrl + '/voice/v2/voicemails/_selected/_metadata';
     let body = { 
         "ids": [ids],
         "status": status
@@ -46,7 +47,7 @@ async function updateSelectedVoiceMailRecordsStatus(token, status, ids){
 }
 
 async function getVoiceMailsTotal(token, status){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/_total?status=' + status;
+    let url = baseUrl + '/voice/v2/voicemails/_total?status=' + status;
 
     let res;
     await makeRequest(token, "GET", url).then((response) => response.json()).then( (response) => {
@@ -57,7 +58,7 @@ async function getVoiceMailsTotal(token, status){
 }
 
 async function getVoiceMailRecord(token, id){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id;
+    let url = baseUrl + '/voice/v2/voicemails/' + id;
     
     let res;
 
@@ -70,7 +71,7 @@ async function getVoiceMailRecord(token, id){
 
 
 async function getVoiceMailsTranscription(token, id){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_transcript';
+    let url = baseUrl + '/voice/v2/voicemails/' + id + '/_transcript';
    
     let res;
     await makeRequest(token, "GET", url)
@@ -83,7 +84,7 @@ async function getVoiceMailsTranscription(token, id){
 }
 
 async function getVoiceMailsContent(token, format, id){
-    let url = 'https://api.intermedia.net/voice/v2/voicemails/' + id + '/_content?format=' + format;
+    let url = baseUrl + '/voice/v2/voicemails/' + id + '/_content?format=' + format;
 
     let res;
     await makeRequest(token, "GET", url)

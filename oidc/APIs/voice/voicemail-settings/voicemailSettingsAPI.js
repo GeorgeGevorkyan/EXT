@@ -1,10 +1,12 @@
+let baseUrl = 'https://api.intermedia.net';
+
 ///////////////////////////////
 // functions for VoiceMails Settings
 ///////////////////////////////
 
 
 async function getGreetingContent(token, format, custom){
-    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
+    let url = baseUrl + '/voice/v2/users/_me/voicemail/greeting?format=' + format + '&custom=' + custom;
     let res;
     
     await makeRequest(token, "GET", url)
@@ -18,7 +20,7 @@ async function getGreetingContent(token, format, custom){
 }
 
 function resetGreetingContent(token){
-    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
+    let url = baseUrl + '/voice/v2/users/_me/voicemail/greeting';
 
     let res;
     makeRequest(token, "DELETE", url).then( (response) => {res = response});    
@@ -26,7 +28,7 @@ function resetGreetingContent(token){
 }
 
 async function updateUserSettings(token, pin, hasCustomGreeting, isTranscriptionPermitted, enableTranscription, receiveEmailNotifications, emails, includeVoiceMail){
-    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
+    let url = baseUrl + '/voice/v2/users/_me/voicemail/settings';
     let body = {
         "pin": pin,
         "hasCustomGreeting": hasCustomGreeting,
@@ -43,7 +45,7 @@ async function updateUserSettings(token, pin, hasCustomGreeting, isTranscription
 }
 
 async function uploadGreetingContent(token){
-    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/greeting';
+    let url = baseUrl + '/voice/v2/users/_me/voicemail/greeting';
     let formData = new FormData();
 
     let selectedFile = document.getElementById('greetingFile').files[0];
@@ -57,7 +59,7 @@ async function uploadGreetingContent(token){
 }
 
 async function getUserSettings(token){
-    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/settings';
+    let url = baseUrl + '/voice/v2/users/_me/voicemail/settings';
 
     let res;
     await makeRequest(token, "GET", url)
@@ -67,7 +69,7 @@ async function getUserSettings(token){
 }
 
 async function getVoicemailUsage(token){
-    let url = 'https://api.intermedia.net/voice/v2/users/_me/voicemail/usage';
+    let url = baseUrl + '/voice/v2/users/_me/voicemail/usage';
 
     let res;
     await makeRequest(token, "GET", url)

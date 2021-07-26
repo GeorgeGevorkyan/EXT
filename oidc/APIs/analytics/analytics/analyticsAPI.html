@@ -2,21 +2,10 @@
 <html>
     <head>
         <title>Analytics API</title>
-        <link rel='stylesheet' href='../../styles/app.css'>
+        <link rel='stylesheet' href='/assets/styles/app.css'>
     </head>
     <body>
         <section>
-            <h2>Analytics API</h2>
-            <p>
-                The analytics API can be used to retrieve details of calls including durations
-                and associated charges for a specified account over a given time range.
-            </p>
-            <p>Before start using API samples, you need to get an access token.</p>
-            <div>
-                <li><label>ClientId: </label><input type="text" id="client-id" /><li>
-                <li><label>ClientSecret: </label><input type="text" id="client-secret" /><li>
-            </div>
-            <button id='getS2SToken'>Get Analytic Token</button>
             <div class='box'>
                 <button id='getDetailedCalls'>Get Detailed Calls</button>
                 <input type="datetime-local" value="yyyy-MM-ddThh:mm:ssZ" step="1" id="dateFromDetailedCalls"></input>
@@ -134,11 +123,10 @@
             <pre id='out'></pre>
         </div>
     </body>
-    <script src='../../log.js'></script>
-    <script src='../../../API/makeRequest.js'></script>
-    <script src='../../../auth/authS2S.js'></script>
+    <script src='/assets/log.js'></script>
+    <script src='/assets/makeRequest.js'></script>
     <script src='analyticsUI.js'></script>
-    <script src='../../../API/analyticsAPI.js'></script>
+    <script src='../analyticsAPI.js'></script>
     <script type="text/javascript">
         init();
     </script>

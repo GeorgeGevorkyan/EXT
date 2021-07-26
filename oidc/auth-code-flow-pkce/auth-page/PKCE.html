@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>API</title>
-        <link rel='stylesheet' href='UI/styles/app.css'>
+        <link rel='stylesheet' href='../../assets/styles/app.css'>
     </head>
     <body>
-        <a href="index.html"> Back to configuration </a> <br>
-        <a href="code-identityserver-sample.html"> Authorize again </a> <br> <br>
+        <a href="../../index.html"> Back to configuration </a> <br>
+        <a href="PKCE.html"> Authorize again </a> <br> <br>
         <section>
             <div>
                 Configure your client redirect URL to: <br>
@@ -32,16 +32,16 @@
         </div>
         <div id="waitText" hidden>Wait... </div>
         <div id="APIs" hidden>
-            <a class='functions' href="UI/PKCE/voice/voicemail/voicemailAPI.html" >Voicemail API</a>
-            <a class='functions' href="UI/PKCE/voice/voicemail settings/voicemailSettingsAPI.html" >Voicemail Settings API</a>
-            <a class='functions' href="UI/PKCE/address book/addressBookAPI.html">Address Book API</a>
+            <a class='functions' href="/APIs/voice/voicemail/voicemail/voicemailAPI.html" >Voicemail API</a>
+            <a class='functions' href="/APIs/voice/voicemail-settings/voicemail-settings/voicemailSettingsAPI.html" >Voicemail Settings API</a>
+            <a class='functions' href="/APIs/address-book/address-book/addressBookAPI.html">Address Book API</a>
         </div>
         </section>
         <br><br>
-        <script src='auth/resourses/oidc-client.js'></script>
-        <script src='auth/authPKCE.js'></script>
-        <script src='code-identityserver-sample.js'></script>
-        <script src='auth/resourses/jwt-decode.js'></script>
-        <script src='UI/log.js'></script>
+        <script src='/assets/oidc-client.js'></script>
+        <script src='../authPKCE.js'></script>
+        <script src='PKCE.js'></script>
+        <script src='/assets/jwt-decode.js'></script>
+        <script src='/assets/log.js'></script>
     </body>
 </html>
