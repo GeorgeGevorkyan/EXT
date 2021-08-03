@@ -1,7 +1,6 @@
 # extend-api-samples-dev
 
 ## Table of Contents
-========
 
 * [Installation](#installation)
 * [Usage](#usage)
