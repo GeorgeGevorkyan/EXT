@@ -29,7 +29,8 @@
 ## Usage
 **First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
   1. Our GitHub Pages:
-    
+     Just go to the [site]()
+     
   2. GitHub Pages:    
       - Create your own project on GitHub
       - Clone our repository
@@ -43,20 +44,21 @@
       - If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
   3. Another Hosting services
+      If you use another Hosting services, clone our repository and deploy it into your server.
 
-**After that**, add in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization, if you clone our repository, URL will be look like this https://URL_TO_YOUR_GITHUB_REPO/index.html )
 
+**After that**, [add](https://kb.intermedia.net/article/63780) in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization)
   
   
 **Now** you can use
 
 
 ## Built with
-  **OIDC client** - Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications
+  **OIDC client** - Library to provide OpenID Connect (OIDC) and **OAuth2** protocol support for client-side, browser-based JavaScript client applications
 
 ## License
  [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE)
 
-## Help
- If you're looking for help, try [Developer Support](https://developer.intermedia.com/articles/feedback.html). 
+## Feedback
+  Feel free to send us feedback on [Developer Support](https://developer.intermedia.com/articles/feedback.html). 
 
