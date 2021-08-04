@@ -23,13 +23,12 @@
 
 
 ## Usage
-<p>
+
    To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
    <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
-</p>
-<p>
+
    More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>
-</p>
+
 **First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
   1. Our GitHub Pages:
      Just go to the [site]() and enter your Credetials
