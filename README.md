@@ -11,7 +11,7 @@
 </p>
 <br>
 <p>
-  Samples show how to work with INTERMEDIA UNITE API's including interacting with Calls, VoiceMails, Analytics and others.
+  Samples show how to work with Intermedia Unite <a href = "https://developer.intermedia.com/index.html"> API's </a> including interacting with Calls, VoiceMails, Analytics and others.
 </p>
 
 ## Table of Contents
