@@ -13,6 +13,8 @@
 <p>
   To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
    <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
+  <br>
+  More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here<a>
 </p>
 
 ## Table of Contents
@@ -25,9 +27,9 @@
 
 ## Usage
 **To use samples you need host this repo** for this you can use **GitHub Pages** or **another hosting services**:
-  - Our GitHub Pages:
+  1. Our GitHub Pages:
     
-  - GitHub Pages:
+  2. GitHub Pages:
     1. Create your own project on GitHub
 
     2. Clone our repository
@@ -40,9 +42,12 @@
 
     4. If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
-  - Another Hosting services
+  3. Another Hosting services
 
-Choose 
+Add in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization, if you clone our repository, URL will be look like this https://URL_TO_YOUR_GITHUB_REPO/index.html )
+
+Now you can use
+
 
 ## Built with
   **OIDC client** - Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications
