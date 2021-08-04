@@ -11,7 +11,8 @@
 </p>
 
 <p>
-  To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the [Unite Extend API page](https://kb.intermedia.net/article/63780) in HostPilot. Please, ask your Account Owner for help.
+  To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
+   <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
 </p>
 
 ## Table of Contents
@@ -43,7 +44,7 @@
 Choose 
 
 ## Built with
-  OIDC client - Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications
+  **OIDC client** - Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications
 
 ## License
  [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE)
