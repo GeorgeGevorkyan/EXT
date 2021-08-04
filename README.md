@@ -31,17 +31,17 @@
   1. Our GitHub Pages:
     
   2. GitHub Pages:    
-    * Create your own project on GitHub
+    - Create your own project on GitHub
 
-    * Clone our repository
+    - Clone our repository
            `git clone https://github.com/intermedia-net/extend-api-samples-dev`
 
-    * Copy it to your project
-          `git remote rename origin upstream`     
-          `git remote add origin URL_TO_YOUR_GITHUB_REPO`     
-          `git push origin master`
+    - Copy it to your project
+          `git remote rename origin upstream     
+           git remote add origin URL_TO_YOUR_GITHUB_REPO     
+           git push origin master`
 
-    * If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
+    - If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
   3. Another Hosting services
 
