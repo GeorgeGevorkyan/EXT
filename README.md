@@ -15,7 +15,7 @@
    <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
 </p>
 <p>
-   More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here<a>
+   More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>
 </p>
 
 ## Table of Contents
