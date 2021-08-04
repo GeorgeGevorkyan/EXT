@@ -24,36 +24,38 @@
 
 ## Usage
 
-   To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
+   To start work with API's you will need Authorization credentials to have able to receive Authorization token and call API's methods, the client must be registered on the 
    <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
 
    More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>
 
 **First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
-  1. Our GitHub Pages:
+  1. **Our GitHub Pages**:
+  
       You can miss this part, just go to the [site]() and enter your Credetials
      
-  2. GitHub Pages:    
-      - Create your own project on GitHub
+  2. **Your GitHub Pages**:    
+      * Create your own project on GitHub
       
-      - Clone our repository
+      * Clone our repository
             
         `git clone https://github.com/intermedia-net/extend-api-samples-dev`
-      - Copy it to your project
+      * Copy it to your project
              
         `git remote rename origin upstream`     
         `git remote add origin URL_TO_YOUR_GITHUB_REPO`     
         `git push origin master`
-      - If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
+      * If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
-  3. Another Hosting services
+  3. **Another Hosting services**:
+  
       If you use another Hosting services, clone our repository and deploy it into your server.
 
 
 **Dont Forget about** [to add](https://kb.intermedia.net/article/63780) in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization)
   
   
-**After that**, you can use start using samples.
+**After that**, you can start using samples.
 
 
 ## Built with
