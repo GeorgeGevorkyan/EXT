@@ -11,11 +11,7 @@
 </p>
 <br>
 <p>
-   To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
-   <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
-</p>
-<p>
-   More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>
+  Samples show how to work with INTERMEDIA UNITE API's including interacting with Calls, VoiceMails, Analytics and others.
 </p>
 
 ## Table of Contents
@@ -27,12 +23,20 @@
 
 
 ## Usage
+<p>
+   To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
+   <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
+</p>
+<p>
+   More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>
+</p>
 **First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
   1. Our GitHub Pages:
-     Just go to the [site]()
+     Just go to the [site]() and enter your Credetials
      
   2. GitHub Pages:    
       - Create your own project on GitHub
+      
       - Clone our repository
             
         `git clone https://github.com/intermedia-net/extend-api-samples-dev`
