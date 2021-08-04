@@ -19,7 +19,7 @@
 * [Usage](#Usage)
 * [Built with](#Built-with)
 * [License](#License)
-* [FeedBack](#Feedback)
+* [Feedback](#Feedback)
 
 
 ## Usage
