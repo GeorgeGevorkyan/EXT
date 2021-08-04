@@ -26,15 +26,15 @@
 
    **To start** work with APIs you will need **Authorization credentials** to have able to receive **Authorization token** and call APIs methods, the client must be registered      on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
 
-   **More information** about **Authorization** and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-            guide">here</a>
+   **More information** about **Authorization** and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-            guide">here</a>.
 
-  **First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
+  **First of all**, To use samples you need to host this repo. You can use **GitHub Pages** or **another hosting services**:
   1. **Our GitHub Pages**:
   
-      You can miss this part, just go to the [site]() and enter your Credetials
+      You can miss this part, just go to the [site]() and enter your Credetials.
      
   2. **Your GitHub Pages**:    
-      * Create your own project on GitHub
+      * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
       
       * Clone our repository
             
