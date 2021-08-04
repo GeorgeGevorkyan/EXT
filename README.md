@@ -7,11 +7,11 @@
 </p>
 <br>
 <p align="center">
-  <strong>This is JavaScript samples of work with Intermedia API's.</strong>
+  <strong>This is JavaScript samples of work with Intermedia APIs.</strong>
 </p>
 <br>
 <p>
-  Samples show how to work with <strong>Intermedia Unite</strong> <a href = "https://developer.intermedia.com/index.html"> API's </a> including interacting with <strong>Calls, VoiceMails, Analytics</strong> and  <strong>others</strong>.
+  <strong>Samples</strong> show how to work with <strong>Intermedia Unite</strong> <a href = "https://developer.intermedia.com/index.html"> APIs </a> including interacting with <strong>Calls, VoiceMails, Analytics</strong> and  <strong>others</strong>.
 </p>
 
 ## Table of Contents
@@ -24,7 +24,7 @@
 
 ## Usage
 
-   **To start** work with API's you will need **Authorization credentials** to have able to receive **Authorization token** and call API's methods, the client must be registered    on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
+   **To start** work with APIs you will need **Authorization credentials** to have able to receive **Authorization token** and call APIs methods, the client must be registered      on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
 
    **More information** about **Authorization** and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-            guide">here</a>
 
