@@ -9,7 +9,7 @@
 <p align="center">
  <strong>This is JavaScript samples of work with Intermedia's API.</strong>
 </p>
-
+<br>
 <p>
   To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
    <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
@@ -25,8 +25,9 @@
 
 ## Usage
 **To use samples you need host this repo** for this you can use **GitHub Pages** or **another hosting services**:
-  * Our GitHub Pages:
-  * GitHub Pages:
+  - Our GitHub Pages:
+    
+  - GitHub Pages:
     1. Create your own project on GitHub
 
     2. Clone our repository
@@ -39,7 +40,7 @@
 
     4. If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
-  * Another Hosting services
+  - Another Hosting services
 
 Choose 
 
