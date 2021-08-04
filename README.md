@@ -27,27 +27,29 @@
 
 
 ## Usage
-**To use samples you need host this repo** for this you can use **GitHub Pages** or **another hosting services**:
+**First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
   1. Our GitHub Pages:
     
-  2. GitHub Pages:
-    1. Create your own project on GitHub
+  2. GitHub Pages:    
+    * Create your own project on GitHub
 
-    2. Clone our repository
+    * Clone our repository
            `git clone https://github.com/intermedia-net/extend-api-samples-dev`
 
-    3. Copy it to your project
+    * Copy it to your project
           `git remote rename origin upstream`     
           `git remote add origin URL_TO_YOUR_GITHUB_REPO`     
           `git push origin master`
 
-    4. If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
+    * If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
   3. Another Hosting services
 
-Add in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization, if you clone our repository, URL will be look like this https://URL_TO_YOUR_GITHUB_REPO/index.html )
+**After that**, add in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization, if you clone our repository, URL will be look like this https://URL_TO_YOUR_GITHUB_REPO/index.html )
 
-Now you can use
+  
+  
+**Now** you can use
 
 
 ## Built with
