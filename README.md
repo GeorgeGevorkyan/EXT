@@ -11,7 +11,7 @@
 </p>
 <br>
 <p>
-  Samples show how to work with <strong>Intermedia Unite</strong> <a href = "https://developer.intermedia.com/index.html"> API's </a> including interacting with <strong>Calls, VoiceMails, Analytics</strong> and  others.
+  Samples show how to work with <strong>Intermedia Unite</strong> <a href = "https://developer.intermedia.com/index.html"> API's </a> including interacting with <strong>Calls, VoiceMails, Analytics</strong> and  <strong>others</strong>.
 </p>
 
 ## Table of Contents
@@ -24,11 +24,11 @@
 
 ## Usage
 
-   To start work with API's you will need **Authorization credentials** to have able to receive **Authorization token** and call API's methods, the client must be registered on    the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
+   **To start** work with API's you will need **Authorization credentials** to have able to receive **Authorization token** and call API's methods, the client must be registered    on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
 
-   **More information** about **Authorization** and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>
+   **More information** about **Authorization** and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-            guide">here</a>
 
-**First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
+  **First of all**, To use samples you need to host this repo for this you can use **GitHub Pages** or **another hosting services**:
   1. **Our GitHub Pages**:
   
       You can miss this part, just go to the [site]() and enter your Credetials
