@@ -5,12 +5,12 @@
     <img alt="GitPoint" title="GitPoint" src="https://github.com/GeorgeGevorkyan/EXT/blob/master/logo-beta.svg" width="450">
   </a>
 </p>
-<br><br>
+<br>
 <p align="center">
- This is javascript samples of work with Intermedia's API.
+ This is JavaScript samples of work with Intermedia's API.
 </p>
 
-You need to have HostPilot account to use them.
+to have able to receive it and call API methods, the client must be registered on the [Unite Extend API page](https://kb.intermedia.net/article/63780) in HostPilot. Please, ask your Account Owner for help.
 
 ## Table of Contents
 
@@ -21,8 +21,10 @@ You need to have HostPilot account to use them.
 
 
 ## Usage
-To use samples you need host this repo and 
-1. Use your hosting service or you can use GitHub Pages:
+To use samples you need host this repo
+
+Use your hosting service or you can use GitHub Pages:
+  * Our GitHub Pages:
   * GitHub Pages:
     1. Create your own project on GitHub
 
@@ -36,7 +38,7 @@ To use samples you need host this repo and
 
     4. If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
   
-  * Hosting service
+  * Another Hosting services
 
 To use our Api's You need to get an Authorization token (https://kb.intermedia.net/article/63780)
 
