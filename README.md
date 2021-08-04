@@ -59,7 +59,7 @@
 ## Built with
   **OIDC client** - Library to provide OpenID Connect (OIDC) and **OAuth2** protocol support for client-side, browser-based JavaScript client applications
 
-## License
+## :copyright: License
  [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE)
 
 ## Feedback
