@@ -5,7 +5,7 @@ This is javascript samples of work with Intermedia's API.You need to have HostPi
 ## Table of Contents
 
 * [Usage](#Usage)
-* [Built with](#Built with)
+* [Built with](#Built-with)
 * [License](#License)
 * [Help](#Help)
 
@@ -22,8 +22,11 @@ To use samples you can:
     `git add --all`
     `git commit -m "Initial commit"`
     `git push -u origin main`
+  
   4. If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
 
+## Built with
+  OIDC client - Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications
 
 ## License
  [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE)
