@@ -11,10 +11,11 @@
 </p>
 <br>
 <p>
-  To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
+   To work with API you will need Authorization credentials to have able to receive authorization token and call API methods, the client must be registered on the 
    <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in HostPilot. Please, ask your Account Owner for help.
-  <br>
-  More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here<a>
+</p>
+<p>
+   More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here<a>
 </p>
 
 ## Table of Contents
