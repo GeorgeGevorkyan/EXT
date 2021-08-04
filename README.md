@@ -61,7 +61,7 @@
   [**OIDC client**](https://github.com/IdentityModel/oidc-client-js) - Library to provide OpenID Connect (OIDC) and **OAuth2** protocol support for client-side, browser-based JavaScript client applications
 
 ## License
- :copyright: [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE)
+  [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE) :copyright:
 
 ## Feedback
   Feel free to send us feedback on [Developer Support](https://developer.intermedia.com/articles/feedback.html). 
