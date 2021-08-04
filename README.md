@@ -1,6 +1,16 @@
-# extend-api-samples-dev
 
-This is javascript samples of work with Intermedia's API.You need to have HostPilot account to use them.
+<h1 align="center"> extend-api-samples-dev </h1> <br>
+<p align="center">
+  <a href="https://developer.intermedia.com/">
+    <img alt="GitPoint" title="GitPoint" src="https://github.com/GeorgeGevorkyan/EXT/blob/master/logo-beta.svg" width="450">
+  </a>
+</p>
+
+<p align="center">
+ This is javascript samples of work with Intermedia's API.
+</p>
+
+You need to have HostPilot account to use them.
 
 ## Table of Contents
 
