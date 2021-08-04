@@ -7,7 +7,7 @@
 </p>
 <br>
 <p align="center">
- This is JavaScript samples of work with Intermedia's API.
+ <strong>This is JavaScript samples of work with Intermedia's API.</strong>
 </p>
 
 <p>
