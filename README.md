@@ -33,6 +33,7 @@
   2. GitHub Pages:    
       - Create your own project on GitHub
           - Clone our repository
+            
             `git clone https://github.com/intermedia-net/extend-api-samples-dev`
           - Copy it to your project
              
