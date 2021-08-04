@@ -7,11 +7,11 @@
 </p>
 <br>
 <p align="center">
-  <strong>This is JavaScript samples of work with Intermedia's API.</strong>
+  <strong>This is JavaScript samples of work with Intermedia's API's.</strong>
 </p>
 <br>
 <p>
-  Samples show how to work with Intermedia Unite <a href = "https://developer.intermedia.com/index.html"> API's </a> including interacting with Calls, VoiceMails, Analytics and  others.
+  Samples show how to work with <strong>Intermedia Unite</strong> <a href = "https://developer.intermedia.com/index.html"> API's </a> including interacting with Calls, VoiceMails, Analytics and  others.
 </p>
 
 ## Table of Contents
