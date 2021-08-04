@@ -5,7 +5,7 @@
     <img alt="GitPoint" title="GitPoint" src="https://github.com/GeorgeGevorkyan/EXT/blob/master/logo-beta.svg" width="450">
   </a>
 </p>
-
+<br><br>
 <p align="center">
  This is javascript samples of work with Intermedia's API.
 </p>
