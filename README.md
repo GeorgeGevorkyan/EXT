@@ -35,6 +35,7 @@
           - Clone our repository
             `git clone https://github.com/intermedia-net/extend-api-samples-dev`
           - Copy it to your project
+             
              `git remote rename origin upstream`     
              `git remote add origin URL_TO_YOUR_GITHUB_REPO`     
              `git push origin master`
