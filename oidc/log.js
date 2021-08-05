@@ -9,9 +9,3 @@ function log() {
         document.getElementById('out').innerHTML += msg + '\r\n';
     });
 }
-
-function clear(){
-    document.getElementById('out').innerHTML = '' + '\r\n';
-}
-
-document.getElementById('clearLog').addEventListener("click", () => { clear(); });
