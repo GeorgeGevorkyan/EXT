@@ -24,11 +24,9 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
 
    First of all, to use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
      
-  1. **Fork Repository**
-      * In the top right, click Fork repository to your GitHub    
+  1. **Fork Repository:** in the top right, click Fork repository to your GitHub    
     
-     **GitHub Pages**    
-      *  How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
+     **GitHub Pages:** How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
            + Under your repository name, click  Settings.
            + In the left sidebar, click Pages.
            + Choose source branch
