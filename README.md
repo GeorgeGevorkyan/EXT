@@ -45,7 +45,8 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
             git remote rename origin upstream  
             git remote add origin URL_TO_YOUR_GITHUB_REPO
             git push origin HEAD:master
-   **Other Hosting services**:
+            
+     **Other Hosting services**:
       * If you use another Hosting services, clone our repository and deploy it into your server.
 
 
