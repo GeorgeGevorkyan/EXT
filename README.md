@@ -10,7 +10,7 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
 
 ## Table of Contents
 
-* [**Usage**](#Usage)
+* [**Before start**](#Before-start)
 * [**Built with**](#Built-with)
 * [**License**](#License)
 * [**Feedback**](#Feedback)
@@ -24,23 +24,26 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
 
   First of all, to use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
      
-  1. **Clone Repository**:    
-      * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
+  1. 
+     1.
+      **Fork Repository**
+       * Fork Repository
+
+     2.
+      **Clone Repository**:    
+       * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
            
 
-      * Clone our repository
+       * Clone our repository
            
-            git clone https://github.com/intermedia-net/extend-api-samples-dev.git
-      * Change our repository's URL to yours GitHub repository's URL
+             git clone https://github.com/intermedia-net/extend-api-samples-dev.git
+       * Change our repository's URL to yours GitHub repository's URL
           
-            cd extend-api-samples-dev
-            git remote rename origin upstream  
-            git remote add origin URL_TO_YOUR_GITHUB_REPO
-            git push origin HEAD:master
-     **Fetch Repository**
-      * Fork Repository
-     
-     
+             cd extend-api-samples-dev
+             git remote rename origin upstream  
+             git remote add origin URL_TO_YOUR_GITHUB_REPO
+             git push origin HEAD:master
+    
   2. **GitHub Pages**    
       *  How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
            + Under your repository name, click  Settings.
