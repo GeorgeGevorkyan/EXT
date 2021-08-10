@@ -27,10 +27,10 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
   1. **Fork Repository:** in the top right, click Fork repository to your GitHub    
     
      **GitHub Pages:** How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
-           + Under your repository name, click  Settings.
-           + In the left sidebar, click Pages.
-           + Choose source branch
-           + To see your published site, under "GitHub Pages", click your new generated site's URL.
+      * Under your repository name, click  Settings.
+      * In the left sidebar, click Pages.
+      * Choose source branch
+      * To see your published site, under "GitHub Pages", click your new generated site's URL.
            
 
   2. **Clone Repository**:    
