@@ -1,68 +1,63 @@
-
-<h1 align="center"> Intermedia API samples </h1> <br>
 <p align="center">
   <a href="https://developer.intermedia.com/">
-    <img alt="Intermedia" title="Intermedia" src="https://github.com/GeorgeGevorkyan/EXT/blob/master/logo-beta.svg" width="450">
+    <img alt="Intermedia" title="Intermedia" src="https://developer.intermedia.com/assets/images/logo-beta.svg" width="450">
   </a>
 </p>
-<br>
-<p align="center">
-  <strong>This is JavaScript samples of work with Intermedia APIs.</strong>
-</p>
-<br>
-<p>
-  <strong>Samples</strong> show how to work with <strong>Intermedia Unite</strong> <a href = "https://developer.intermedia.com/index.html"> APIs </a>, including interacting with <strong>Calls, VoiceMails, Analytics</strong> and  <strong>others</strong>.
-</p>
+
+### This is JavaScript samples of work with Intermedia Extend API
+
+Samples show how to work with <a href = "https://developer.intermedia.com/index.html">Intermedia Extend API</a>, including interacting with Calls, VoiceMails, Analytics and others.
 
 ## Table of Contents
 
-* [Usage](#Usage)
-* [Built with](#Built-with)
-* [License](#License)
-* [Feedback](#Feedback)
+* [**Usage**](#Usage)
+* [**Built with**](#Built-with)
+* [**License**](#License)
+* [**Feedback**](#Feedback)
 
 
-## Usage
+## Before start
 
-   **To start** work with APIs you will need **Authorization credentials** to have able to receive **Authorization token** and call APIs methods, the client must be registered      on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
+   For working with API you will need Authorization credentials, to have able to receive Authorization token and call API methods, so you **must** be registered on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
 
-   **More information** about **Authorization** and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-            guide">here</a>.
+   More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>.
 
-  **First of all**, To use samples you need to host this repo. You can use **GitHub Pages** or **another hosting services**:
-  1. **Our GitHub Pages**:
-  
-      You can miss this part, just go to the [site]() and enter your Credetials.
+  First of all, to use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
      
-  2. **Your GitHub Pages**:    
+  1. **Your GitHub Pages**:    
       * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
-      
+           
+
       * Clone our repository
-            
-        `git clone https://github.com/intermedia-net/extend-api-samples-dev`
-      * Copy it to your project
-             
-        `git remote rename origin upstream`     
-        `git remote add origin URL_TO_YOUR_GITHUB_REPO`     
-        `git push origin master`
-      * If you need more information about GitHub Pages, you can get it [here](https://docs.github.com/en/pages).
-  
-  3. **Another Hosting services**:
-  
-      If you use another Hosting services, clone our repository and deploy it into your server.
+           
+            git clone https://github.com/intermedia-net/extend-api-samples-dev.git
+      * Change our repository's URL to yours GitHub repository's URL
+          
+            cd extend-api-samples-dev
+            git remote rename origin upstream  
+            git remote add origin URL_TO_YOUR_GITHUB_REPO
+            git push origin HEAD:master
+      *  How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
+           + Under your repository name, click  Settings.
+           + In the left sidebar, click Pages.
+           + Choose source branch
+           + To see your published site, under "GitHub Pages", click your new generated site's URL.
+           
+
+  2. **Other Hosting services**:
+      * If you use another Hosting services, clone our repository and deploy it into your server.
 
 
-**Dont Forget about** [to add](https://kb.intermedia.net/article/63780) in your HostPilot account a **Redirect URL** (URL where user will be sent after authorization)
-  
-  
-**After that**, you can start using samples.
-
+Also read [Article](https://kb.intermedia.net/article/63780), which provides the information about correct creation of clients. Use it to do correct authorization flow creation.
+     
+After that, you can start using samples.
 
 ## Built with
   [**OIDC client**](https://github.com/IdentityModel/oidc-client-js) - Library to provide OpenID Connect (OIDC) and **OAuth2** protocol support for client-side, browser-based JavaScript client applications
 
 ## License
-  [MIT](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE) :copyright:
+  [**MIT**](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE) :copyright:
 
 ## Feedback
-  Feel free to send us feedback on [Developer Support](https://developer.intermedia.com/articles/feedback.html). 
+  Feel free to send us feedback on [**Developer Support**](https://developer.intermedia.com/articles/feedback.html). 
 
