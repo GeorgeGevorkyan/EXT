@@ -24,7 +24,7 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
 
   First of all, to use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
      
-  1. **Your GitHub Pages**:    
+  1. **Clone Repository**:    
       * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
            
 
@@ -37,6 +37,11 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
             git remote rename origin upstream  
             git remote add origin URL_TO_YOUR_GITHUB_REPO
             git push origin HEAD:master
+     **Fetch Repository**
+      * Fork Repository
+     
+     
+  2. **GitHub Pages**    
       *  How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
            + Under your repository name, click  Settings.
            + In the left sidebar, click Pages.
