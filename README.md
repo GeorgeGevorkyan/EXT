@@ -18,33 +18,16 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
 
 ## Before start
 
-   For working with API you will need Authorization credentials, to have able to receive Authorization token and call API methods, so you **must** be registered on the <a href ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
+   For working with API you will need Authorization credentials, to have able to receive Authorization token and call API methods, so you **must** be registered on the <a href      ="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, ask your Account Owner for help.
 
    More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>.
 
-  First of all, to use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
+   First of all, to use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
      
-  1. 
-     1.
-      **Fork Repository**
-       * Fork Repository
-
-     2.
-      **Clone Repository**:    
-       * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
-           
-
-       * Clone our repository
-           
-             git clone https://github.com/intermedia-net/extend-api-samples-dev.git
-       * Change our repository's URL to yours GitHub repository's URL
-          
-             cd extend-api-samples-dev
-             git remote rename origin upstream  
-             git remote add origin URL_TO_YOUR_GITHUB_REPO
-             git push origin HEAD:master
+  1. **Fork Repository**
+      * In the top right, click Fork repository to your GitHub    
     
-  2. **GitHub Pages**    
+     **GitHub Pages**    
       *  How to [host](https://docs.github.com/en/pages) your repository on GitHub Pages.
            + Under your repository name, click  Settings.
            + In the left sidebar, click Pages.
@@ -52,7 +35,19 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
            + To see your published site, under "GitHub Pages", click your new generated site's URL.
            
 
-  2. **Other Hosting services**:
+  2. **Clone Repository**:    
+      * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
+           
+      * Clone our repository
+           
+            git clone https://github.com/intermedia-net/extend-api-samples-dev.git
+      * Change our repository's URL to yours GitHub repository's URL
+          
+            cd extend-api-samples-dev
+            git remote rename origin upstream  
+            git remote add origin URL_TO_YOUR_GITHUB_REPO
+            git push origin HEAD:master
+   **Other Hosting services**:
       * If you use another Hosting services, clone our repository and deploy it into your server.
 
 
