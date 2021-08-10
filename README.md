@@ -22,13 +22,15 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
 
    More information about Authorization and needed credentials you can see <a href ="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>.
 
-  To use samples you need to host this repository. You can use **GitHub Pages** or another hosting services:
+  To use samples you need to host this repository. You can fork our repository and host it on **GitHub Pages** or also you can use another hosting services:
      
   1. **Fork Repository:** 
+
       * In the top right, click Fork repository to your GitHub.
       * Choose GitHub profile.    
     
      **[Host](https://docs.github.com/en/pages) on GitHub Pages:**
+
       * Under your repository name, click  Settings.
       * In the left sidebar, click Pages.
       * Choose source branch
@@ -39,16 +41,15 @@ Samples show how to work with <a href = "https://developer.intermedia.com/index.
       * Create your [own project](https://docs.github.com/en/get-started/quickstart/create-a-repo) on GitHub
            
       * Clone our repository
-           
             git clone https://github.com/intermedia-net/extend-api-samples-dev.git
+
       * Change our repository's URL to yours GitHub repository's URL
-          
             cd extend-api-samples-dev
             git remote rename origin upstream  
             git remote add origin URL_TO_YOUR_GITHUB_REPO
             git push origin HEAD:master
             
-     **Other Hosting services**:
+     **Host on other Hosting services**:
       * If you use another Hosting services, clone our repository and deploy it into your server.
 
 
@@ -64,4 +65,3 @@ After that, you can start using samples.
 
 ## Feedback
   Feel free to send us feedback on [**Developer Support**](https://developer.intermedia.com/articles/feedback.html). 
-
