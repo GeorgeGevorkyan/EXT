@@ -1,7 +1,7 @@
 ///////////////////////////////
 // on load
 ///////////////////////////////
-if(!isAuthorized()){
+if (!isAuthorized()) {
     window.location.href = "../../auth/pkce/auth.html"
 }
 
@@ -44,16 +44,16 @@ document.getElementById('clearLog').addEventListener("click", () => document.get
 ///////////////////////////////
 // Rendering functions
 ///////////////////////////////
-function changeFieldsStatus(id, legacyId, _all){
-    if(id.checked || _all.checked){
+function changeFieldsStatus(id, legacyId, _all) {
+    if (id.checked || _all.checked) {
         legacyId.disabled = false;
-    }else{
+    } else {
         legacyId.disabled = true;
         legacyId.checked = false;
     }
 }
 
-function renderAvatarImg(byteCode, parentNode){
+function renderAvatarImg(byteCode, parentNode) {
     let imgElem = document.createElement("img");
     imgElem.src = `data:image/jpg;base64, ${byteCode}`;
     parentNode.appendChild(imgElem);
@@ -62,9 +62,9 @@ function renderAvatarImg(byteCode, parentNode){
 ///////////////////////////////
 // Address book functions
 ///////////////////////////////
-function onGetContacts(){
+function onGetContacts() {
     const query = document.getElementById('query').value;
-    
+
     const phone = document.getElementById('phone').value;
 
     const scope = document.getElementById('scope').value;
@@ -72,102 +72,106 @@ function onGetContacts(){
     let fields;
 
     const getContactsid = document.getElementById('getContactsid');
-    if(getContactsid.checked){
+    if (getContactsid.checked) {
         fields += getContactsid.value;
     }
 
     const getContactsLegacyid = document.getElementById('getContactslegacyId');
-    if(getContactsLegacyid.checked){
+    if (getContactsLegacyid.checked) {
         fields += (fields ? "," : '') + getContactsLegacyid.value;
     }
 
     const getContacts_all = document.getElementById('getContacts_all');
-    if(getContacts_all.checked){
+    if (getContacts_all.checked) {
         fields += (fields ? "," : '') + getContacts_all.value;
     }
 
     getContacts(query, phone, scope, fields).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get contacts failed! " + error);
         console.log("Get contacts failed! " + error);
     });
 }
 
-function onGetUserDetails(){
+function onGetUserDetails() {
     let fields;
     const getContactsid = document.getElementById('getUserDetailsid');
-    if(getContactsid.checked){
+    if (getContactsid.checked) {
         fields += getContactsid.value;
     }
 
     const getContactsLegacyid = document.getElementById('getUserDetailslegacyId');
-    if(getContactsLegacyid.checked){
+    if (getContactsLegacyid.checked) {
         fields += (fields ? "," : '') + getContactsLegacyid.value;
     }
 
     const getContacts_all = document.getElementById('getUserDetails_all');
-    if(getContacts_all.checked){
+    if (getContacts_all.checked) {
         fields += (fields ? "," : '') + getContacts_all.value;
     }
 
     getUserDetails(fields).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get contacts failed! " + error);
         console.log("Get contacts failed! " + error);
     });
 }
 
-function onGetContactsByJIDs(){
+function onGetContactsByJIDs() {
     const jids = (document.getElementById('jids').value).split(",");
 
     let fields;
     const getContactsid = document.getElementById('getContactsByJIDsid');
-    if(getContactsid.checked){
+    if (getContactsid.checked) {
         fields += getContactsid.value;
     }
 
     const getContactsLegacyid = document.getElementById('getContactsByJIDslegacyId');
-    if(getContactsLegacyid.checked){
+    if (getContactsLegacyid.checked) {
         fields += (fields ? "," : '') + getContactsLegacyid.value;
     }
 
     const getContacts_all = document.getElementById('getContactsByJIDs_all');
-    if(getContacts_all.checked){
+    if (getContacts_all.checked) {
         fields += (fields ? "," : '') + getContacts_all.value;
     }
 
     getContactsByJIDs(jids, fields).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get contacts failed! " + error);
         console.log("Get contacts failed! " + error);
     });
 }
 
-function onGetSingleContact(){ 
+function onGetSingleContact() {
     let fields;
     const getContactsid = document.getElementById('getSingleContactid');
-    if(getContactsid.checked){
+    if (getContactsid.checked) {
         fields += getContactsid.value;
     }
 
     const getContactsLegacyid = document.getElementById('getSingleContactlegacyId');
-    if(getContactsLegacyid.checked){
+    if (getContactsLegacyid.checked) {
         fields += (fields ? "," : '') + getContactsLegacyid.value;
     }
 
     const getContacts_all = document.getElementById('getSingleContact_all');
-    if(getContacts_all.checked){
+    if (getContacts_all.checked) {
         fields += (fields ? "," : '') + getContacts_all.value;
     }
 
     getSingleContact(document.getElementById('id').value, fields).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get contacts failed! " + error);
         console.log("Get contacts failed! " + error);
     });
 }
 
-function onGetContactsId(){
+function onGetContactsId() {
     let id = document.getElementById('getContactsid');
     let legacyId = document.getElementById('getContactslegacyId');
     let _all = document.getElementById('getContacts_all');
@@ -175,7 +179,7 @@ function onGetContactsId(){
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetContactsAll(){
+function onGetContactsAll() {
     let id = document.getElementById('getContactsid');
     let legacyId = document.getElementById('getContactslegacyId');
     let _all = document.getElementById('getContacts_all');
@@ -183,73 +187,75 @@ function onGetContactsAll(){
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetUserDetailsId(){
+function onGetUserDetailsId() {
     let id = document.getElementById('getUserDetailsid');
     let legacyId = document.getElementById('getUserDetailslegacyId');
     let _all = document.getElementById('getUserDetails_all');
-    
+
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetUserDetailsAll(){
+function onGetUserDetailsAll() {
     let id = document.getElementById('getUserDetailsid');
     let legacyId = document.getElementById('getUserDetailslegacyId');
     let _all = document.getElementById('getUserDetails_all');
-    
+
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetContactsByJIDsId(){
+function onGetContactsByJIDsId() {
     let id = document.getElementById('getContactsByJIDsid');
     let legacyId = document.getElementById('getContactsByJIDslegacyId');
     let _all = document.getElementById('getContactsByJIDs_all');
-    
+
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetContactsByJIDsAll(){
+function onGetContactsByJIDsAll() {
     let id = document.getElementById('getContactsByJIDsid');
     let legacyId = document.getElementById('getContactsByJIDslegacyId');
     let _all = document.getElementById('getContactsByJIDs_all');
-    
+
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetSingleContactId(){
+function onGetSingleContactId() {
     let id = document.getElementById('getSingleContactid');
     let legacyId = document.getElementById('getSingleContactlegacyId');
     let _all = document.getElementById('getSingleContact_all');
-    
+
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetSingleContactAll(){
+function onGetSingleContactAll() {
     let id = document.getElementById('getSingleContactid');
     let legacyId = document.getElementById('getSingleContactlegacyId');
     let _all = document.getElementById('getSingleContact_all');
-    
+
     changeFieldsStatus(id, legacyId, _all);
 }
 
-function onGetAvatar(){
+function onGetAvatar() {
     let avatarId = document.getElementById('avatar-id').value;
 
-    getAvatar(avatarId).then((response) =>{
+    getAvatar(avatarId).then((response) => {
         document.getElementById("get-avatar-output").innerHTML = "";
         renderAvatarImg(response["avatar"], document.getElementById("get-avatar-output"));
     }).catch((error) => {
+        log("Get avatar failed! " + error);
         console.log("Get avatar failed! " + error);
     });
 }
 
-function onGetMultipleAvatars(){
+function onGetMultipleAvatars() {
     let avatarIds = document.getElementById("avatar-ids").value.split(/\s*,\s*/);
-    getMultipleAvatars(avatarIds).then((response) =>{
+    getMultipleAvatars(avatarIds).then((response) => {
         document.getElementById("get-multiple-avatars-output").innerHTML = "";
         response["results"].forEach(element => {
             renderAvatarImg(element["avatar"], document.getElementById("get-multiple-avatars-output"));
         });
     }).catch((error) => {
+        log("Get multiple avatar failed! " + error);
         console.log("Get multiple avatar failed! " + error);
     });
 }

@@ -1,7 +1,7 @@
 ///////////////////////////////
 // on load
 ///////////////////////////////
-if(!isAuthorized()){
+if (!isAuthorized()) {
     window.location.href = "../../auth/pkce/auth.html"
 }
 
@@ -16,7 +16,7 @@ document.getElementById('getDefaultGreetingContentMp3').addEventListener("click"
 document.getElementById('getDefaultGreetingContentOgg').addEventListener("click", () =>
     onGetGreetingContent("ogg", 0), false);
 
-document.getElementById('getCustomGreetingContentMp3').addEventListener("click", () => 
+document.getElementById('getCustomGreetingContentMp3').addEventListener("click", () =>
     onGetGreetingContent("mp3", 1), false);
 
 document.getElementById('getCustomGreetingContentOgg').addEventListener("click", () =>
@@ -37,7 +37,7 @@ document.getElementById('clearLog').addEventListener("click", () => document.get
 ///////////////////////////////
 // Voicemail settings functions
 ///////////////////////////////
-function onGetGreetingContent(format, custom){
+function onGetGreetingContent(format, custom) {
     getGreetingContent(format, custom).then((response) => {
         let dataUrl = window.URL.createObjectURL(response);
         let a = document.createElement('a');
@@ -46,31 +46,34 @@ function onGetGreetingContent(format, custom){
         a.click();
     }).catch((error) => {
         console.log("Get greeting content failed! " + error);
-    }); 
+        log("Get greeting content failed! " + error);
+    });
 
 }
 
-function onUploadGreetingContent(){
+function onUploadGreetingContent() {
     uploadGreetingContent().then((response) => {
         log(response);
     }).catch((error) => {
         console.log("Upload greeting content failed! " + error);
+        log("Upload greeting content failed! " + error);
     });
 }
 
-function onGetUserSettings(){
+function onGetUserSettings() {
     getUserSettings().then((response) => {
         log(response);
     }).catch((error) => {
         console.log("Get user settings failed! " + error);
+        log("Get user settings failed! " + error);
     });
 }
 
-function onUpdateUserSettings(){
+function onUpdateUserSettings() {
     updateUserSettings(
         document.getElementById("pin").value,
-        document.getElementById("hasCustomGreeting").value, 
-        document.getElementById("isTranscriptionPermitted").value, 
+        document.getElementById("hasCustomGreeting").value,
+        document.getElementById("isTranscriptionPermitted").value,
         document.getElementById("enableTranscription").value,
         document.getElementById("receiveEmailNotifications").value,
         document.getElementById("emails").value,
@@ -79,21 +82,24 @@ function onUpdateUserSettings(){
         log(response);
     }).catch((error) => {
         console.log("Update user settings failed! " + error);
+        log("Update user settings failed! " + error);
     });
 }
 
-function onGetVoicemailUsage(){
+function onGetVoicemailUsage() {
     getVoicemailUsage().then((response) => {
         log(response);
     }).catch((error) => {
         console.log("Get voicemail usage failed! " + error);
+        log("Get voicemail usage failed! " + error);
     });
 }
 
-function onResetGreetingContent(){
+function onResetGreetingContent() {
     resetGreetingContent().then((response) => {
         log(response);
     }).catch((error) => {
         console.log("Reset greeting content failed! " + error);
+        log("Reset greeting content failed! " + error);
     });
 }

@@ -1,7 +1,7 @@
 ///////////////////////////////
 // on load
 ///////////////////////////////
-if(!isAuthorized()){
+if (!isAuthorized()) {
     window.location.href = "../../auth/pkce/auth.html"
 }
 
@@ -23,7 +23,7 @@ document.getElementById('warm-transfer-call').addEventListener("click", onWarmTr
 ///////////////////////////////
 // Rendering functions
 ///////////////////////////////
-function createSelectElem(parentNode, elemId, dataList, valueParam, textParam){
+function createSelectElem(parentNode, elemId, dataList, valueParam, textParam) {
     //Create and append select list
     let selectList = document.createElement("select");
     selectList.id = elemId;
@@ -38,11 +38,11 @@ function createSelectElem(parentNode, elemId, dataList, valueParam, textParam){
     }
 }
 
-function renderCallTableRow(eventType, callDirection, callId){
+function renderCallTableRow(eventType, callDirection, callId) {
     let allCallElems = document.getElementsByClassName("calls-table-row");
 
-    for(let i=0; i<allCallElems.length; i++){
-        if(allCallElems[i].classList.contains(callId)){
+    for (let i = 0; i < allCallElems.length; i++) {
+        if (allCallElems[i].classList.contains(callId)) {
             allCallElems[i].innerHTML = `<td>${eventType}</td><td>${callId}</td>`;
             return;
         }
@@ -52,7 +52,7 @@ function renderCallTableRow(eventType, callDirection, callId){
     newCallElem.className = `calls-table-row ${callId}`;
     newCallElem.innerHTML = `<td>${eventType}</td><td>${callId}</td>`;
 
-    if(callDirection == "outgoing"){
+    if (callDirection == "outgoing") {
         document.getElementById("outgoing-calls-table").appendChild(newCallElem);
     } else {
         document.getElementById("incoming-calls-table").appendChild(newCallElem);
@@ -62,69 +62,76 @@ function renderCallTableRow(eventType, callDirection, callId){
 ///////////////////////////////
 // Device functions
 ///////////////////////////////
-function onGetDevices(){
+function onGetDevices() {
     getDevices().then((response) => {
         let devices = response["clickToCallDevices"];
         createSelectElem(document.getElementById("devices-wrapper"), "devices-select", devices, "id", "name");
     }).catch((error) => {
         console.log("Get devices failed! " + error);
+        log("Get devices failed! " + error);
     });
 }
 
 ///////////////////////////////
 // Call functions
 ///////////////////////////////
-function onMakeCall(){
+function onMakeCall() {
     let phoneNumber = document.getElementById('phone-number').value;
     let deviceId = document.getElementById('devices-select').value;
 
     makeCall(deviceId, phoneNumber, "placeCall").catch((error) => {
         console.log("Make call failed! " + error);
+        log("Make call failed! " + error);
     });
 }
 
-function onTerminateCall(){
+function onTerminateCall() {
     let callId = document.getElementById("terminate-call-id").value;
     terminateCall(callId).catch((error) => {
         console.log("Terminate failed! " + error);
+        log("Terminate failed! " + error);
     });
 }
 
-function onCancelCall(){
+function onCancelCall() {
     let callId = document.getElementById("cancel-call-id").value;
     cancelCall(callId, true).catch((error) => {
         console.log("Cancel failed! " + error);
+        log("Cancel failed! " + error);
     });
 }
 
-function onTransferCall(){
+function onTransferCall() {
     let phoneNumber = document.getElementById('transfer-phone-number').value;
     let curCallId = document.getElementById("cur-call-id").value;
     transferCall(curCallId, phoneNumber).catch((error) => {
         console.log("Transfer failed! " + error);
+        log("Transfer failed! " + error);
     });
 }
 
-function onWarmTransferCall(){
+function onWarmTransferCall() {
     let callId1 = document.getElementById("warm-transfer-call-id-1").value;
     let callId2 = document.getElementById("warm-transfer-call-id-2").value;
     warmTransferCall(callId1, callId2).catch((error) => {
         console.log("Warm transfer failed! " + error);
+        log("Warm transfer failed! " + error);
     });
 }
 
 ///////////////////////////////
 // Notifications Hub
 ///////////////////////////////
-function onSubscribeNotificationHub(){
+function onSubscribeNotificationHub() {
     createHubSubscription().then((response) => {
         startHubConnection(response.deliveryMethod.uri);
     }).catch((error) => {
         console.log("Subscribe failed!" + error);
+        log("Subscribe failed!" + error);
     });
 }
 
-function startHubConnection(deliveryMethodUri){
+function startHubConnection(deliveryMethodUri) {
     let connection = new signalR.HubConnectionBuilder()
         .configureLogging(signalR.LogLevel.Trace)
         .withUrl(deliveryMethodUri, {
@@ -139,7 +146,7 @@ function startHubConnection(deliveryMethodUri){
     connection.on("OnCommandResult", data => {
         console.log(data);
     });
-    
+
     // Start the connection.
     connection.start().then(() => console.log("connected")).catch(err => console.log(err));
 }

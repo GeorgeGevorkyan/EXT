@@ -1,7 +1,7 @@
 ///////////////////////////////
 // on load
 ///////////////////////////////
-if(!isAuthorized()){
+if (!isAuthorized()) {
     window.location.href = "../../auth/pkce/auth.html"
 }
 
@@ -18,28 +18,31 @@ document.getElementById('get-meeting-details').addEventListener("click", onGetMe
 ///////////////////////////////
 // Meeting functions
 ///////////////////////////////
-function onStartMeeting(){
+function onStartMeeting() {
     startMeeting().then((response) => {
         console.log(response);
     }).catch((error) => {
+        log("Start meeting failed! " + error);
         console.log("Start meeting failed! " + error);
     });
 }
 
-function onGetUserDetails(){
+function onGetUserDetails() {
     getUserDetails().then((response) => {
         console.log(response);
     }).catch((error) => {
+        log("Start meeting failed! " + error);
         console.log("Start meeting failed! " + error);
     });
 }
 
-function onGetMeetingDetails(){
+function onGetMeetingDetails() {
     let meetingCode = document.getElementById("meeting-code").value;
 
     getMeetingDetails(meetingCode).then((response) => {
         console.log(response);
     }).catch((error) => {
+        log("Start meeting failed! " + error);
         console.log("Start meeting failed! " + error);
     });
 }

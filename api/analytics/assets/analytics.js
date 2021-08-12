@@ -1,7 +1,7 @@
 ///////////////////////////////
 // on load
 ///////////////////////////////
-if(!isAuthorized()){
+if (!isAuthorized()) {
     window.location.href = "../../auth/s2s/auth.html"
 }
 
@@ -22,18 +22,18 @@ document.getElementById('clearLog').addEventListener("click", () => document.get
 ///////////////////////////////
 // Analytics functions
 ///////////////////////////////
-function onGetDetailedCalls(){
+function onGetDetailedCalls() {
     let chargeable = document.getElementById('chargeable').value;
     let bound = document.getElementById('bound').value;
     let status = document.getElementById('status').value;
     let body = {};
 
-    if(chargeable != 'select'){
+    if (chargeable != 'select') {
         body['chargeable'] = [chargeable];
     }
-    
-    if(bound != 'select' && status != 'select'){
-        body['callAttributes'] =[bound, status];
+
+    if (bound != 'select' && status != 'select') {
+        body['callAttributes'] = [bound, status];
     }
 
     getDetailedCalls(
@@ -49,11 +49,12 @@ function onGetDetailedCalls(){
     ).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get detailed calls failed! " + error);
         console.log("Get detailed calls failed! " + error);
     });
 }
 
-function onGetUserCalls(){
+function onGetUserCalls() {
     const dateFrom = new Date(document.getElementById('dateFromUserCalls').value).toISOString();
     const dateTo = new Date(document.getElementById('dateToUserCalls').value).toISOString();
     const userIds = (document.getElementById('userIds').value).split(",");
@@ -66,11 +67,12 @@ function onGetUserCalls(){
     ).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get user calls failed! " + error);
         console.log("Get user calls failed! " + error);
     });
 }
 
-function onGetUserFilters(){
+function onGetUserFilters() {
     getUserFilters(
         document.getElementById('dateFromUserFilters').value,
         document.getElementById('dateToUserFilters').value,
@@ -79,6 +81,7 @@ function onGetUserFilters(){
     ).then((response) => {
         log(response);
     }).catch((error) => {
+        log("Get user filters failed! " + error);
         console.log("Get user filters failed! " + error);
     });
 }

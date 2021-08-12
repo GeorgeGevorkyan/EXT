@@ -1,7 +1,7 @@
 ///////////////////////////////
 // on load
 ///////////////////////////////
-if(!isAuthorized()){
+if (!isAuthorized()) {
     window.location.href = "../../auth/pkce/auth.html"
 }
 
@@ -17,15 +17,15 @@ document.getElementById('buttonNext').addEventListener("click", () => {
     onGetVoiceMails(++pageNumberOfVoicemails * countOnList);
 });
 
-document.getElementById('buttonPrev').addEventListener("click", () => { 
-    onGetVoiceMails((pageNumberOfVoicemails > 0 ?--pageNumberOfVoicemails:pageNumberOfVoicemails) * countOnList);
+document.getElementById('buttonPrev').addEventListener("click", () => {
+    onGetVoiceMails((pageNumberOfVoicemails > 0 ? --pageNumberOfVoicemails : pageNumberOfVoicemails) * countOnList);
 });
 
 document.getElementById('getVoiceMails').addEventListener("click", () => onGetVoiceMails(0), false);
 
 document.getElementById('deleteVoiceMailRecords').addEventListener("click", onDeleteVoiceMailRecords, false);
 
-document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click",onUpdateVoiceMailRecordsStatus, false); 
+document.getElementById('updateVoiceMailRecordsStatus').addEventListener("click", onUpdateVoiceMailRecordsStatus, false);
 
 document.getElementById('getVoiceMailsTotal').addEventListener("click", onGetVoiceMailsTotal, false);
 
@@ -36,14 +36,14 @@ document.getElementById('clearLog').addEventListener("click", () => document.get
 ///////////////////////////////
 // Rendering functions
 ///////////////////////////////
-function createNewTr(tr){
+function createNewTr(tr) {
     let tableRow = document.createElement('tr');
     document.getElementById('table').appendChild(tableRow);
-    
+
     let td = document.createElement('td');
     tableRow.appendChild(td);
     td.innerText = tr["id"];
-    
+
     let td2 = document.createElement('td');
     tableRow.appendChild(td2);
     td2.innerText = tr["sender"]["phoneNumber"];
@@ -63,7 +63,7 @@ function createNewTr(tr){
     let td6 = document.createElement('td');
     tableRow.appendChild(td6);
     let date = new Date(tr["whenCreated"]);
-    td6.innerText = date.getMonth() + 1 + '/' + date.getDay()  + '/' +  date.getFullYear() + ', ' + date.getHours()  + ':' +  date.getMinutes();
+    td6.innerText = date.getMonth() + 1 + '/' + date.getDay() + '/' + date.getFullYear() + ', ' + date.getHours() + ':' + date.getMinutes();
 
     let td7 = document.createElement('td');
     tableRow.appendChild(td7);
@@ -100,23 +100,23 @@ function createNewTr(tr){
     let button11 = document.createElement('button');
     button11.innerHTML = "Change Status";
     td11.appendChild(button11);
-    button11.addEventListener("click", () => onUpdateSelectedVoiceMailRecordsStatus(tr["status"] == "read"? "unread": "read", tr["id"]), false);
+    button11.addEventListener("click", () => onUpdateSelectedVoiceMailRecordsStatus(tr["status"] == "read" ? "unread" : "read", tr["id"]), false);
 }
 
-function updateList(response){
+function updateList(response) {
     let tableNode = document.getElementById("table");
-    document.getElementById('buttonCurr').hidden = false;   
-    document.getElementById('thead').hidden = false;  
+    document.getElementById('buttonCurr').hidden = false;
+    document.getElementById('thead').hidden = false;
 
-    if (pageNumberOfVoicemails > 0) {   
+    if (pageNumberOfVoicemails > 0) {
         document.getElementById('buttonPrev').hidden = false;
-    } else{
-        document.getElementById('buttonPrev').hidden = true;   
+    } else {
+        document.getElementById('buttonPrev').hidden = true;
     }
 
     if (response["records"].length == countOnList) {
         document.getElementById('buttonNext').hidden = false;
-    } else{
+    } else {
         document.getElementById('buttonNext').hidden = true;
     }
 
@@ -126,8 +126,8 @@ function updateList(response){
 
     for (let index = 0; index < response["records"].length; index++) {
         createNewTr(response["records"][index]);
-    }   
-        
+    }
+
     document.getElementById('buttonCurr').innerHTML = pageNumberOfVoicemails + 1;
     document.getElementById('buttonPrev').innerHTML = pageNumberOfVoicemails;
     document.getElementById('buttonNext').innerHTML = pageNumberOfVoicemails + 2;
@@ -136,74 +136,82 @@ function updateList(response){
 ///////////////////////////////
 // Voicemails functions
 ///////////////////////////////
-function onGetVoiceMails(offset){
+function onGetVoiceMails(offset) {
     getVoiceMails(offset, countOnList).then((response) => {
         updateList(response);
     }).catch((error) => {
         console.log("Get voicemails failed! " + error);
+        log("Get voicemails failed! " + error);
     });
 }
 
-function onDeleteVoiceMailRecords(){
+function onDeleteVoiceMailRecords() {
     let status = document.getElementById("deleteStatus").value;
     deleteVoiceMailRecords(status).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
         console.log("Delete voicemail records failed! " + error);
-    }); 
+        log("Delete voicemail records failed! " + error);
+    });
 }
 
-function onDeleteSelectedVoicemailRecords(id){
+function onDeleteSelectedVoicemailRecords(id) {
     deleteSelectedVoicemailRecords(id).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
         console.log("Delete selected voicemail records failed! " + error);
+        log("Delete selected voicemail records failed! " + error);
     });
 }
 
-function onUpdateVoiceMailRecordsStatus(){
+function onUpdateVoiceMailRecordsStatus() {
     let status = document.getElementById("updateStatus").value
     updateVoiceMailRecordsStatus(status).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
         console.log("Update voicemail records status failed! " + error);
+        log("Update voicemail records status failed! " + error);
     });
 }
 
-function onUpdateSelectedVoiceMailRecordsStatus(status, ids){
+function onUpdateSelectedVoiceMailRecordsStatus(status, ids) {
     updateSelectedVoiceMailRecordsStatus(status, ids).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
         console.log("Update selected voicemail records status failed! " + error);
+        log("Update selected voicemail records status failed! " + error);
     });
 }
 
-function onGetVoiceMailsTotal(){
+function onGetVoiceMailsTotal() {
     getVoiceMailsTotal(document.getElementById("totalStatus").value).then((response) => {
         log(response);
     }).catch((error) => {
         console.log("Get voicemail total failed! " + error);
-    }); 
-        
+        log("Get voicemail total failed! " + error);
+    });
+
 }
 
-function onGetVoiceMailRecord(){
+function onGetVoiceMailRecord() {
     getVoiceMailRecord(document.getElementById("id").value).then((response) => {
         log(response);
     }).catch((error) => {
         console.log("Get voicemail record failed! " + error);
-    }); 
+        log("Get voicemail record failed! " + error);
+    });
 }
 
-function onGetVoiceMailsTranscription(id){
+function onGetVoiceMailsTranscription(id) {
     getVoiceMailsTranscription(id).then((response) => {
         log(response["text"]);
     }).catch((error) => {
         console.log("Get voicemails transcription failed! " + error);
-    }); 
+        log("Get voicemails transcription failed! " + error);
+    });
 }
 
-function onGetVoiceMailsContent(format, id){
+function onGetVoiceMailsContent(format, id) {
     getVoiceMailsContent(format, id).then((response) => {
         let dataUrl = window.URL.createObjectURL(response);
         let a = document.createElement('a');
@@ -212,9 +220,8 @@ function onGetVoiceMailsContent(format, id){
         a.click();
     }).catch((error) => {
         console.log("Get voicemails content failed! " + error);
-    }); 
+        log("Get voicemails content failed! " + error);
+    });
 
 
 }
-
-
