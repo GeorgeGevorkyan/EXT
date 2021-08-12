@@ -18,7 +18,7 @@ function getAccessToken(settings) {
             mgr.signinRedirect({ useReplaceToNavigate: true }).then(() => {
                 log("Redirecting to AdSTS...");
             }).catch((err) => {
-                fail(new Error("Redirecting to AdSTS failed! " + err));
+                fail(new Error("Redirecting to AdSTS failed! \n" + err));
             });
         }
     });
