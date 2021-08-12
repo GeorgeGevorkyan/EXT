@@ -1,5 +1,5 @@
 // https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide
-function getAccessToken(settings){
+function getAccessToken(settings) {
     return new Promise((succeed, fail) => {
         const mgr = new Oidc.UserManager(settings);
 
@@ -12,14 +12,13 @@ function getAccessToken(settings){
                 log(err);
                 fail(new Error("Exchange code for token failed!:" + err));
             });
-        } else {    //go authorization
+        } else { //go authorization
             log("Going to sign in using following configuration");
 
-            mgr.signinRedirect({useReplaceToNavigate:true}).then(() => {
+            mgr.signinRedirect({ useReplaceToNavigate: true }).then(() => {
                 log("Redirecting to AdSTS...");
             }).catch((err) => {
-                log(err);
-                fail(new Error("Redirecting to AdSTS failed!:" + err));
+                fail(new Error("Redirecting to AdSTS failed! " + err));
             });
         }
     });
