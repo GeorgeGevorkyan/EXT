@@ -35,7 +35,6 @@
         setSessionToken(response);
         window.location.href = "api-menu.html";
     }).catch((error) => {
-        window.location.href = "auth.html";
         log(error);
     });
 })();
