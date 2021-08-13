@@ -67,7 +67,6 @@ function onGetDevices() {
         let devices = response["clickToCallDevices"];
         createSelectElem(document.getElementById("devices-wrapper"), "devices-select", devices, "id", "name");
     }).catch((error) => {
-        console.log("Get devices failed! " + error);
         log("Get devices failed! " + error);
     });
 }
@@ -80,7 +79,6 @@ function onMakeCall() {
     let deviceId = document.getElementById('devices-select').value;
 
     makeCall(deviceId, phoneNumber, "placeCall").catch((error) => {
-        console.log("Make call failed! " + error);
         log("Make call failed! " + error);
     });
 }
@@ -88,7 +86,6 @@ function onMakeCall() {
 function onTerminateCall() {
     let callId = document.getElementById("terminate-call-id").value;
     terminateCall(callId).catch((error) => {
-        console.log("Terminate failed! " + error);
         log("Terminate failed! " + error);
     });
 }
@@ -96,7 +93,6 @@ function onTerminateCall() {
 function onCancelCall() {
     let callId = document.getElementById("cancel-call-id").value;
     cancelCall(callId, true).catch((error) => {
-        console.log("Cancel failed! " + error);
         log("Cancel failed! " + error);
     });
 }
@@ -105,7 +101,6 @@ function onTransferCall() {
     let phoneNumber = document.getElementById('transfer-phone-number').value;
     let curCallId = document.getElementById("cur-call-id").value;
     transferCall(curCallId, phoneNumber).catch((error) => {
-        console.log("Transfer failed! " + error);
         log("Transfer failed! " + error);
     });
 }
@@ -114,7 +109,6 @@ function onWarmTransferCall() {
     let callId1 = document.getElementById("warm-transfer-call-id-1").value;
     let callId2 = document.getElementById("warm-transfer-call-id-2").value;
     warmTransferCall(callId1, callId2).catch((error) => {
-        console.log("Warm transfer failed! " + error);
         log("Warm transfer failed! " + error);
     });
 }
@@ -126,7 +120,6 @@ function onSubscribeNotificationHub() {
     createHubSubscription().then((response) => {
         startHubConnection(response.deliveryMethod.uri);
     }).catch((error) => {
-        console.log("Subscribe failed!" + error);
         log("Subscribe failed!" + error);
     });
 }
@@ -148,5 +141,5 @@ function startHubConnection(deliveryMethodUri) {
     });
 
     // Start the connection.
-    connection.start().then(() => console.log("connected")).catch(err => console.log(err));
+    connection.start().then(() => console.log("connected")).catch(err => log(err));
 }

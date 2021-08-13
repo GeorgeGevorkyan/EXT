@@ -45,7 +45,6 @@ function onGetGreetingContent(format, custom) {
         a.download = 'greeting.' + format;
         a.click();
     }).catch((error) => {
-        console.log("Get greeting content failed! " + error);
         log("Get greeting content failed! " + error);
     });
 
@@ -55,7 +54,6 @@ function onUploadGreetingContent() {
     uploadGreetingContent().then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Upload greeting content failed! " + error);
         log("Upload greeting content failed! " + error);
     });
 }
@@ -64,7 +62,6 @@ function onGetUserSettings() {
     getUserSettings().then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Get user settings failed! " + error);
         log("Get user settings failed! " + error);
     });
 }
@@ -81,7 +78,6 @@ function onUpdateUserSettings() {
     ).then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Update user settings failed! " + error);
         log("Update user settings failed! " + error);
     });
 }
@@ -90,7 +86,6 @@ function onGetVoicemailUsage() {
     getVoicemailUsage().then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Get voicemail usage failed! " + error);
         log("Get voicemail usage failed! " + error);
     });
 }
@@ -99,7 +94,6 @@ function onResetGreetingContent() {
     resetGreetingContent().then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Reset greeting content failed! " + error);
         log("Reset greeting content failed! " + error);
     });
 }

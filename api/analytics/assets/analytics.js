@@ -50,7 +50,6 @@ function onGetDetailedCalls() {
         log(response);
     }).catch((error) => {
         log("Get detailed calls failed! " + error);
-        console.log("Get detailed calls failed! " + error);
     });
 }
 
@@ -68,7 +67,6 @@ function onGetUserCalls() {
         log(response);
     }).catch((error) => {
         log("Get user calls failed! " + error);
-        console.log("Get user calls failed! " + error);
     });
 }
 
@@ -82,6 +80,5 @@ function onGetUserFilters() {
         log(response);
     }).catch((error) => {
         log("Get user filters failed! " + error);
-        console.log("Get user filters failed! " + error);
     });
 }

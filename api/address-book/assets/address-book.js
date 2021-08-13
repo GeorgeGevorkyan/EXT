@@ -90,7 +90,6 @@ function onGetContacts() {
         log(response);
     }).catch((error) => {
         log("Get contacts failed! " + error);
-        console.log("Get contacts failed! " + error);
     });
 }
 
@@ -115,7 +114,6 @@ function onGetUserDetails() {
         log(response);
     }).catch((error) => {
         log("Get contacts failed! " + error);
-        console.log("Get contacts failed! " + error);
     });
 }
 
@@ -142,7 +140,6 @@ function onGetContactsByJIDs() {
         log(response);
     }).catch((error) => {
         log("Get contacts failed! " + error);
-        console.log("Get contacts failed! " + error);
     });
 }
 
@@ -167,7 +164,6 @@ function onGetSingleContact() {
         log(response);
     }).catch((error) => {
         log("Get contacts failed! " + error);
-        console.log("Get contacts failed! " + error);
     });
 }
 
@@ -243,7 +239,6 @@ function onGetAvatar() {
         renderAvatarImg(response["avatar"], document.getElementById("get-avatar-output"));
     }).catch((error) => {
         log("Get avatar failed! " + error);
-        console.log("Get avatar failed! " + error);
     });
 }
 
@@ -256,6 +251,5 @@ function onGetMultipleAvatars() {
         });
     }).catch((error) => {
         log("Get multiple avatar failed! " + error);
-        console.log("Get multiple avatar failed! " + error);
     });
 }

@@ -140,7 +140,6 @@ function onGetVoiceMails(offset) {
     getVoiceMails(offset, countOnList).then((response) => {
         updateList(response);
     }).catch((error) => {
-        console.log("Get voicemails failed! " + error);
         log("Get voicemails failed! " + error);
     });
 }
@@ -150,7 +149,6 @@ function onDeleteVoiceMailRecords() {
     deleteVoiceMailRecords(status).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
-        console.log("Delete voicemail records failed! " + error);
         log("Delete voicemail records failed! " + error);
     });
 }
@@ -159,7 +157,6 @@ function onDeleteSelectedVoicemailRecords(id) {
     deleteSelectedVoicemailRecords(id).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
-        console.log("Delete selected voicemail records failed! " + error);
         log("Delete selected voicemail records failed! " + error);
     });
 }
@@ -169,7 +166,6 @@ function onUpdateVoiceMailRecordsStatus() {
     updateVoiceMailRecordsStatus(status).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
-        console.log("Update voicemail records status failed! " + error);
         log("Update voicemail records status failed! " + error);
     });
 }
@@ -178,7 +174,6 @@ function onUpdateSelectedVoiceMailRecordsStatus(status, ids) {
     updateSelectedVoiceMailRecordsStatus(status, ids).then((response) => {
         onGetVoiceMails(pageNumberOfVoicemails * countOnList);
     }).catch((error) => {
-        console.log("Update selected voicemail records status failed! " + error);
         log("Update selected voicemail records status failed! " + error);
     });
 }
@@ -187,7 +182,6 @@ function onGetVoiceMailsTotal() {
     getVoiceMailsTotal(document.getElementById("totalStatus").value).then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Get voicemail total failed! " + error);
         log("Get voicemail total failed! " + error);
     });
 
@@ -197,7 +191,6 @@ function onGetVoiceMailRecord() {
     getVoiceMailRecord(document.getElementById("id").value).then((response) => {
         log(response);
     }).catch((error) => {
-        console.log("Get voicemail record failed! " + error);
         log("Get voicemail record failed! " + error);
     });
 }
@@ -206,7 +199,6 @@ function onGetVoiceMailsTranscription(id) {
     getVoiceMailsTranscription(id).then((response) => {
         log(response["text"]);
     }).catch((error) => {
-        console.log("Get voicemails transcription failed! " + error);
         log("Get voicemails transcription failed! " + error);
     });
 }
@@ -219,7 +211,6 @@ function onGetVoiceMailsContent(format, id) {
         a.download = id + "." + format;
         a.click();
     }).catch((error) => {
-        console.log("Get voicemails content failed! " + error);
         log("Get voicemails content failed! " + error);
     });
 
