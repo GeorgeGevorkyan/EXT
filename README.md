@@ -4,39 +4,40 @@
   </a>
 </h1>
 
-### This is JavaScript samples of work with Intermedia Extend API
+# JavaScript sample code for Extend Platform API
 
-Samples show how to work with <a href="https://developer.intermedia.com/index.html">Intermedia Extend API</a>, including interacting with Calls, VoiceMails, Analytics and others.
+  This sample code shows how to work with <a href="https://developer.intermedia.com/index.html">Extend Platform API</a>.
+  
+  The Extend Platform API allows you to integrate the features of Intermedia's award-winning voice, video, contact center, and analytics services into business applications (CRMs, ERPs, Ticketing Systems, etc.).
 
-## Table of Contents
+## Authorization
 
-* [**Before start**](#Before-start)
-* [**Built with**](#Built-with)
-* [**License**](#License)
-* [**Feedback**](#Feedback)
+   You are going to need a set of valid credentials to invoke the APIs. Please follow the instructions provided in the [Intermedia Unite Extend API page](https://kb.intermedia.net/article/63780) to register your service account and your application CLient ID.
 
-## Before start
+   > NOTE: You need the Account Owner, or Technical Administrator with Intermedia Unite or Intermedia Anymeeting permissions to access the Extend API section of **Hostpilot Control Panel**. If you do not have the sufficient permissions, please contact your account administrator for help.
 
-   Working with the API implies having Authorization credentials for receiving Authorization token and calling API methods. Therefore, you must be registered on the <a href="https://kb.intermedia.net/article/63780"> Unite Extend API page </a> in **HostPilot**. Please, contact your Account Owner for help.
+   Please review the [Authorization API reference](https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide) for detailed information about supported authorization flows and credentials.
 
-   The detailed information about Authorization and the credentials required can be found here: <a href="https://developer.intermedia.com/api/spec/calling/index.html#dev-guide-auth-guide">here</a>.
+## Hosting the code
 
-  To use samples, you need to host the repository. There are two options how to do that:
+  To use the provided samples, you would need to host the repository on some website (because you need a unique client URL for proper authorization configuration). There are multiple options how to achieve this, but the simplest ones are:
 
-* **Option 1**: Fork the repository and [enable](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) GitHub pages on it.
-* **Option 2**: Host it yourself. Clone our repository and use your favorite http server (nginx, apache, iis, etc).
+* **Option 1**: [Fork](https://github.com/intermedia-net/extend-api-samples/fork) the repository into your own account, and [enable the GitHub pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) for it.
+* **Option 2**: Self-host the code. Clone our repository and use your favorite http server (nginx, apache, IIS, etc).
 
-Read the [article](https://kb.intermedia.net/article/63780) to learn about the correct creation of clients for proper authorization flow initiation.
-Once you have done this, you can start using the samples.
+## Invoking the APIs
 
-## Built with
+* Browse the **index.html** file to configure and authorize your client.
+* After the successful authorization you will see the menu with the available API call samples.
 
-  [**OIDC client**](https://github.com/IdentityModel/oidc-client-js) - the library for providing OpenID Connect (OIDC) and **OAuth2** protocol support for client-side, browser-based JavaScript client applications.
+## Credits
+
+  This code sample uses [**OIDC client**](https://github.com/IdentityModel/oidc-client-js) - a library for providing OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications.
 
 ## License
 
-  [**MIT**](https://github.com/intermedia-net/extend-api-samples-dev/blob/main/LICENSE) :copyright:
+  This code sample is licensed under [MIT License](https://github.com/intermedia-net/extend-api-samples/blob/main/LICENSE).
 
 ## Feedback
 
-  Please, feel free to send us your feedback on [**Developer Support**](https://developer.intermedia.com/articles/feedback.html).
+  Excited? Frustrated? Please feel free to contact us via the [feedback form](https://developer.intermedia.com/articles/feedback.html).

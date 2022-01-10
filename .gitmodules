@@ -1,0 +1,3 @@
+[submodule "submodules/build-tools"]
+	path = submodules/build-tools
+	url = https://tfs.intermedia.net/tfs/DefaultCollection/System/_git/build-tools
