@@ -38,14 +38,14 @@ function onGetCallRecordingsArchive(format = "zip") {
         let dataUrl = window.URL.createObjectURL(response);
         let a = document.createElement('a');
         a.href = dataUrl;
-        a.download = id + "." + format;
+        a.download = ids + "." + format;
         a.click();
     }).catch((error) => {
         log("Get Call Recordings Archive failed! " + error);
     });
 }
 
-function onGetCallRecordingContent() {
+function onGetCallRecordingContent(format = "zip") {
     let uuid =  document.getElementById("unified-user-id").value;
     let id = document.getElementById("call-recording-id").value;
 
